@@ -334,3 +334,72 @@ Running this program takes the 50,000 MNIST training images, and prepares an exp
 Using the expanded training data I obtained a 99.37 percent training accuracy. So this almost trivial change gives a substantial improvement in classification accuracy. Indeed, as we [discussed earlier](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization) this idea of algorithmically expanding the data can be taken further. Just to remind you of the flavour of some of the results in that earlier discussion: in 2003 Simard, Steinkraus and Platt* improved their MNIST performance to 99.6 percent using a neural network otherwise very similar to ours, using two convolutional-pooling layers, followed by a hidden fully-connected layer with 100 neurons. There were a few differences of detail in their architecture - they didn't have the advantage of using rectified linear units, for instance - but the key to their improved performance was expanding the training data. They did this by rotating, translating, and skewing the MNIST training images. They also developed a process of "elastic distortion", a way of emulating the random oscillations hand muscles undergo when a person is writing. By combining all these processes they substantially increased the effective size of their training data, and that's how they achieved 99.6 percent accuracy.
 
 > [Best Practices for Convolutional Neural Networks Applied to Visual Document Analysis](http://dx.doi.org/10.1109/ICDAR.2003.1227801), by Patrice Simard, Dave Steinkraus, and John Platt (2003).
+
+#### Problem
+
+- The idea of convolutional layers is to behave in an invariant way across images. It may seem surprising, then, that our network can learn more when all we've done is translate the input data. Can you explain why this is actually quite reasonable?
+
+**Inserting an extra fully-connected layer:** Can we do even better? One possibility is to use exactly the same procedure as above, but to expand the size of the fully-connected layer. I tried with 300 and 1,000 neurons, obtaining results of 99.46 and 99.43 percent, respectively. That's interesting, but not really a convincing win over the earlier result (99.37 percent).
+
+What about adding an extra fully-connected layer? Let's try inserting an extra fully-connected layer, so that we have two 100-hidden neuron fully-connected layers:
+
+```python
+>>> net = Network([
+        ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28), 
+                      filter_shape=(20, 1, 5, 5), 
+                      poolsize=(2, 2), 
+                      activation_fn=ReLU),
+        ConvPoolLayer(image_shape=(mini_batch_size, 20, 12, 12), 
+                      filter_shape=(40, 20, 5, 5), 
+                      poolsize=(2, 2), 
+                      activation_fn=ReLU),
+        FullyConnectedLayer(n_in=40*4*4, n_out=100, activation_fn=ReLU),
+        FullyConnectedLayer(n_in=100, n_out=100, activation_fn=ReLU),
+        SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
+>>> net.SGD(expanded_training_data, 60, mini_batch_size, 0.03, 
+            validation_data, test_data, lmbda=0.1)
+```
+
+Doing this, I obtained a test accuracy of 99.43 percent. Again, the expanded net isn't helping so much. Running similar experiments with fully-connected layers containing 300 and 1,000 neurons yields results of 99.48 and 99.47 percent. That's encouraging, but still falls short of a really decisive win.
+
+What's going on here? Is it that the expanded or extra fully-connected layers really don't help with MNIST? Or might it be that our network has the capacity to do better, but we're going about learning the wrong way? For instance, maybe we could use stronger regularization techniques to reduce the tendency to overfit. One possibility is the [dropout](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization) technique introduced back in Chapter 3. Recall that the basic idea of dropout is to remove individual activations at random while training the network. This makes the model more robust to the loss of individual pieces of evidence, and thus less likely to rely on particular idiosyncracies of the training data. Let's try applying dropout to the final fully-connected layers:
+
+```python
+>>> net = Network([
+        ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28), 
+                      filter_shape=(20, 1, 5, 5), 
+                      poolsize=(2, 2), 
+                      activation_fn=ReLU),
+        ConvPoolLayer(image_shape=(mini_batch_size, 20, 12, 12), 
+                      filter_shape=(40, 20, 5, 5), 
+                      poolsize=(2, 2), 
+                      activation_fn=ReLU),
+        FullyConnectedLayer(
+            n_in=40*4*4, n_out=1000, activation_fn=ReLU, p_dropout=0.5),
+        FullyConnectedLayer(
+            n_in=1000, n_out=1000, activation_fn=ReLU, p_dropout=0.5),
+        SoftmaxLayer(n_in=1000, n_out=10, p_dropout=0.5)], 
+        mini_batch_size)
+>>> net.SGD(expanded_training_data, 40, mini_batch_size, 0.03, 
+            validation_data, test_data)
+```
+
+Using this, we obtain an accuracy of 99.60 percent, which is a substantial improvement over our earlier results, especially our main benchmark, the network with 100 hidden neurons, where we achieved 99.37 percent.
+
+There are two changes worth noting.
+
+First, I reduced the number of training epochs to 40: dropout reduced overfitting, and so we learned faster.
+
+Second, the fully-connected hidden layers have 1,000 neurons, not the 100 used earlier. Of course, dropout effectively omits many of the neurons while training, so some expansion is to be expected. In fact, I tried experiments with both 300 and 1,000 hidden neurons, and obtained (very slightly) better validation performance with 1,000 hidden neurons.
+
+**Using an ensemble of networks:** An easy way to improve performance still further is to create several neural networks, and then get them to vote to determine the best classification. Suppose, for example, that we trained 5 different neural networks using the prescription above, with each achieving accuracies near to 99.6 percent. Even though the networks would all have similar accuracies, they might well make different errors, due to the different random initializations. It's plausible that taking a vote amongst our 5 networks might yield a classification better than any individual network.
+
+This sounds too good to be true, but this kind of ensembling is a common trick with both neural networks and other machine learning techniques. And it does in fact yield further improvements: we end up with 99.67percent accuracy. In other words, our ensemble of networks classifies all but 33 of the 10,000 test images correctly.
+
+The remaining errors in the test set are shown below. The label in the top right is the correct classification, according to the MNIST data, while in the bottom right is the label output by our ensemble of nets:
+
+![ensemble_errors](../meta/ensemble_errors.png)
+
+It's worth looking through these in detail. The first two digits, a 6 and a 5, are genuine errors by our ensemble. However, they're also understandable errors, the kind a human could plausibly make. That 6 really does look a lot like a 0, and the 5 looks a lot like a 3. The third image, supposedly an 8, actually looks to me more like a 9. So I'm siding with the network ensemble here: I think it's done a better job than whoever originally drew the digit. On the other hand, the fourth image, the 6, really does seem to be classified badly by our networks.
+
+And so on. In most cases our networks' choices seem at least plausible, and in some cases they've done a better job classifying than the original person did writing the digit. Overall, our networks offer exceptional performance, especially when you consider that they correctly classified 9,967 images which aren't shown. In that context, the few clear errors here seem quite understandable. Even a careful human makes the occasional mistake. And so I expect that only an extremely careful and methodical human would do much better. Our network is getting near to human performance.
