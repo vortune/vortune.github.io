@@ -403,3 +403,204 @@ The remaining errors in the test set are shown below. The label in the top right
 It's worth looking through these in detail. The first two digits, a 6 and a 5, are genuine errors by our ensemble. However, they're also understandable errors, the kind a human could plausibly make. That 6 really does look a lot like a 0, and the 5 looks a lot like a 3. The third image, supposedly an 8, actually looks to me more like a 9. So I'm siding with the network ensemble here: I think it's done a better job than whoever originally drew the digit. On the other hand, the fourth image, the 6, really does seem to be classified badly by our networks.
 
 And so on. In most cases our networks' choices seem at least plausible, and in some cases they've done a better job classifying than the original person did writing the digit. Overall, our networks offer exceptional performance, especially when you consider that they correctly classified 9,967 images which aren't shown. In that context, the few clear errors here seem quite understandable. Even a careful human makes the occasional mistake. And so I expect that only an extremely careful and methodical human would do much better. Our network is getting near to human performance.
+
+**Why we only applied dropout to the fully-connected layers:** If you look carefully at the code above, you'll notice that we applied dropout only to the fully-connected section of the network, not to the convolutional layers. In principle we could apply a similar procedure to the convolutional layers. But, in fact, there's no need: the convolutional layers have considerable inbuilt resistance to overfitting. The reason is that the shared weights mean that convolutional filters are forced to learn from across the entire image. This makes them less likely to pick up on local idiosyncracies in the training data. And so there is less need to apply other regularizers, such as dropout.
+
+**Going further:** It's possible to improve performance on MNIST still further. Rodrigo Benenson has compiled an [informative summary page](http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html), showing progress over the years, with links to papers. Many of these papers use deep convolutional networks along lines similar to the networks we've been using. If you dig through the papers you'll find many interesting techniques, and you may enjoy implementing some of them. If you do so it's wise to start implementation with a simple network that can be trained quickly, which will help you more rapidly understand what is going on.
+
+For the most part, I won't try to survey this recent work. But I can't resist making one exception. It's a 2010 paper by Cireșan, Meier, Gambardella, and Schmidhuber \*.  What I like about this paper is how simple it is. The network is a many-layer neural network, using only fully-connected layers (no convolutions). Their most successful network had hidden layers containing 2,500, 2,000, 1,500, 1,000, and 500 neurons, respectively. They used ideas similar to Simard *et al* to expand their training data. But apart from that, they used few other tricks, including no convolutional layers: it was a plain, vanilla network, of the kind that, with enough patience, could have been trained in the 1980s (if the MNIST data set had existed), given enough computing power. They achieved a classification accuracy of 99.65 percent, more or less the same as ours. The key was to use a very large, very deep network, and to use a GPU to speed up training. This let them train for many epochs. They also took advantage of their long training times to gradually decrease the learning rate from $10^{−3}$ to $10^{−6}$. It's a fun exercise to try to match these results using an architecture like theirs.
+
+> [Deep, Big, Simple Neural Nets Excel on Handwritten Digit Recognition](http://arxiv.org/abs/1003.0358), by Dan Claudiu Cireșan, Ueli Meier, Luca Maria Gambardella, and Jürgen Schmidhuber (2010).
+
+**Why are we able to train?** We saw in [the last chapter](http://neuralnetworksanddeeplearning.com/chap5.html) that there are fundamental obstructions to training in deep, many-layer neural networks. In particular, we saw that the gradient tends to be quite unstable: as we move from the output layer to earlier layers the gradient tends to either vanish (the vanishing gradient problem) or explode (the exploding gradient problem). Since the gradient is the signal we use to train, this causes problems.
+
+How have we avoided those results?
+
+Of course, the answer is that we haven't avoided these results. Instead, we've done a few things that help us proceed anyway. In particular: (1) Using convolutional layers greatly reduces the number of parameters in those layers, making the learning problem much easier; (2) Using more powerful regularization techniques (notably dropout and convolutional layers) to reduce overfitting, which is otherwise more of a problem in more complex networks; (3) Using rectified linear units instead of sigmoid neurons, to speed up training - empirically, often by a factor of 3-5; (4) Using GPUs and being willing to train for a long period of time. In particular, in our final experiments we trained for 40 epochs using a data set 5 times larger than the raw MNIST training data. Earlier in the book we mostly trained for 30 epochs using just the raw training data. Combining factors (3) and (4) it's as though we've trained a factor perhaps 30 times longer than before.
+
+Your response may be "Is that it? Is that all we had to do to train deep networks? What's all the fuss about?"
+
+Of course, we've used other ideas, too: making use of sufficiently large data sets (to help avoid overfitting); using the right cost function (to [avoid a learning slowdown](http://neuralnetworksanddeeplearning.com/chap3.html#the_cross\-entropy_cost_function)); using [good weight initializations](http://neuralnetworksanddeeplearning.com/chap3.html#weight_initialization) (also to avoid a learning slowdown, due to neuron saturation); [algorithmically expanding the training data](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization). We discussed these and other ideas in earlier chapters, and have for the most part been able to reuse these ideas with little comment in this chapter.
+
+With that said, this really is a rather simple set of ideas. Simple, but powerful, when used in concert. Getting started with deep learning has turned out to be pretty easy!
+
+**How deep are these networks, anyway?** Counting the convolutional-pooling layers as single layers, our final architecture has 44 hidden layers. Does such a network really deserve to be called a *deep* network? Of course, 4 hidden layers is many more than in the shallow networks we studied earlier. Most of those networks only had a single hidden layer, or occasionally 2 hidden layers. On the other hand, as of 2015 state-of-the-art deep networks sometimes have dozens of hidden layers. I've occasionally heard people adopt a deeper-than-thou attitude, holding that if you're not keeping-up-with-the-Joneses in terms of number of hidden layers, then you're not really doing deep learning. I'm not sympathetic to this attitude, in part because it makes the definition of deep learning into something which depends upon the result-of-the-moment. The real breakthrough in deep learning was to realize that it's practical to go beyond the shallow 1- and 2-hidden layer networks that dominated work until the mid-2000s. That really was a significant breakthrough, opening up the exploration of much more expressive models. But beyond that, the number of layers is not of primary fundamental interest. Rather, the use of deeper networks is a tool to use to help achieve other goals - like better classification accuracies.
+
+**A word on procedure:** In this section, we've smoothly moved from single hidden-layer shallow networks to many-layer convolutional networks. It all seemed so easy! We make a change and, for the most part, we get an improvement. If you start experimenting, I can guarantee things won't always be so smooth. The reason is that I've presented a cleaned-up narrative, omitting many experiments - including many failed experiments. This cleaned-up narrative will hopefully help you get clear on the basic ideas. But it also runs the risk of conveying an incomplete impression. Getting a good, working network can involve a lot of trial and error, and occasional frustration. In practice, you should expect to engage in quite a bit of experimentation. To speed that process up you may find it helpful to revisit Chapter 3's discussion of [how to choose a neural network's hyper-parameters](http://neuralnetworksanddeeplearning.com/chap3.html#how_to_choose_a_neural_network's_hyper-parameters), and perhaps also to look at some of the further reading suggested in that section.
+
+### The code for our convolutional networks
+
+Alright, let's take a look at the code for our program, `network3.py`. Structurally, it's similar to `network2.py`, the program we developed in [Chapter 3](http://neuralnetworksanddeeplearning.com/chap3.html), although the details differ, due to the use of Theano. We'll start by looking at the `FullyConnectedLayer` class, which is similar to the layers studied earlier in the book. Here's the code (discussion below)*.
+
+> Note added November 2016: several readers have noted that in the line initializing `self.w`, I set`scale=np.sqrt(1.0/n_out)`, when the arguments of Chapter 3 suggest a better initialization may be `scale=np.sqrt(1.0/n_in)`. This was simply a mistake on my part. In an ideal world I'd rerun all the examples in this chapter with the correct code. Still, I've moved on to other projects, so am going to let the error go.
+
+```python
+class FullyConnectedLayer(object):
+
+    def __init__(self, n_in, n_out, activation_fn=sigmoid, p_dropout=0.0):
+        self.n_in = n_in
+        self.n_out = n_out
+        self.activation_fn = activation_fn
+        self.p_dropout = p_dropout
+        # Initialize weights and biases
+        self.w = theano.shared(
+            np.asarray(
+                np.random.normal(
+                    loc=0.0, scale=np.sqrt(1.0/n_out), size=(n_in, n_out)),
+                dtype=theano.config.floatX),
+            name='w', borrow=True)
+        self.b = theano.shared(
+            np.asarray(np.random.normal(loc=0.0, scale=1.0, size=(n_out,)),
+                       dtype=theano.config.floatX),
+            name='b', borrow=True)
+        self.params = [self.w, self.b]
+
+    def set_inpt(self, inpt, inpt_dropout, mini_batch_size):
+        self.inpt = inpt.reshape((mini_batch_size, self.n_in))
+        self.output = self.activation_fn(
+            (1-self.p_dropout)*T.dot(self.inpt, self.w) + self.b)
+        self.y_out = T.argmax(self.output, axis=1)
+        self.inpt_dropout = dropout_layer(
+            inpt_dropout.reshape((mini_batch_size, self.n_in)), self.p_dropout)
+        self.output_dropout = self.activation_fn(
+            T.dot(self.inpt_dropout, self.w) + self.b)
+
+    def accuracy(self, y):
+        "Return the accuracy for the mini-batch."
+        return T.mean(T.eq(y, self.y_out))
+```
+
+Much of the `__init__` method is self-explanatory, but a few remarks may help clarify the code. As per usual, we randomly initialize the weights and biases as normal random variables with suitable standard deviations. The lines doing this look a little forbidding. However, most of the complication is just loading the weights and biases into what Theano calls shared variables. This ensures that these variables can be processed on the GPU, if one is available. We won't get too much into the details of this. If you're interested, you can dig into the [Theano documentation](http://deeplearning.net/software/theano/index.html). Note also that this weight and bias initialization is designed for the sigmoid activation function (as [discussed earlier](http://neuralnetworksanddeeplearning.com/chap3.html#weight_initialization)). Ideally, we'd initialize the weights and biases somewhat differently for activation functions such as the tanh and rectified linear function. This is discussed further in problems below. The`__init__` method finishes with `self.params = [self.w, self.b]`. This is a handy way to bundle up all the learnable parameters associated to the layer. Later on, the `Network.SGD` method will use `params` attributes to figure out what variables in a `Network` instance can learn.
+
+The `set_inpt` method is used to set the input to the layer, and to compute the corresponding output. I use the name `inpt` rather than `input` because `input` is a built-in function in Python, and messing with built-ins tends to cause unpredictable behavior and difficult-to-diagnose bugs. Note that we actually set the input in two separate ways: as `self.inpt` and`self.inpt_dropout`. This is done because during training we may want to use dropout. If that's the case then we want to remove a fraction `self.p_dropout` of the neurons. That's what the function `dropout_layer`in the second-last line of the `set_inpt` method is doing. So `self.inpt_dropout` and `self.output_dropout` are used during training, while `self.inpt` and `self.output` are used for all other purposes, e.g., evaluating accuracy on the validation and test data.
+
+The `ConvPoolLayer` and `SoftmaxLayer` class definitions are similar to `FullyConnectedLayer`. Indeed, they're so close that I won't excerpt the code here. If you're interested you can look at the full listing for `network3.py`, later in this section.
+
+However, a couple of minor differences of detail are worth mentioning. Most obviously, in both `ConvPoolLayer` and `SoftmaxLayer` we compute the output activations in the way appropriate to that layer type. Fortunately, Theano makes that easy, providing built-in operations to compute convolutions, max-pooling, and the softmax function.
+
+Less obviously, when we [introduced the softmax layer](http://neuralnetworksanddeeplearning.com/chap3.html#softmax), we never discussed how to initialize the weights and biases. Elsewhere we've argued that for sigmoid layers we should initialize the weights using suitably parameterized normal random variables. But that heuristic argument was specific to sigmoid neurons (and, with some amendment, to tanh neurons). However, there's no particular reason the argument should apply to softmax layers. So there's no *a priori* reason to apply that initialization again. Rather than do that, I shall initialize all the weights and biases to be 0. This is a rather *ad hoc* procedure, but works well enough in practice.
+
+Okay, we've looked at all the layer classes. What about the `Network` class? Let's start by looking at the `__init__` method:
+
+```python
+class Network(object):
+    
+    def __init__(self, layers, mini_batch_size):
+        """Takes a list of `layers`, describing the network architecture, and
+        a value for the `mini_batch_size` to be used during training
+        by stochastic gradient descent.
+
+        """
+        self.layers = layers
+        self.mini_batch_size = mini_batch_size
+        self.params = [param for layer in self.layers for param in layer.params]
+        self.x = T.matrix("x")  
+        self.y = T.ivector("y")
+        init_layer = self.layers[0]
+        init_layer.set_inpt(self.x, self.x, self.mini_batch_size)
+        for j in xrange(1, len(self.layers)):
+            prev_layer, layer  = self.layers[j-1], self.layers[j]
+            layer.set_inpt(
+                prev_layer.output, prev_layer.output_dropout, self.mini_batch_size)
+        self.output = self.layers[-1].output
+        self.output_dropout = self.layers[-1].output_dropout
+```
+
+Most of this is self-explanatory, or nearly so. The line `self.params = [param for layer in ...]` bundles up the parameters for each layer into a single list. As anticipated above, the `Network.SGD` method will use `self.params` to figure out what variables in the `Network` can learn. The lines `self.x = T.matrix("x")` and `self.y = T.ivector("y")` define Theano symbolic variables named `x` and `y`. These will be used to represent the input and desired output from the network.
+
+Now, this isn't a Theano tutorial, and so we won't get too deeply into what it means that these are symbolic variables*.
+
+> The [Theano documentation](http://deeplearning.net/software/theano/index.html) provides a good introduction to Theano. And if you get stuck, you may find it helpful to look at one of the other tutorials available online. For instance, [this tutorial](http://nbviewer.ipython.org/github/craffel/theano-tutorial/blob/master/Theano%20Tutorial.ipynb) covers many basics.
+
+But the rough idea is that these represent mathematical variables, *not* explicit values. We can do all the usual things one would do with such variables: add, subtract, and multiply them, apply functions, and so on. Indeed, Theano provides many ways of manipulating such symbolic variables, doing things like convolutions, max-pooling, and so on. But the big win is the ability to do fast symbolic differentiation, using a very general form of the backpropagation algorithm. This is extremely useful for applying stochastic gradient descent to a wide variety of network architectures. In particular, the next few lines of code define symbolic outputs from the network. We start by setting the input to the initial layer, with the line
+
+```pyton
+        init_layer.set_inpt(self.x, self.x, self.mini_batch_size)
+```
+
+Note that the inputs are set one mini-batch at a time, which is why the mini-batch size is there. Note also that we pass the input `self.x` in twice: this is because we may use the network in two different ways (with or without dropout). The `for` loop then propagates the symbolic variable `self.x` forward through the layers of the `Network`. This allows us to define the final `output` and `output_dropout` attributes, which symbolically represent the output from the `Network`.
+
+Now that we've understood how a `Network` is initialized, let's look at how it is trained, using the `SGD` method. The code looks lengthy, but its structure is actually rather simple. Explanatory comments after the code.
+
+```python
+def SGD(self, training_data, epochs, mini_batch_size, eta, 
+            validation_data, test_data, lmbda=0.0):
+        """Train the network using mini-batch stochastic gradient descent."""
+        training_x, training_y = training_data
+        validation_x, validation_y = validation_data
+        test_x, test_y = test_data
+
+        # compute number of minibatches for training, validation and testing
+        num_training_batches = size(training_data)/mini_batch_size
+        num_validation_batches = size(validation_data)/mini_batch_size
+        num_test_batches = size(test_data)/mini_batch_size
+
+        # define the (regularized) cost function, symbolic gradients, and updates
+        l2_norm_squared = sum([(layer.w**2).sum() for layer in self.layers])
+        cost = self.layers[-1].cost(self)+\
+               0.5*lmbda*l2_norm_squared/num_training_batches
+        grads = T.grad(cost, self.params)
+        updates = [(param, param-eta*grad) 
+                   for param, grad in zip(self.params, grads)]
+
+        # define functions to train a mini-batch, and to compute the
+        # accuracy in validation and test mini-batches.
+        i = T.lscalar() # mini-batch index
+        train_mb = theano.function(
+            [i], cost, updates=updates,
+            givens={
+                self.x:
+                training_x[i*self.mini_batch_size: (i+1)*self.mini_batch_size],
+                self.y: 
+                training_y[i*self.mini_batch_size: (i+1)*self.mini_batch_size]
+            })
+        validate_mb_accuracy = theano.function(
+            [i], self.layers[-1].accuracy(self.y),
+            givens={
+                self.x: 
+                validation_x[i*self.mini_batch_size: (i+1)*self.mini_batch_size],
+                self.y: 
+                validation_y[i*self.mini_batch_size: (i+1)*self.mini_batch_size]
+            })
+        test_mb_accuracy = theano.function(
+            [i], self.layers[-1].accuracy(self.y),
+            givens={
+                self.x: 
+                test_x[i*self.mini_batch_size: (i+1)*self.mini_batch_size],
+                self.y: 
+                test_y[i*self.mini_batch_size: (i+1)*self.mini_batch_size]
+            })
+        self.test_mb_predictions = theano.function(
+            [i], self.layers[-1].y_out,
+            givens={
+                self.x: 
+                test_x[i*self.mini_batch_size: (i+1)*self.mini_batch_size]
+            })
+        # Do the actual training
+        best_validation_accuracy = 0.0
+        for epoch in xrange(epochs):
+            for minibatch_index in xrange(num_training_batches):
+                iteration = num_training_batches*epoch+minibatch_index
+                if iteration 
+                    print("Training mini-batch number {0}".format(iteration))
+                cost_ij = train_mb(minibatch_index)
+                if (iteration+1) 
+                    validation_accuracy = np.mean(
+                        [validate_mb_accuracy(j) for j in xrange(num_validation_batches)])
+                    print("Epoch {0}: validation accuracy {1:.2
+                        epoch, validation_accuracy))
+                    if validation_accuracy >= best_validation_accuracy:
+                        print("This is the best validation accuracy to date.")
+                        best_validation_accuracy = validation_accuracy
+                        best_iteration = iteration
+                        if test_data:
+                            test_accuracy = np.mean(
+                                [test_mb_accuracy(j) for j in xrange(num_test_batches)])
+                            print('The corresponding test accuracy is {0:.2
+                                test_accuracy))
+        print("Finished training network.")
+        print("Best validation accuracy of {0:.2
+            best_validation_accuracy, best_iteration))
+        print("Corresponding test accuracy of {0:.2
+```
+
