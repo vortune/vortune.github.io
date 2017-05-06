@@ -48,17 +48,23 @@ Our earlier networks work pretty well: we've [obtained a classification accuracy
 
 > The origins of convolutional neural networks go back to the 1970s. But the seminal paper establishing the modern subject of convolutional networks was a 1998 paper, ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf), by Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. LeCun has since made an interesting [remark](https://www.facebook.com/yann.lecun/posts/10152348155137143) on the terminology for convolutional nets: "The [biological] neural inspiration in models like convolutional nets is very tenuous. That's why I call them 'convolutional nets' not 'convolutional neural nets', and why we call the nodes 'units' and not 'neurons' ". Despite this remark, convolutional nets use many of the same ideas as the neural networks we've studied up to now: ideas such as backpropagation, gradient descent, regularization, non-linear activation functions, and so on. And so we will follow common practice, and consider them a type of neural network. I will use the terms "convolutional neural network" and "convolutional net(work)" interchangeably. I will also use the terms "[artificial] neuron" and "unit" interchangeably.
 >
-> 卷积神经网络的起源可以追索到20世纪70年代。不过奠定神经网络当代地位的开创性论文是1998年发表的 ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)，作者是 Yann LeCun, Léon Bottou, Yoshua Bengio, 与 Patrick Haffner。关于卷积网络这个术语，LeCun 曾经做过一个有趣的说明：“在卷积网络模型中，所包含的来自生物神经系统的灵感很少。这就是为什么我叫他们做‘卷积网络’而不是‘卷积神经网络’，以及我们称节点为‘单元’而不是‘神经元’的原因”。尽管如此，卷积网络使用的很多概念，与我们今天研究的神经网络相同：这些概念包括反向传播，梯度下降，正则化，非线性激活函数等等。所以，我们会跟随一般的惯例，都将他们看成是神经网络的一个类型。我会交替使用“卷积神经网络”与“卷积网络”作为术语，我也会交替使用“[人工]神经元”与“单元”作为术语。
+> 卷积神经网络的起源可以追索到20世纪70年代。不过奠定神经网络影响地位的开创性论文是1998年发表的 ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)，作者是 Yann LeCun, Léon Bottou, Yoshua Bengio, 与 Patrick Haffner。关于卷积网络这个术语，LeCun 曾经做过一个有趣的说明：“在卷积网络模型中，所包含的来自生物神经系统的灵感很少。这就是为什么我叫他们做‘卷积网络’而不是‘卷积神经网络’，以及我们称节点为‘单元’而不是‘神经元’的原因”。尽管如此，卷积网络使用的很多概念，与我们今天研究的神经网络相同：这些概念包括反向传播，梯度下降，正则化，非线性激活函数等等。所以，我们会跟随一般的惯例，都将他们看成是神经网络的一个类型。我会交替使用“卷积神经网络”与“卷积网络”作为术语，我也会交替使用“[人工]神经元”与“单元”作为术语。
 
 Convolutional neural networks use three basic ideas: *local receptive fields*, *shared weights*, and *pooling*. Let's look at each of these ideas in turn.
 
-**Local receptive fields:** In the fully-connected layers shown earlier, the inputs were depicted as a vertical line of neurons. In a convolutional net, it'll help to think instead of the inputs as a 28×2828×28 square of neurons, whose values correspond to the 28×2828×28 pixel intensities we're using as inputs:
+卷积神经网络使用到三个基本思想：*局部感受域*，*共享权值*，以及*池化*。让我们依次了解一下这些思想。
+
+**Local receptive fields:** In the fully-connected layers shown earlier, the inputs were depicted as a vertical line of neurons. In a convolutional net, it'll help to think instead of the inputs as a 28×28 square of neurons, whose values correspond to the 28×28 pixel intensities we're using as inputs:
+
+**局部感受域：**在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将28x28 个像素的灰度值的输入，看作是一个 28x28 个输入点的组成的方阵。
 
 ![Input neuron](../meta/tikz42.png)
 
 
 
 As per usual, we'll connect the input pixels to a layer of hidden neurons. But we won't connect every input pixel to every hidden neuron. Instead, we only make connections in small, localized regions of the input image.
+
+和通常一样，我们将把输入像素链接到一个隐藏层的神经元当中。不过这次我们不将所有的输入到连接到所有的隐藏层神经元之中。去而代之的是，我们仅建立对输入图像的小范围的，局部的链接关系。
 
 To be more precise, each neuron in the first hidden layer will be connected to a small region of the input neurons, say, for example, a 5×5 region, corresponding to 25 input pixels. So, for a particular hidden neuron, we might have connections that look like this:
 
