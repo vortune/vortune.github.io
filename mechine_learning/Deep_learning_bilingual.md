@@ -172,7 +172,11 @@ A big advantage of sharing weights and biases is that it greatly reduces the num
 
 Of course, we can't really do a direct comparison between the number of parameters, since the two models are different in essential ways. But, intuitively, it seems likely that the use of translation invariance by the convolutional layer will reduce the number of parameters it needs to get the same performance as the fully-connected model. That, in turn, will result in faster training for the convolutional model, and, ultimately, will help us build deep networks using convolutional layers.
 
+当然，我们不能机械地比较参数数量的差别，毕竟两个模型本质上采用不同的方法学。不过，直觉上，对于实现转换不变性这样的目的来说，卷积网络可以节省不少的参数而获得与全链接网络同等的性能。进一步讲，卷积网络能够有更快的训练速度，最终有利于我们以卷积层构建深度网络。
+
 Incidentally, the name *convolutional* comes from the fact that the operation in Equation (125) is sometimes known as a *convolution*. A little more precisely, people sometimes write that equation as $a^1=\sigma(b + w * a^0)$, where $a^1$ denotes the set of output activations from one feature map, $a^0$ is the set of input activations, and $∗$ is called a convolution operation. We're not going to make any deep use of the mathematics of convolutions, so you don't need to worry too much about this connection. But it's worth at least knowing where the name comes from.
+
+顺带说明一下，*卷积*这个词来自于算式（125），它有时候被当作是*卷积*算法。更精确地，大家有时候将算式写成 $a^1 = \sigma(b + w*a^0)$，这里 $a^1$ 表示其中一个特征图的激活输出值的集合，$a^0$ 表示有效输入值的集合，而 $*$ 被成为卷积运算符。我们将不会对数学意义上的卷积涉及太深，所以你也无需对他们之间的关联担心太多。不过，知道这个名称的由来总是有好处的。
 
 **Pooling layers:** In addition to the convolutional layers just described, convolutional neural networks also contain *pooling layers*. Pooling layers are usually used immediately after convolutional layers. What the pooling layers do is simplify the information in the output from the convolutional layer.
 
