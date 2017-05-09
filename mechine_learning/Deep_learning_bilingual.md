@@ -188,9 +188,7 @@ In detail, a pooling layer takes each feature map * output from the convolutiona
 
 > The nomenclature is being used loosely here. In particular, I'm using "feature map" to mean not the function computed by the convolutional layer, but rather the activation of the hidden neurons output from the layer. This kind of mild abuse of nomenclature is pretty common in the research literature.
 >
-> 
-
-
+> 这个术语在这里用得有点随意。特别地，相比于使用激活值这个术语，我会用“特征图”来表示通过卷积层来的计算方法获得的结果。这种术语的随意使用在研究文章中很常见。
 
 ![Pooling layers](../meta/tikz47.png)
 
