@@ -184,7 +184,11 @@ Incidentally, the name *convolutional* comes from the fact that the operation in
 
 In detail, a pooling layer takes each feature map * output from the convolutional layer and prepares a condensed feature map. For instance, each unit in the pooling layer may summarize a region of (say) 2×2 neurons in the previous layer. As a concrete example, one common procedure for pooling is known as *max-pooling*. In max-pooling, a pooling unit simply outputs the maximum activation in the 2×2 input region, as illustrated in the following diagram:
 
+详细地说，池化层将卷积层中的输出再浓缩到一个特征图中。例如，每个池化层中的单元都是对前面一个层的某个区域（譬如，2x2 个像素）的汇总。举个实际的例子，一个常见的池化处理是*最大池化（max-pooling）*。在最大池化中，一个池化单元就只是简单地将 2x2 输入区域中的最大激活值输出。
+
 > The nomenclature is being used loosely here. In particular, I'm using "feature map" to mean not the function computed by the convolutional layer, but rather the activation of the hidden neurons output from the layer. This kind of mild abuse of nomenclature is pretty common in the research literature.
+>
+> 
 
 
 
