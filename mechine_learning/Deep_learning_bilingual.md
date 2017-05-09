@@ -1,5 +1,7 @@
 #Deep learning
 
+# 深度学习
+
 In the [last chapter](http://neuralnetworksanddeeplearning.com/chap5.html) we learned that deep neural networks are often much harder to train than shallow neural networks. That's unfortunate, since we have good reason to believe that *if* we could train deep nets they'd be much more powerful than shallow nets. But while the news from the last chapter is discouraging, we won't let it stop us. In this chapter, we'll develop techniques which can be used to train deep networks, and apply them in practice. We'll also look at the broader picture, briefly reviewing recent progress on using deep nets for image recognition, speech recognition, and other applications. And we'll take a brief, speculative look at what the future may hold for neural nets, and for artificial intelligence.
 
 The chapter is a long one. To help you navigate, let's take a tour. The sections are only loosely coupled, so provided you have some basic familiarity with neural nets, you can jump to whatever most interests you.
@@ -56,7 +58,7 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 **Local receptive fields:** In the fully-connected layers shown earlier, the inputs were depicted as a vertical line of neurons. In a convolutional net, it'll help to think instead of the inputs as a 28×28 square of neurons, whose values correspond to the 28×28 pixel intensities we're using as inputs:
 
-**局部接收域：**在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将28x28 个像素的灰度值的输入，看作是一个 28x28 个输入点的组成的方阵。
+**局部接受域：**在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将28x28 个像素的灰度值的输入，看作是一个 28x28 个输入点的组成的方阵。
 
 ![Input neuron](../meta/tikz42.png)
 
@@ -160,7 +162,7 @@ I've shown just 3 feature maps, to keep the diagram above simple. However, in pr
 
 The 20 images correspond to 20 different feature maps (or filters, or kernels). Each map is represented as a 5×5 block image, corresponding to the 5×5 weights in the local receptive field. Whiter blocks mean a smaller (typically, more negative) weight, so the feature map responds less to corresponding input pixels. Darker blocks mean a larger weight, so the feature map responds more to the corresponding input pixels. Very roughly speaking, the images above show the type of features the convolutional layer responds to.
 
-这 20 个图片对应于 20 个不同的特征映射（或者叫滤镜，内核）。每个映射表现为一个 5x5 的方块图像，对应于 5x5 个在局部接收域中的权重。白色的方块表示更小的权重值（更加负面），所以特征映射对输入像素的相应更小。黑色的方块意味着更大的权重值，这样特征映射对于输入像素的相应更大。大体来说，上面的图型展示了卷积层对不同特征类型的相应。
+这 20 个图片对应于 20 个不同的特征映射（或者叫滤镜，内核）。每个映射表现为一个 5x5 的方块图像，对应于 5x5 个在局部接收域中的权重。白色的方块表示更小的权重值（更加负面），所以特征映射对输入像素的相应更小。黑色的方块意味着更大的权重值，这样特征映射对于输入像素的相应更大。大体来说，上面的图型展示了卷积层对不同特征类型的响应。
 
 So what can we conclude from these feature maps? It's clear there is spatial structure here beyond what we'd expect at random: many of the features have clear sub-regions of light and dark. That shows our network really is learning things related to the spatial structure. However, beyond that, it's difficult to see what these feature detectors are learning. Certainly, we're not learning (say) the [Gabor filters](http://en.wikipedia.org/wiki/Gabor_filter) which have been used in many traditional approaches to image recognition. In fact, there's now a lot of work on better understanding the features learnt by convolutional networks. If you're interested in following up on that work, I suggest starting with the paper [Visualizing and Understanding Convolutional Networks](http://arxiv.org/abs/1311.2901) by Matthew Zeiler and Rob Fergus (2013).
 
@@ -188,7 +190,7 @@ In detail, a pooling layer takes each feature map * output from the convolutiona
 
 > The nomenclature is being used loosely here. In particular, I'm using "feature map" to mean not the function computed by the convolutional layer, but rather the activation of the hidden neurons output from the layer. This kind of mild abuse of nomenclature is pretty common in the research literature.
 >
-> 这个术语在这里用得有点随意。特别地，相比于使用激活值这个术语，我会用“特征图”来表示通过卷积层来的计算方法获得的结果。这种术语的随意使用在研究文章中很常见。
+> 这个术语在这里用得有点随意。特别地，相比于使用激活值这个术语，我会用“特征图”来表示通过卷积层来的计算方法获得的结果。这种术语的随意使用的情况，在科研类文章中很常见。
 
 ![Pooling layers](../meta/tikz47.png)
 
@@ -196,13 +198,19 @@ In detail, a pooling layer takes each feature map * output from the convolutiona
 
 Note that since we have 24×24 neurons output from the convolutional layer, after pooling we have 12×12 neurons.
 
+注意，当我们有一个 24x24 个输出神经元的卷积层时，经过池化处理之后，我们会得到一个 12x12 的神经元。
+
 As mentioned above, the convolutional layer usually involves more than a single feature map. We apply max-pooling to each feature map separately. So if there were three feature maps, the combined convolutional and max-pooling layers would look like:
+
+正如上面提及的那样，卷积网络通常包含一个以上的特征图。我们分别对每个特征图应用最大池化。所以，如果我们有三个特征图，卷积层和池化层结合后的样子应该像这样：
 
 ![](../meta/tikz48.png)
 
 
 
 We can think of max-pooling as a way for the network to ask whether a given feature is found anywhere in a region of the image. It then throws away the exact positional information. The intuition is that once a feature has been found, its exact location isn't as important as its rough location relative to other features. A big benefit is that there are many fewer pooled features, and so this helps reduce the number of parameters needed in later layers.
+
+我们可以将最大池化看作是一个查证的方法，它说明了在图像的某个区域中是否有某种给定的特征存在。它还会给出准确的位置信息。在直觉上就可知，一旦某个特征被发现，重要的是它与其他特征的大致的位置关联性，而不是它自己的确切位置。
 
 Max-pooling isn't the only technique used for pooling. Another common approach is known as *L2 pooling*. Here, instead of taking the maximum activation of a 2×2 region of neurons, we take the square root of the sum of the squares of the activations in the 2×2 region. While the details are different, the intuition is similar to max-pooling: L2 pooling is a way of condensing information from the convolutional layer. In practice, both techniques have been widely used. And sometimes people use other types of pooling operation. If you're really trying to optimize performance, you may use validation data to compare several different approaches to pooling, and choose the approach which works best. But we're not going to worry about that kind of detailed optimization.
 
