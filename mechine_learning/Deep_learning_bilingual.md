@@ -278,8 +278,14 @@ If you wish to follow along, then you'll need to get Theano running on your syst
 如果你打算跟着一起玩，那么你需要部署 Theano 运行在你的系统上。可以根据项目[主页](http://deeplearning.net/software/theano/)上的指引安装 Theano。接下来的范例需要运行在 Theano 0.6\* 上。有些需要运行在 Mac OS X Yosemite 上，无需 GPU 支持。有些运行在 Ubuntu 14.04 上，需要 NVIDIA GPU。而有些实习可以运行在上述两个系统上。要使 `network3.py` 正确运行，你需要在 `network3.py` 源码中（恰当地）将 `GPU` 这个标志设置为 `True` 或者 `False`。除此之外，要在 GPU 上正确配置和运行 Theano，你会发现 [这里的指引](http://deeplearning.net/software/theano/tutorial/using_gpu.html) 非常有用。网上还有很多的教程，很容易通过 Google 找到，它们会帮助你搞定很多事情。如果你自己没有可用的 GPU，你或者可以看看 [Amazon Web Services](http://aws.amazon.com/ec2/instance-types/) 的 EC2.G2 套餐。值得注意的是，即使使用 GPU，代码的执行还是会挺费时的。许多试验运行的时间长达几分钟到几个小时，仅是以 CPU 来运行复杂的实验的话，可能要花费数天的时间。就像前面中，我建议的那样，先配置运行某些作业，然后继续阅读文献，偶尔回头看看程序的输出。如果你只是使用 CPU，对于复杂的实验，你可能会希望减少训练的时间片段，或者宁愿整个忽略它们。
 
 > As I release this chapter, the current version of Theano has changed to version 0.7. I've actually rerun the examples under Theano 0.7 and get extremely similar results to those reported in the text.
+>
+> 当我发表这个文章的时候，Theano 已经升级到 0.7 版本。我在 Theadno 0.7 上重新运行过那些例子，并且得到与官方的汇报非常近似的结果。
 
 To get a baseline, we'll start with a shallow architecture using just a single hidden layer, containing 100 hidden neurons. We'll train for 60 epochs, using a learning rate of $\eta = 0.1$, a mini-batch size of 10, and no regularization. Here we go*:
+
+先搞个入门级的，我们将以仅包含一个隐藏层的浅层网络作为起点，它包含100个隐藏神经元。我们将训练60个周期，学习步长 $\eta = 0.1$，小批量大小是 10 ，不考虑正则化。我们这就开始：
+
+> > 译注：mini-batch size，每次梯度下降训练抽取的样本数据数量
 
 ```python
 >>> import network3
@@ -297,6 +303,10 @@ To get a baseline, we'll start with a shallow architecture using just a single h
 > Code for the experiments in this section may be found [in this script](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/conv.py). Note that the code in the script simply duplicates and parallels the discussion in this section.
 >
 > Note also that throughout the section I've explicitly specified the number of training epochs. I've done this for clarity about how we're training. In practice, it's worth using [early stopping](http://neuralnetworksanddeeplearning.com/chap3.html#early_stopping), that is, tracking accuracy on the validation set, and stopping training when we are confident the validation accuracy has stopped improving.
+>
+> 这一段中的实习代码可以[在这个脚本](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/conv.py)里面找到。脚本中的代码与本段完全一致，并且与本段的讨论顺序是并行对应的。
+>
+> 还要注意，在整个段落中，我都明确定义了训练的周期。我这样做是为了标明我们是如何训练的。事实上， [提前终止](http://neuralnetworksanddeeplearning.com/chap3.html#early_stopping)是很有用。就是说，密切跟踪通过使用验证数据集测试得到的准确率，当我们确信验证的准确率不会再改善的时候，就可以停止训练了。
 
 I obtained a best classification accuracy of 97.80 percent. This is the classification accuracy on the `test_data`, evaluated at the training epoch where we get the best classification accuracy on the `validation_data`. Using the validation data to decide when to evaluate the test accuracy helps avoid overfitting to the test data (see this [earlier discussion](http://neuralnetworksanddeeplearning.com/chap3.html#validation_explanation) of the use of validation data). We will follow this practice below. Your results may vary slightly, since the network's weights and biases are randomly initialized*.
 
