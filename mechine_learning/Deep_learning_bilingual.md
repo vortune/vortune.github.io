@@ -363,13 +363,22 @@ That gets us to 98.78 percent accuracy, which is a considerable improvement over
 
 In specifying the network structure, I've treated the convolutional and pooling layers as a single layer. Whether they're regarded as separate layers or as a single layer is to some extent a matter of taste. `network3.py`treats them as a single layer because it makes the code for `network3.py` a little more compact. However, it is easy to modify `network3.py` so the layers can be specified separately, if desired.
 
+在规划网络结构时，我将卷积层和池化层当成一个单层来处理了。是否将它们分层处理还是单层处理，纯粹就是因为外部因素的考虑。`network3.py` 将它们视为单层，是因为这样可以使得 `network3.py` 的源码更加紧凑。如果需要的话，通过修改 `network3.py` 的源码，将它进行分层处理，也是很容易的。
+
 #### Exercise
 
+### 练习
+
 - What classification accuracy do you get if you omit the fully-connected layer, and just use the convolutional-pooling layer and softmax layer? Does the inclusion of the fully-connected layer help?
+- 如果忽略全链接层，仅使用卷积-池化层和逻辑多分类层（softmax），你会得到什么样的分类精度呢？包含全链接层有帮助吗？
 
 Can we improve on the 98.78 percent classification accuracy?
 
+我们还能进一步改进 98.78% 的分类精度吗？
+
 Let's try inserting a second convolutional-pooling layer. We'll make the insertion between the existing convolutional-pooling layer and the fully-connected hidden layer. Again, we'll use a 5×5 local receptive field, and pool over 2×2 regions. Let's see what happens when we train using similar hyper-parameters to before:
+
+让我们试试插入第二个卷积-池化层。我们将它插入到现存的卷积-池化层和全链接隐藏层之间。再次使用 5x5 的局部接收域，以及 2x2 的池化窗口。让我们看看用与之前类似的超参数进行训练时，会发生什么：
 
 ```python
 >>> net = Network([
@@ -386,6 +395,8 @@ Let's try inserting a second convolutional-pooling layer. We'll make the inserti
 ```
 
 Once again, we get an improvement: we're now at 99.06 percent classification accuracy!
+
+我们在一场取得了进步：现在我们取得了 99.06% 的分类精度！
 
 There's two natural questions to ask at this point. The first question is: what does it even mean to apply a second convolutional-pooling layer? In fact, you can think of the second convolutional-pooling layer as having as input 12×12 "images", whose "pixels" represent the presence (or absence) of particular localized features in the original input image. So you can think of this layer as having as input a version of the original input image. That version is abstracted and condensed, but still has a lot of spatial structure, and so it makes sense to use a second convolutional-pooling layer.
 
