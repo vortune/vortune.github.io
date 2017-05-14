@@ -448,7 +448,7 @@ That's a satisfying point of view, but gives rise to a second question. The outp
 
 As a beginning, let's change our neurons so that instead of using a sigmoid activation function, we use [rectified linear units](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron). That is, we'll use the activation function $f(z) = \text{max}(0,z)$. We'll train for 60 epochs, with a learning rate of $\eta = 0.03$. I also found that it helps a little to use some [l2 regularization](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization), with regularization parameter $\lambda = 0.01$:
 
-作为起点，让我们改变神经元的激活函数 sigmoid，代之以[纠正线性单元](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron)。亦即，我们以 $f(z) = \text{max}(0,z)$ 作为激活函数。我们将训练 60 个周期，学习步长 $\eta = 0.03$。我还发现使用 [l2 正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization)。
+作为起点，让我们改变神经元的激活函数 sigmoid，代之以[纠正线性单元](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron)。亦即，我们以 $f(z) = \text{max}(0,z)$ 作为激活函数。我们将训练 60 个周期，学习步长 $\eta = 0.03$。我还发现使用 [l2 正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization) 会有一点帮助，所以设定正则化参数 $\lambda = 0.01$ ：
 
 ```python
 >>> from network3 import ReLU
@@ -469,15 +469,21 @@ As a beginning, let's change our neurons so that instead of using a sigmoid acti
 
 I obtained a classification accuracy of 99.23 percent. It's a modest improvement over the sigmoid results (99.06). However, across all my experiments I found that networks based on rectified linear units consistently outperformed networks based on sigmoid activation functions. There appears to be a real gain in moving to rectified linear units for this problem.
 
+我又取得了 99.23% 的分类精度。相比于 sigmoid 的结果（99.06%），这是一个恰当的进展。无论如何，贯通我的所有实践当中，我发现基于纠正线性单元的网络，总是优于基于 sigmoid 激活函数的网络。在激活函数的选择这个问题上，这带来了一个真正的收获，就是迁移到纠正线性单元。
+
 What makes the rectified linear activation function better than the sigmoid or tanh functions? At present, we have a poor understanding of the answer to this question. Indeed, rectified linear units have only begun to be widely used in the past few years. The reason for that recent adoption is empirical: a few people tried rectified linear units, often on the basis of hunches or heuristic arguments*.
 
+是什么使得纠正线性激活函数比 sigmoid 和 tanh 函数更好呢？从表象上，我们对这个问题缺乏理解。事实上，纠正线性单元被广泛使用也就是近几年的事情。采纳它的理由都是经验性的：有些人尝试使用纠正线性单元，经常是以促进或者启发讨论作为出发点。
+
 > A common justification is that $\text{max}(0,z)$ doesn't saturate in the limit of large $z$, unlike sigmoid neurons, and this helps rectified linear units continue learning. The argument is fine, as far it goes, but it's hardly a detailed justification, more of a just-so story. Note that we discussed the problems with saturation back in [Chapter 2](http://neuralnetworksanddeeplearning.com/chap2.html#saturation).
+>
+> 一个常见的正当理由是 $\text{max}(0,z)$ 在大 $z$ 值的限制中不饱和，这一点与 sigmoid 神经元不同，这将有助于纠正线性单元继续学习。这个论点很好，但是它不足以成为具体的理由，而更象是一个传说。请注意，我们在[第二章](http://neuralnetworksanddeeplearning.com/chap2.html#saturation)中讨论过神经元的饱和问题。
 
 They got good results classifying benchmark data sets, and the practice has spread. In an ideal world we'd have a theory telling us which activation function to pick for which application. But at present we're a long way from such a world. I should not be at all surprised if further major improvements can be obtained by an even better choice of activation function. And I also expect that in coming decades a powerful theory of activation functions will be developed. Today, we still have to rely on poorly understood rules of thumb and experience.
 
 **Expanding the training data:** Another way we may hope to improve our results is by algorithmically expanding the training data. A simple way of expanding the training data is to displace each training image by a single pixel, either up one pixel, down one pixel, left one pixel, or right one pixel. We can do this by running the program `expand_mnist.py` from the shell prompt*:
 
-> The code for `expand_mnist.py` is available[here](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/expand_mnist.py).
+> The code for `expand_mnist.py` is available [here](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/expand_mnist.py).
 
 ```bash
 $ python expand_mnist.py
