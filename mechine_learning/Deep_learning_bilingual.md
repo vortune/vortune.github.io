@@ -440,9 +440,15 @@ That's a satisfying point of view, but gives rise to a second question. The outp
 
 **Using rectified linear units:** The network we've developed at this point is actually a variant of one of the networks used in the seminal 1998 paper* introducing the MNIST problem, a network known as LeNet-5.  It's a good foundation for further experimentation, and for building up understanding and intuition. In particular, there are many ways we can vary the network in an attempt to improve our results.
 
+**使用纠正线性单元：**我们现在在这里开发的网络，实际上是那篇 1998 年的开创性的论文在介绍 MNIST 问题时所使用的网络的变体，它叫做 LeNet-5。无论对于进一步练习，理解深度学习，还是建立直觉来说，它都是很好的基础。特别是，还存在很多途径调整我们的网络，以改善我们的结果。
+
 > ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf), by Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner (1998). There are many differences of detail, but broadly speaking our network is quite similar to the networks described in the paper.
+>
+> ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf), 由 Yann LeCun, Léon Bottou, Yoshua Bengio, 与 Patrick Haffner 在1998年发布。 尽管有很多细节不同，但是广义来说，我们的网络与论文所述的非常类似。
 
 As a beginning, let's change our neurons so that instead of using a sigmoid activation function, we use [rectified linear units](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron). That is, we'll use the activation function $f(z) = \text{max}(0,z)$. We'll train for 60 epochs, with a learning rate of $\eta = 0.03$. I also found that it helps a little to use some [l2 regularization](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization), with regularization parameter $\lambda = 0.01$:
+
+作为起点，让我们改变神经元的激活函数 sigmoid，代之以[纠正线性单元](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron)。亦即，我们以 $f(z) = \text{max}(0,z)$ 作为激活函数。我们将训练 60 个周期，学习步长 $\eta = 0.03$。我还发现使用 [l2 正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization)。
 
 ```python
 >>> from network3 import ReLU
