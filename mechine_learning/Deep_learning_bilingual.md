@@ -481,6 +481,8 @@ What makes the rectified linear activation function better than the sigmoid or t
 
 They got good results classifying benchmark data sets, and the practice has spread. In an ideal world we'd have a theory telling us which activation function to pick for which application. But at present we're a long way from such a world. I should not be at all surprised if further major improvements can be obtained by an even better choice of activation function. And I also expect that in coming decades a powerful theory of activation functions will be developed. Today, we still have to rely on poorly understood rules of thumb and experience.
 
+他们已经取得了良好的分类基准数据集，并且实验已经开展。在理想的世界当中，我们应该有一个理论来告诉我们，哪一个激活函数针对哪一个应用。不过，现实情况是，我们还有很长的路要走。如果深度学习通过选择更好的激活函数，而进一步取得重大进展，我不会感到惊讶。我期待未来的十年内，能够发展出强大的激活函数理论。今天，我们仍然需要依赖对它贫乏的理解和经验。
+
 **Expanding the training data:** Another way we may hope to improve our results is by algorithmically expanding the training data. A simple way of expanding the training data is to displace each training image by a single pixel, either up one pixel, down one pixel, left one pixel, or right one pixel. We can do this by running the program `expand_mnist.py` from the shell prompt*:
 
 > The code for `expand_mnist.py` is available [here](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/expand_mnist.py).
