@@ -519,11 +519,17 @@ Running this program takes the 50,000 MNIST training images, and prepares an exp
 
 Using the expanded training data I obtained a 99.37 percent training accuracy. So this almost trivial change gives a substantial improvement in classification accuracy. Indeed, as we [discussed earlier](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization) this idea of algorithmically expanding the data can be taken further. Just to remind you of the flavour of some of the results in that earlier discussion: in 2003 Simard, Steinkraus and Platt* improved their MNIST performance to 99.6 percent using a neural network otherwise very similar to ours, using two convolutional-pooling layers, followed by a hidden fully-connected layer with 100 neurons. There were a few differences of detail in their architecture - they didn't have the advantage of using rectified linear units, for instance - but the key to their improved performance was expanding the training data. They did this by rotating, translating, and skewing the MNIST training images. They also developed a process of "elastic distortion", a way of emulating the random oscillations hand muscles undergo when a person is writing. By combining all these processes they substantially increased the effective size of their training data, and that's how they achieved 99.6 percent accuracy.
 
+使用扩展训练数据，我取得了 99.37% 的训练精度。就是这样一个微不足道的改变，就给分类精度带来了如此显著的提高。实际上，正如我们早前讨论的那样，以算法来扩展数据还可以取得更大的成绩。告诉你一点在早前讨论的结果中的一些趣事：在 2003 年，Simard, Steinkraus 和 Platt\* 将 MNIST 的分类表现提高到 99.6% 时，所用的网络架构与我们非常相似，使用两个卷积池，紧跟一个 100 个神经元的全连隐藏层。在他们的架构中稍微有点不同 - 他们没有利用修正线性单元的优势，实际上 - 他们改进表现的关键是扩展训练数据。他们将 MNIST 训练图像进行旋转，变形，和倾斜。他们甚至还开发了一种叫“弹性变形”的方法，这个方法模拟人类手部肌肉在书写过程中的震颤。结合所述的各种方法，他们极大地增加了他们的有效训练数据，这就是为什么他们可以取得 99.6% 的精度的原因。
+
 > [Best Practices for Convolutional Neural Networks Applied to Visual Document Analysis](http://dx.doi.org/10.1109/ICDAR.2003.1227801), by Patrice Simard, Dave Steinkraus, and John Platt (2003).
 
 #### Problem
 
+#### 问题
+
 - The idea of convolutional layers is to behave in an invariant way across images. It may seem surprising, then, that our network can learn more when all we've done is translate the input data. Can you explain why this is actually quite reasonable?
+
+  卷积层的设计思想是历遍所有图像，而保持行为的一致性。当我们转变输入数据时，我们的网络可以学习到更多的东西，这听起来很奇怪。你能解释这个现象的确切理由吗？
 
 **Inserting an extra fully-connected layer:** Can we do even better? One possibility is to use exactly the same procedure as above, but to expand the size of the fully-connected layer. I tried with 300 and 1,000 neurons, obtaining results of 99.46 and 99.43 percent, respectively. That's interesting, but not really a convincing win over the earlier result (99.37 percent).
 
