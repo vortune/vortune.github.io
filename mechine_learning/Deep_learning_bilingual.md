@@ -485,13 +485,19 @@ They got good results classifying benchmark data sets, and the practice has spre
 
 **Expanding the training data:** Another way we may hope to improve our results is by algorithmically expanding the training data. A simple way of expanding the training data is to displace each training image by a single pixel, either up one pixel, down one pixel, left one pixel, or right one pixel. We can do this by running the program `expand_mnist.py` from the shell prompt*:
 
+**扩展训练数据：**另外一个我们可以期待改进结果的方法是通过算法来扩展训练数据。最简单的扩展训练数据的方法是将训练图片移动一个像素，不是上下移动一个像素，就是左右移动一个像素。你可以通过在 shell 命令行提示符下运行程序 `expand_mnist.py` 来实现：
+
 > The code for `expand_mnist.py` is available [here](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/expand_mnist.py).
+>
+> `expand_mnist.py` 的源码可以在[这里](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/expand_mnist.py)获得。
 
 ```bash
 $ python expand_mnist.py
 ```
 
 Running this program takes the 50,000 MNIST training images, and prepares an expanded training set, with 250,000 training images. We can then use those training images to train our network. We'll use the same network as above, with rectified linear units. In my initial experiments I reduced the number of training epochs - this made sense, since we're training with 5 times as much data. But, in fact, expanding the data turned out to considerably reduce the effect of overfitting. And so, after some experimentation, I eventually went back to training for 60 epochs. In any case, let's train:
+
+运行程序取得 50,000 个 MNIST 训练数据，并且形成一个扩展训练集，内含 250,000 个训练图像。接下来我们就可以用它们来训练我们的网络了。我们使用上述同一个网络，以修正线性单元作为激活函数。在初始的实验中，我缩减了训练的轮次。这是有道理的，因为我们的训练数据扩大了 5 倍。的确，扩展数据极大地抑制了过拟合的影响。然而，经过一番试验之后，我最终还是回到了 60 个轮次的训练节奏。无论如何，我们训练吧：
 
 ```python
 >>> expanded_training_data, _, _ = network3.load_data_shared(
