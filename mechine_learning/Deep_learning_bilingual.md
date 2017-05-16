@@ -246,11 +246,12 @@ In particular, just as earlier in the book, we will train our network using stoc
 
 - **Backpropagation in a convolutional network** The core equations of backpropagation in a network with fully-connected layers are (BP1)-(BP4) ([link](http://neuralnetworksanddeeplearning.com/chap2.html#backpropsummary)). Suppose we have a network containing a convolutional layer, a max-pooling layer, and a fully-connected output layer, as in the network discussed above. How are the equations of backpropagation modified?
 
-- **卷积网络中的反向传播** 全链接网络中的反向传播的核心公式是 (BP1)-(BP4) ([link](http://neuralnetworksanddeeplearning.com/chap2.html#backpropsummary))。假设我们有一个网络，它包含一个卷积层，以及极值池化层，一个用于输出的全链接层，就像我们在上面讨论过的网络一样。如何调整反向传播的公式呢？
+  **卷积网络中的反向传播** 全链接网络中的反向传播的核心公式是 (BP1)-(BP4) ([link](http://neuralnetworksanddeeplearning.com/chap2.html#backpropsummary))。假设我们有一个网络，它包含一个卷积层，以及极值池化层，一个用于输出的全链接层，就像我们在上面讨论过的网络一样。如何调整反向传播的公式呢？
 
   > BP1:        $ \delta_j^L = \frac{\partial C}{\partial a_j^L} \sigma'(z_j^L)$
   >
   > BP4:        $\frac{\partial C}{\partial w_{jk}^l} = a_k^{l-1} \delta_j^l$
+
 
 
 
@@ -533,7 +534,11 @@ Using the expanded training data I obtained a 99.37 percent training accuracy. S
 
 **Inserting an extra fully-connected layer:** Can we do even better? One possibility is to use exactly the same procedure as above, but to expand the size of the fully-connected layer. I tried with 300 and 1,000 neurons, obtaining results of 99.46 and 99.43 percent, respectively. That's interesting, but not really a convincing win over the earlier result (99.37 percent).
 
+**插入一个额外的全连层：** 我们还可以做得更好吗？一个可能的途径是应用上面的相同步骤，但是扩展全连层的大小。我试过用 300 和 1,000 个神经元的，分别取得 99.46% 和 99.43% 的结果。这是有点意思，但完全不能令人信服地击败之前的结果（99.37）。
+
 What about adding an extra fully-connected layer? Let's try inserting an extra fully-connected layer, so that we have two 100-hidden neuron fully-connected layers:
+
+多增加一个全连层又如何呢？让我们插入一个额外的全连层，亦即我们有两个 100 个隐藏神经元的全连层：
 
 ```python
 >>> net = Network([
@@ -553,6 +558,8 @@ What about adding an extra fully-connected layer? Let's try inserting an extra f
 ```
 
 Doing this, I obtained a test accuracy of 99.43 percent. Again, the expanded net isn't helping so much. Running similar experiments with fully-connected layers containing 300 and 1,000 neurons yields results of 99.48 and 99.47 percent. That's encouraging, but still falls short of a really decisive win.
+
+这样做之后，我取得了 99.43% 的测试精度。扩展的网络并不能带来很大的帮助。在包含 300 和 1,000 个神经元的全链接层中运行类似的实验，也取得了 99.48% 和 99.47% 的结果。也算是一个鼓励吧，不过我们仍然缺少一个决定性的胜利。
 
 What's going on here? Is it that the expanded or extra fully-connected layers really don't help with MNIST? Or might it be that our network has the capacity to do better, but we're going about learning the wrong way? For instance, maybe we could use stronger regularization techniques to reduce the tendency to overfit. One possibility is the [dropout](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization) technique introduced back in Chapter 3. Recall that the basic idea of dropout is to remove individual activations at random while training the network. This makes the model more robust to the loss of individual pieces of evidence, and thus less likely to rely on particular idiosyncracies of the training data. Let's try applying dropout to the final fully-connected layers:
 
