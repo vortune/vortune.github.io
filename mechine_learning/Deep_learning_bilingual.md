@@ -564,6 +564,10 @@ Doing this, I obtained a test accuracy of 99.43 percent. Again, the expanded net
 
 What's going on here? Is it that the expanded or extra fully-connected layers really don't help with MNIST? Or might it be that our network has the capacity to do better, but we're going about learning the wrong way? For instance, maybe we could use stronger regularization techniques to reduce the tendency to overfit. One possibility is the [dropout](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization) technique introduced back in Chapter 3. Recall that the basic idea of dropout is to remove individual activations at random while training the network. This makes the model more robust to the loss of individual pieces of evidence, and thus less likely to rely on particular idiosyncracies of the training data. Let's try applying dropout to the final fully-connected layers:
 
+这里到底发生了什么呢？是扩展或者是新增的全连层对 MNIST 没有帮助吗？还是可能我们的网络其实是有能力做得更好，但是我们在探索的过程中走错路了？例如，也许我们可以用更强的正则化技术去抑制过拟合的趋势。其中一个可选项，就是在第三章中介绍过的[辍学](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization)技术。回顾一下辍学的基本思想，就是在网络训练的过程中，随机地移除单个的活动单元。这将是我们的模型在面对数据的小片表征缺损时，表现得更加强健，并且尽可能少地脱离训练数据的个体特征的影响。让我们尝试一下将辍学应用到最后的全连层：
+
+> > 译注：暂时用“辍学”来作为 dropout 的中文术语吧。我觉得也挺形象，毕竟那些神经元就是退出学习了。
+
 ```python
 >>> net = Network([
         ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28), 
