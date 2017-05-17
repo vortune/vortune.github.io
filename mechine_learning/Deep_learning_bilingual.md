@@ -58,7 +58,7 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 **Local receptive fields:** In the fully-connected layers shown earlier, the inputs were depicted as a vertical line of neurons. In a convolutional net, it'll help to think instead of the inputs as a 28×28 square of neurons, whose values correspond to the 28×28 pixel intensities we're using as inputs:
 
-**局部接受域：**在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将28x28 个像素的灰度值的输入，看作是一个 28x28 个输入点的组成的方阵。
+**局部接受域：** 在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将28x28 个像素的灰度值的输入，看作是一个 28x28 个输入点的组成的方阵。
 
 ![Input neuron](../meta/tikz42.png)
 
