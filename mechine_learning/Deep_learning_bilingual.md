@@ -375,7 +375,8 @@ In specifying the network structure, I've treated the convolutional and pooling 
 ### 练习
 
 - What classification accuracy do you get if you omit the fully-connected layer, and just use the convolutional-pooling layer and softmax layer? Does the inclusion of the fully-connected layer help?
-- 如果忽略全链接层，仅使用卷积池和逻辑多分类层（softmax），你会得到什么样的分类精度呢？包含全链接层有帮助吗？
+
+  如果忽略全链接层，仅使用卷积池和逻辑多分类层（softmax），你会得到什么样的分类精度呢？包含全链接层有帮助吗？
 
 Can we improve on the 98.78 percent classification accuracy?
 
