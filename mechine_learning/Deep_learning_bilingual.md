@@ -42,11 +42,11 @@ We did this using networks in which adjacent network layers are fully connected 
 
 In particular, for each pixel in the input image, we encoded the pixel's intensity as the value for a corresponding neuron in the input layer. For the 28×28 pixel images we've been using, this means our network has 784 (=28×28) input neurons. We then trained the network's weights and biases so that the network's output would - we hope! - correctly identify the input image: '0', '1', '2', ..., '8', or '9'.
 
-具体点说，对于输入图片中的每个像素，我们都将该像素的灰度编码为输入层中对应像素的神经元的值。我们采用28x28 的图片，这意味着我们的网络需要 784(=28x28) 个输入神经元。接着我们训练出网络的权重以及偏至，以便网络能像我们期待的那样争取区分输入的图片：’0‘，’1‘，’2‘，...’8‘，或者 ’9‘。
+具体点说，对于输入图片中的每个像素，我们都将该像素的灰度编码为输入层中对应像素的神经元的值。我们采用28x28 的图片，这意味着我们的网络需要 784(=28x28) 个输入神经元。接着我们训练出网络的权重以及偏至，以便网络能像我们期待的那样区分输入的图片：’0‘，’1‘，’2‘，...’8‘，或者 ’9‘。
 
 Our earlier networks work pretty well: we've [obtained a classification accuracy better than 98 percent](http://neuralnetworksanddeeplearning.com/chap3.html#98percent), using training and test data from the [MNIST handwritten digit data set](http://neuralnetworksanddeeplearning.com/chap1.html#learning_with_gradient_descent). But upon reflection, it's strange to use networks with fully-connected layers to classify images. The reason is that such a network architecture does not take into account the spatial structure of the images. For instance, it treats input pixels which are far apart and close together on exactly the same footing. Such concepts of spatial structure must instead be inferred from the training data. But what if, instead of starting with a network architecture which is *tabula rasa*, we used an architecture which tries to take advantage of the spatial structure? In this section I describe *convolutional neural networks* *. These networks use a special architecture which is particularly well-adapted to classify images. Using this architecture makes convolutional networks fast to train. This, in turn, helps us train deep, many-layer networks, which are very good at classifying images. Today, deep convolutional networks or some close variant are used in most neural networks for image recognition.
 
-我们早前的网络工作得不错：我们使用[MNIST 手写数字数据集](http://neuralnetworksanddeeplearning.com/chap1.html#learning_with_gradient_descent)来训练和测试时，[取得了高于98%的识别率](http://neuralnetworksanddeeplearning.com/chap3.html#98percent)。不过值得反思的是，以层间全链接的网络来识别图像有点奇怪。理由是这样的网络架构没有考虑到图像的空间结构。举例来说，该架构对输入像素的处理方式，掩盖了它们的远近关系，然而，训练样本中的数据空间结构关系必须得到体现。我们如何白手起家地运用一个可以充分利用数据空间结构的网络架构呢？在本章节中，我将介绍*卷积神经网络* \*. 这些网络具有非常适合图像分类的特殊架构。应用这些架构使得卷积网络实现快速训练。这样可以帮组我们训练那种深度多层的网络，这种网络对于图像分类的效果很棒。今天，在神经网络图像识别领域中，*深度卷积网络*以及类似的变体应用得最多。
+我们早前的网络工作得不错：我们使用 [MNIST 手写数字数据集](http://neuralnetworksanddeeplearning.com/chap1.html#learning_with_gradient_descent)来训练和测试时，[取得了高于98%的识别率](http://neuralnetworksanddeeplearning.com/chap3.html#98percent)。不过值得反思的是，以层间全链接的网络来识别图像有点奇怪。理由是这样的网络架构没有考虑到图像的空间结构。举例来说，该架构对输入像素的处理方式，掩盖了它们的远近关系，然而，训练样本中的数据空间结构关系必须得到体现。我们如何白手起家地搭建一个可以充分利用数据空间结构的网络架构呢？在本章节中，我将介绍*卷积神经网络* \*. 这些网络具有非常适合图像分类的特殊架构。应用这些架构使得卷积网络实现快速训练。这样可以帮助我们训练那种深度的多层的网络，这种网络对于图像的分类效果很棒。今天，在神经网络图像识别领域中，*深度卷积网络*以及类似的变体应用得最多。
 
 > The origins of convolutional neural networks go back to the 1970s. But the seminal paper establishing the modern subject of convolutional networks was a 1998 paper, ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf), by Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. LeCun has since made an interesting [remark](https://www.facebook.com/yann.lecun/posts/10152348155137143) on the terminology for convolutional nets: "The [biological] neural inspiration in models like convolutional nets is very tenuous. That's why I call them 'convolutional nets' not 'convolutional neural nets', and why we call the nodes 'units' and not 'neurons' ". Despite this remark, convolutional nets use many of the same ideas as the neural networks we've studied up to now: ideas such as backpropagation, gradient descent, regularization, non-linear activation functions, and so on. And so we will follow common practice, and consider them a type of neural network. I will use the terms "convolutional neural network" and "convolutional net(work)" interchangeably. I will also use the terms "[artificial] neuron" and "unit" interchangeably.
 >
@@ -58,7 +58,7 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 **Local receptive fields:** In the fully-connected layers shown earlier, the inputs were depicted as a vertical line of neurons. In a convolutional net, it'll help to think instead of the inputs as a 28×28 square of neurons, whose values correspond to the 28×28 pixel intensities we're using as inputs:
 
-**局部接受域：** 在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将28x28 个像素的灰度值的输入，看作是一个 28x28 个输入点的组成的方阵。
+**局部接收域：** 在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将 28x28 个像素的灰度值的输入，看作是一个由 28x28 个输入点组成的方阵。
 
 ![Input neuron](../meta/tikz42.png)
 
@@ -66,7 +66,7 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 As per usual, we'll connect the input pixels to a layer of hidden neurons. But we won't connect every input pixel to every hidden neuron. Instead, we only make connections in small, localized regions of the input image.
 
-和通常一样，我们将把输入像素链接到一个隐藏层的神经元当中。不过这次我们不将所有的输入到连接到所有的隐藏层神经元之中。去而代之的是，我们仅建立对输入图像的小范围的，局部的链接关系。
+和通常一样，我们将把输入像素链接到一个隐藏层的神经元当中。不过这次我们不将所有的输入到连接到所有的隐藏层神经元之中。取而代之的是，我们仅建立对输入图像的小范围的，局部的链接关系。
 
 To be more precise, each neuron in the first hidden layer will be connected to a small region of the input neurons, say, for example, a 5×5 region, corresponding to 25 input pixels. So, for a particular hidden neuron, we might have connections that look like this:
 
