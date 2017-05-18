@@ -590,11 +590,19 @@ What's going on here? Is it that the expanded or extra fully-connected layers re
 
 Using this, we obtain an accuracy of 99.60 percent, which is a substantial improvement over our earlier results, especially our main benchmark, the network with 100 hidden neurons, where we achieved 99.37 percent.
 
+应用这个技巧，我们取得了 99.60% 的精度，这相比于我们早前的结果是一个巨大的进步，尤其是我们以基准方法应用 100 个隐藏神经元的时候，我仅取得 99.37% 的成绩。
+
 There are two changes worth noting.
+
+有两个改变值得注意。
 
 First, I reduced the number of training epochs to 40: dropout reduced overfitting, and so we learned faster.
 
+第一，我们缩减训练的轮次为 40：辍学会抑制过拟合，并且使我们加速了学习。
+
 Second, the fully-connected hidden layers have 1,000 neurons, not the 100 used earlier. Of course, dropout effectively omits many of the neurons while training, so some expansion is to be expected. In fact, I tried experiments with both 300 and 1,000 hidden neurons, and obtained (very slightly) better validation performance with 1,000 hidden neurons.
+
+第二，全链接隐藏层有 1,000 个神经元，不是早前的 100 个。当然，辍学有效地在训练中忽略了其中的大多数，所以我们可以预测一些扩展的结果。事实上，我尝试过 300 至 1,000 个隐藏神经元，并且在 1,000 个隐藏神经元的时候获得更好的（非常轻微）表现。
 
 **Using an ensemble of networks:** An easy way to improve performance still further is to create several neural networks, and then get them to vote to determine the best classification. Suppose, for example, that we trained 5 different neural networks using the prescription above, with each achieving accuracies near to 99.6 percent. Even though the networks would all have similar accuracies, they might well make different errors, due to the different random initializations. It's plausible that taking a vote amongst our 5 networks might yield a classification better than any individual network.
 
