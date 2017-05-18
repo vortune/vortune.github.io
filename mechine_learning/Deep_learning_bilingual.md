@@ -180,7 +180,7 @@ Of course, we can't really do a direct comparison between the number of paramete
 
 Incidentally, the name *convolutional* comes from the fact that the operation in Equation (125) is sometimes known as a *convolution*. A little more precisely, people sometimes write that equation as $a^1=\sigma(b + w * a^0)$, where $a^1$ denotes the set of output activations from one feature map, $a^0$ is the set of input activations, and $∗$ is called a convolution operation. We're not going to make any deep use of the mathematics of convolutions, so you don't need to worry too much about this connection. But it's worth at least knowing where the name comes from.
 
-顺带说明一下，*卷积*这个词来自于算式（125），它有时候被当作是*卷积*算法。更精确地，大家有时候将算式写成 $a^1 = \sigma(b + w*a^0)$，这里 $a^1$ 表示其中一个特征图的激活输出值的集合，$a^0$ 表示有效输入值的集合，而 $*$ 被成为卷积运算符。我们将不会对数学意义上的卷积涉及太深，所以你也无需对他们之间的关联担心太多。不过，知道这个名称的由来总是有好处的。
+顺带说明一下，*卷积*这个词来自于算式（125），它有时候被当作是*卷积*算法。更精确地，大家有时候将算式写成 $a^1 = \sigma(b + w*a^0)$，这里 $a^1$ 表示其中一个特征图的激活输出值的集合，$a^0$ 表示有效输入值的集合，而 $*$ 被称为卷积运算符。我们将不会对数学意义上的卷积涉及太深，所以你也无需对它们之间的关联担心太多。不过，知道这个名称的由来总是有好处的。
 
 **Pooling layers:** In addition to the convolutional layers just described, convolutional neural networks also contain *pooling layers*. Pooling layers are usually used immediately after convolutional layers. What the pooling layers do is simplify the information in the output from the convolutional layer.
 
@@ -286,7 +286,7 @@ If you wish to follow along, then you'll need to get Theano running on your syst
 
 To get a baseline, we'll start with a shallow architecture using just a single hidden layer, containing 100 hidden neurons. We'll train for 60 epochs, using a learning rate of $\eta = 0.1$, a mini-batch size of 10, and no regularization. Here we go*:
 
-先搞个入门级的，我们将以仅包含一个隐藏层的浅层网络作为起点，它包含100个隐藏神经元。我们将训练60个周期，学习步长 $\eta = 0.1$，小批量大小是 10 ，不考虑正则化。我们这就开始：
+先搞个入门级的，我们将以仅包含一个隐藏层的浅层网络作为起点，它包含100个隐藏神经元。我们将训练60个轮次，学习步长 $\eta = 0.1$，小批量大小是 10 ，不考虑正则化。我们这就开始：
 
 > > 译注：mini-batch size，每次梯度下降训练抽取的样本数据数量
 
@@ -309,11 +309,11 @@ To get a baseline, we'll start with a shallow architecture using just a single h
 >
 > 这一段中的实习代码可以[在这个脚本](https://github.com/mnielsen/neural-networks-and-deep-learning/blob/master/src/conv.py)里面找到。脚本中的代码与本段完全一致，并且与本段的讨论顺序是并行对应的。
 >
-> 还要注意，在整个段落中，我都明确定义了训练的周期。我这样做是为了标明我们是如何训练的。事实上， [提前终止](http://neuralnetworksanddeeplearning.com/chap3.html#early_stopping)是很有用。就是说，密切跟踪通过使用验证数据集测试得到的准确率，当我们确信验证的准确率不会再改善的时候，就可以停止训练了。
+> 还要注意，在整个段落中，我都明确定义了训练的轮次。我这样做是为了标明我们是如何训练的。事实上， [提前终止](http://neuralnetworksanddeeplearning.com/chap3.html#early_stopping)是很有用。就是说，密切跟踪通过使用验证数据集测试得到的准确率，当我们确信验证的准确率不会再改善的时候，就可以停止训练了。
 
 I obtained a best classification accuracy of 97.80 percent. This is the classification accuracy on the `test_data`, evaluated at the training epoch where we get the best classification accuracy on the `validation_data`. Using the validation data to decide when to evaluate the test accuracy helps avoid overfitting to the test data (see this [earlier discussion](http://neuralnetworksanddeeplearning.com/chap3.html#validation_explanation) of the use of validation data). We will follow this practice below. Your results may vary slightly, since the network's weights and biases are randomly initialized\*.
 
-我取得了最高 97.80% 的最佳分类精度。这个是在`测试数据`上取得的分类精度，我们以`验证数据`在训练期间对网络进行评估，以便确定在哪里获得最佳的分类精度。使用验证数据来决定何时检测分类精度，以帮助避免出现对测试数据的过拟合（请参考有关验证数据的使用的[早前讨论](http://neuralnetworksanddeeplearning.com/chap3.html#validation_explanation)）。我们会伴随后续的内容进行练习，你得到的结果可能略有不同，原因是网络的权值和偏至是随机初始化\*的。
+我取得了最高 97.80% 的最佳分类精度。这个是在`测试数据`上取得的分类精度，我们以`验证数据`在训练轮次中对网络进行评估，以便确定在哪里获得最佳的分类精度。使用验证数据来决定何时检测分类精度，以帮助避免出现对测试数据的过拟合（请参考有关验证数据的使用的[早前讨论](http://neuralnetworksanddeeplearning.com/chap3.html#validation_explanation)）。我们会伴随后续的内容进行练习，你得到的结果可能略有不同，原因是网络的权值和偏至是随机初始化\*的。
 
 > In fact, in this experiment I actually did three separate runs training a network with this architecture. I then reported the test accuracy which corresponded to the best validation accuracy from any of the three runs. Using multiple runs helps reduce variation in results, which is useful when comparing many architectures, as we are doing. I've followed this procedure below, except where noted. In practice, it made little difference to the results obtained.
 >
@@ -321,7 +321,7 @@ I obtained a best classification accuracy of 97.80 percent. This is the classifi
 
 This 97.80 percent accuracy is close to the 98.04 percent accuracy obtained back in [Chapter 3](http://neuralnetworksanddeeplearning.com/chap3.html#chap3_98_04_percent), using a similar network architecture and learning hyper-parameters. In particular, both examples used a shallow network, with a single hidden layer containing 100 hidden neurons. Both also trained for 60 epochs, used a mini-batch size of 10, and a learning rate of $\eta = 0.1$.
 
-这里的 97.80% 的分辨精度已经接近第三章所取得的 98.04% 的分辨精度，两者用的是类似的架构以及学习参数。事实上，两个例子使用的都是浅层网络，包含一个 100 个隐藏神经元的隐藏层。两者都训练 60 个周期，小批量大小为 10，以及学习步长 $\eta = 0.1$ 。
+这里的 97.80% 的分辨精度已经接近第三章所取得的 98.04% 的分辨精度，两者用的是类似的架构以及学习参数。事实上，两个例子使用的都是浅层网络，包含一个 100 个隐藏神经元的隐藏层。两者都训练 60 个轮次，小批量大小为 10，以及学习步长 $\eta = 0.1$ 。
 
 There were, however, two differences in the earlier network. First, we [regularized](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization) the earlier network, to help reduce the effects of overfitting. Regularizing the current network does improve the accuracies, but the gain is only small, and so we'll hold off worrying about regularization until later. Second, while the final layer in the earlier network used sigmoid activations and the cross-entropy cost function, the current network uses a softmax final layer, and the log-likelihood cost function. As [explained](http://neuralnetworksanddeeplearning.com/chap3.html#softmax) in Chapter 3 this isn't a big change. I haven't made this switch for any particularly deep reason - mostly, I've done it because softmax plus log-likelihood cost is more common in modern image classification networks.
 
@@ -430,7 +430,7 @@ That's a satisfying point of view, but gives rise to a second question. The outp
 
   Begin with the same hyper-parameters as for the sigmoid network, but train for 20 epochs instead of 60. How well does your network perform? What if you continue out to 60 epochs? Try plotting the per-epoch validation accuracies for both tanh- and sigmoid-based networks, all the way out to 60 epochs. If your results are similar to mine, you'll find the tanh networks train a little faster, but the final accuracies are very similar. Can you explain why the tanh network might train faster? Can you get a similar training speed with the sigmoid, perhaps by changing the learning rate, or doing some rescaling * ?
 
-  开始时，就像 sigmoid 网络一样，以相同的超参数训练 20 个周期而不是 60 个周期。你的网络表现的还好吗？要是连续训练至 60 个周期呢？试着描述出 tanh 与 sigmoid 网络的全部 60 个训练周期的验证精度，如果你的结果与我的近似，你会发现 tanh 网络的训练速度要快一点，不过最终的精度是非常相似的。你可以解释为什么 tanh 网络会训练的更快一些呢？你可以在 sigmoid 网络中取得类似的训练速度吗？应该改变学习步长，还是做点其他的什么调整呢\*？
+  开始时，就像 sigmoid 网络一样，以相同的超参数训练 20 个轮次而不是 60 个轮次。你的网络表现的还好吗？要是连续训练至 60 个轮次呢？试着描述出 tanh 与 sigmoid 网络的全部 60 个训练轮次的验证精度，如果你的结果与我的近似，你会发现 tanh 网络的训练速度要快一点，不过最终的精度是非常相似的。你可以解释为什么 tanh 网络会训练的更快一些呢？你可以在 sigmoid 网络中取得类似的训练速度吗？应该改变学习步长，还是做点其他的什么调整呢\*？
 
   > You may perhaps find inspiration in recalling that  $\sigma(z) = \frac{1 + \text{tanh}(\frac{z}{2})}{2}$
   >
@@ -450,7 +450,7 @@ That's a satisfying point of view, but gives rise to a second question. The outp
 
 As a beginning, let's change our neurons so that instead of using a sigmoid activation function, we use [rectified linear units](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron). That is, we'll use the activation function $f(z) = \text{max}(0,z)$. We'll train for 60 epochs, with a learning rate of $\eta = 0.03$. I also found that it helps a little to use some [l2 regularization](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization), with regularization parameter $\lambda = 0.01$:
 
-作为起点，让我们改变神经元的激活函数 sigmoid，代之以[纠正线性单元](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron)。亦即，我们以 $f(z) = \text{max}(0,z)$ 作为激活函数。我们将训练 60 个周期，学习步长 $\eta = 0.03$。我还发现使用 [l2 正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization) 会有一点帮助，所以设定正则化参数 $\lambda = 0.01$ ：
+作为起点，让我们改变神经元的激活函数 sigmoid，代之以[纠正线性单元](http://neuralnetworksanddeeplearning.com/chap3.html#other_models_of_artificial_neuron)。亦即，我们以 $f(z) = \text{max}(0,z)$ 作为激活函数。我们将训练 60 个轮次，学习步长 $\eta = 0.03$。我还发现使用 [l2 正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization) 会有一点帮助，所以设定正则化参数 $\lambda = 0.01$ ：
 
 ```python
 >>> from network3 import ReLU
