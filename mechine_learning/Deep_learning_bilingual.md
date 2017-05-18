@@ -620,7 +620,11 @@ The remaining errors in the test set are shown below. The label in the top right
 
 It's worth looking through these in detail. The first two digits, a 6 and a 5, are genuine errors by our ensemble. However, they're also understandable errors, the kind a human could plausibly make. That 6 really does look a lot like a 0, and the 5 looks a lot like a 3. The third image, supposedly an 8, actually looks to me more like a 9. So I'm siding with the network ensemble here: I think it's done a better job than whoever originally drew the digit. On the other hand, the fourth image, the 6, really does seem to be classified badly by our networks.
 
+值得查看一下这些细节。头两个数字，6 和 5，这的确是网络协作出错了。不过，他们都是可以理解的错误，人类也会产生这样的错误。那个 6 看起来非常像 0，还有那个 5 看起来很像 3 。第三个图，据说是 8 ，实际上看起来很像 9 。所以，到这里，我的立场和网络协作的结果是一致的：我认为现在的工作已经比那些画这些数字的人做得更好了。另一个方面，我们的网络分类的确是有明显出错的地方，譬如地四个图片，那个是 6 。
+
 And so on. In most cases our networks' choices seem at least plausible, and in some cases they've done a better job classifying than the original person did writing the digit. Overall, our networks offer exceptional performance, especially when you consider that they correctly classified 9,967 images which aren't shown. In that context, the few clear errors here seem quite understandable. Even a careful human makes the occasional mistake. And so I expect that only an extremely careful and methodical human would do much better. Our network is getting near to human performance.
+
+如此等等。在大多数情况下，我们的网络的选择看起来至少是合情合理的，还有一些情况下，它们做得比描画这些数字图片的人类原创者做得更好。总体来说，我们的网络提供了令人期待的表现，尤其是你试想一下，它们正确地分辨了 9,967 张图片。在这样的表现之中，有个别明显的错误也是可以理解的。即使是一个谨慎的人也会偶尔犯这样的错误。在我看来，只有那些极端谨小慎微和很有条理的人才会做得更好。我们的网络正在接近人类的表现。
 
 **Why we only applied dropout to the fully-connected layers:** If you look carefully at the code above, you'll notice that we applied dropout only to the fully-connected section of the network, not to the convolutional layers. In principle we could apply a similar procedure to the convolutional layers. But, in fact, there's no need: the convolutional layers have considerable inbuilt resistance to overfitting. The reason is that the shared weights mean that convolutional filters are forced to learn from across the entire image. This makes them less likely to pick up on local idiosyncracies in the training data. And so there is less need to apply other regularizers, such as dropout.
 
