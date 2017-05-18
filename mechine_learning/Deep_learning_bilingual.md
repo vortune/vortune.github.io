@@ -606,9 +606,15 @@ Second, the fully-connected hidden layers have 1,000 neurons, not the 100 used e
 
 **Using an ensemble of networks:** An easy way to improve performance still further is to create several neural networks, and then get them to vote to determine the best classification. Suppose, for example, that we trained 5 different neural networks using the prescription above, with each achieving accuracies near to 99.6 percent. Even though the networks would all have similar accuracies, they might well make different errors, due to the different random initializations. It's plausible that taking a vote amongst our 5 networks might yield a classification better than any individual network.
 
-This sounds too good to be true, but this kind of ensembling is a common trick with both neural networks and other machine learning techniques. And it does in fact yield further improvements: we end up with 99.67percent accuracy. In other words, our ensemble of networks classifies all but 33 of the 10,000 test images correctly.
+**使用网络的协作：** 一个简单的进一步推进网络表现的途径，就是创建多个神经网络，并且从它们当中殷选最佳的分类结果。假设，我们用上述的技巧，训练 5 个不同的神经网络，每个网络大致都会取得 99.6% 的成绩。尽管它们都有相似的精度，而他们产生的错误可能是不同的，这是由于它们是被随机初始化的。从 5 个网络分类结果中选择，会比单一网络的结果更佳，这样更加合理一些。
+
+This sounds too good to be true, but this kind of ensembling is a common trick with both neural networks and other machine learning techniques. And it does in fact yield further improvements: we end up with 99.67 percent accuracy. In other words, our ensemble of networks classifies all but 33 of the 10,000 test images correctly.
+
+听起来实现了很好的结果，这种在两个神经网络和机器学习中协调的方法，是一种常用的技巧。而它并不会产生实质性的改进：我们最终停止在 99.67% 的精度。换言之，我们的网络协作正确地识别了所有的 10,000 个图像，除了 33 个之外。
 
 The remaining errors in the test set are shown below. The label in the top right is the correct classification, according to the MNIST data, while in the bottom right is the label output by our ensemble of nets:
+
+测试集中还留下的错误都在下面显示了。右上的标签是 MNIST 数据中标定的正确分类，而右下是我们的多个网络的协作分类的输出：
 
 ![ensemble_errors](../meta/ensemble_errors.png)
 
