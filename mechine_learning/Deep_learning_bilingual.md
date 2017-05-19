@@ -642,11 +642,15 @@ For the most part, I won't try to survey this recent work. But I can't resist ma
 
 **Why are we able to train?** We saw in [the last chapter](http://neuralnetworksanddeeplearning.com/chap5.html) that there are fundamental obstructions to training in deep, many-layer neural networks. In particular, we saw that the gradient tends to be quite unstable: as we move from the output layer to earlier layers the gradient tends to either vanish (the vanishing gradient problem) or explode (the exploding gradient problem). Since the gradient is the signal we use to train, this causes problems.
 
-**我们凭什么去训练？** 我们在[上一章](http://neuralnetworksanddeeplearning.com/chap5.html)中，看到过对于深度，多层网络的训练存在着根本障碍。我们看到过梯度训练趋于完全失稳：当我们从输出层向早前的层推算时，梯度训练要么趋于消失（梯度消失问题），要么趋于爆炸（梯度爆炸问题）。梯度是我们赖以训练网络的信号，因而会造成问题。
+**我们凭什么去训练？** 我们在[上一章](http://neuralnetworksanddeeplearning.com/chap5.html)中，看到过对于深度，多层网络的训练存在着根本障碍。我们看到过梯度训练趋于完全失稳：当我们从输出层向早前的层推算时，梯度要么趋于消失（梯度消失问题），要么趋于爆炸（梯度爆炸问题）。梯度是我们赖以训练网络的信号，因而会造成问题。
 
 How have we avoided those results?
 
+我们如何避开这些坑？
+
 Of course, the answer is that we haven't avoided these results. Instead, we've done a few things that help us proceed anyway. In particular: (1) Using convolutional layers greatly reduces the number of parameters in those layers, making the learning problem much easier; (2) Using more powerful regularization techniques (notably dropout and convolutional layers) to reduce overfitting, which is otherwise more of a problem in more complex networks; (3) Using rectified linear units instead of sigmoid neurons, to speed up training - empirically, often by a factor of 3-5; (4) Using GPUs and being willing to train for a long period of time. In particular, in our final experiments we trained for 40 epochs using a data set 5 times larger than the raw MNIST training data. Earlier in the book we mostly trained for 30 epochs using just the raw training data. Combining factors (3) and (4) it's as though we've trained a factor perhaps 30 times longer than before.
+
+诚然，答案是我们其实无法避免这些坑。替代的办法是，我们做了些事情来帮助我们继续前进。具体来说：（1）使用卷积层极大地缩减了层中的参数，使得关于学习的问题容易了很多；（2）使用更加有力的正则化技术（特别是辍学和卷积层）抑制过拟合，否则在越复杂的网络中，问题越严重；（3）使用修正线性单元替代 sigmoid 神经元，以加速训练速度 - 经验上通常快 3-5 倍；（4）使用 GPU 以及耐心地进行长时间的训练，在我们最后的实验中，我们以 MNIST 的原始数据 5 倍的扩展数据训练了 40 个轮次。在本书的前期联系中，我们几乎都是使用原始数据训练 30 个轮次。结合（3）和（4）它相当于我们的训练比之前多了 30 倍。
 
 Your response may be "Is that it? Is that all we had to do to train deep networks? What's all the fuss about?"
 
