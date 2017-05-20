@@ -670,11 +670,15 @@ With that said, this really is a rather simple set of ideas. Simple, but powerfu
 
 **A word on procedure:** In this section, we've smoothly moved from single hidden-layer shallow networks to many-layer convolutional networks. It all seemed so easy! We make a change and, for the most part, we get an improvement. If you start experimenting, I can guarantee things won't always be so smooth. The reason is that I've presented a cleaned-up narrative, omitting many experiments - including many failed experiments. This cleaned-up narrative will hopefully help you get clear on the basic ideas. But it also runs the risk of conveying an incomplete impression. Getting a good, working network can involve a lot of trial and error, and occasional frustration. In practice, you should expect to engage in quite a bit of experimentation. To speed that process up you may find it helpful to revisit Chapter 3's discussion of [how to choose a neural network's hyper-parameters](http://neuralnetworksanddeeplearning.com/chap3.html#how_to_choose_a_neural_network's_hyper-parameters), and perhaps also to look at some of the further reading suggested in that section.
 
-**实验过程的建言：** 在这一段，我们平稳地从单层隐藏层的浅层网络过渡到多层卷积网络。所有的一切看起来是那么容易！我们作出改变，在大多数情况下，我就取得了改进。如果你开始试验了，我保证事情应该不会那么顺利。理由是我讲述的是一个梳理清楚的故事，忽略了很多的试验 - 包括很多失败的实验。梳理清楚的讲述有助于你对基本思想取得清晰的认识。不过它也包含表述不完全的风险。得到一个良好，有效的网络会经历很多试验和错误，还有偶尔的挫折感。想加速这个过程，你会发现回顾第三章有关[如何选择神经网络的超参数](http://neuralnetworksanddeeplearning.com/chap3.html#how_to_choose_a_neural_network's_hyper-parameters)的讨论非常有用，并且进一步阅读那个段落中建议的相关内容。
+**实验过程的建言：** 在这一段，我们平稳地从单层隐藏层的浅层网络过渡到多层卷积网络。所有的一切看起来是那么容易！我们作出改变，在大多数情况下，就取得了进展。如果你开始试验了，我保证事情应该不会那么顺利。理由是我讲述的是一个梳理清楚的故事，忽略了很多的试验 - 包括很多失败的实验。梳理清楚的讲述有助于你对基本思路取得清晰的认识。不过它也包含表述不完全的风险。得到一个良好，有效的网络会经历很多试验和错误，还有偶尔的挫折感。想加速这个过程，你会发现回顾第三章有关[如何选择神经网络的超参数](http://neuralnetworksanddeeplearning.com/chap3.html#how_to_choose_a_neural_network's_hyper-parameters)的讨论，并且进一步阅读那个段落中建议的相关内容非常有用。
 
 ### The code for our convolutional networks
 
+### 我们的卷积网络源代码
+
 Alright, let's take a look at the code for our program, `network3.py`. Structurally, it's similar to `network2.py`, the program we developed in [Chapter 3](http://neuralnetworksanddeeplearning.com/chap3.html), although the details differ, due to the use of Theano. We'll start by looking at the `FullyConnectedLayer` class, which is similar to the layers studied earlier in the book. Here's the code (discussion below)*.
+
+好了，让我们看看我们的程序代码，`network3.py` 。结构上，它类似 `network2.py` ，那个我们在[第三章](http://neuralnetworksanddeeplearning.com/chap3.html)开发的程序，由于是使用 Theano，所以在细节上有差别。我们首先看 `FullConnectedLayer` 类，它类似于本书在早前研究过的那样。这里仅展示代码（讨论在后面展开）\* 。
 
 > Note added November 2016: several readers have noted that in the line initializing `self.w`, I set`scale=np.sqrt(1.0/n_out)`, when the arguments of Chapter 3 suggest a better initialization may be `scale=np.sqrt(1.0/n_in)`. This was simply a mistake on my part. In an ideal world I'd rerun all the examples in this chapter with the correct code. Still, I've moved on to other projects, so am going to let the error go.
 
