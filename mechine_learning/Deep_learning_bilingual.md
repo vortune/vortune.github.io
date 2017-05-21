@@ -738,6 +738,8 @@ However, a couple of minor differences of detail are worth mentioning. Most obvi
 
 Less obviously, when we [introduced the softmax layer](http://neuralnetworksanddeeplearning.com/chap3.html#softmax), we never discussed how to initialize the weights and biases. Elsewhere we've argued that for sigmoid layers we should initialize the weights using suitably parameterized normal random variables. But that heuristic argument was specific to sigmoid neurons (and, with some amendment, to tanh neurons). However, there's no particular reason the argument should apply to softmax layers. So there's no *a priori* reason to apply that initialization again. Rather than do that, I shall initialize all the weights and biases to be 0. This is a rather *ad hoc* procedure, but works well enough in practice.
 
+不太明显的差别是，当我们[介绍 softmax 层](http://neuralnetworksanddeeplearning.com/chap3.html#softmax) 时，我们从来没有讨论过如何初始化权值与偏至。在其他地方，我们辩明应该以恰当的随机变量去初始化 sigmoid 层的权值与偏至。不过这个试探性的参数是针对 sigmoid 神经元的（并且对于 tanh 神经元，需要有些修正）。无论如何，没有特别的理由表明这样的参数应该用到 softmax 层。没有什么先天的理由去再一次初始化。相比而言，我要将权值和偏至全部设置为 0 。这是一个特别的手法，但是在实际试验中效果良好。
+
 Okay, we've looked at all the layer classes. What about the `Network` class? Let's start by looking at the `__init__` method:
 
 ```python
