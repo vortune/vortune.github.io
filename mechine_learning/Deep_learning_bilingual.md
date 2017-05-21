@@ -742,6 +742,8 @@ Less obviously, when we [introduced the softmax layer](http://neuralnetworksandd
 
 Okay, we've looked at all the layer classes. What about the `Network` class? Let's start by looking at the `__init__` method:
 
+OK，我们硬件看过所有的层类了。类 `Network` 又如何呢？让我们从查看 `__init__` 函数入手：
+
 ```python
 class Network(object):
     
@@ -767,6 +769,8 @@ class Network(object):
 ```
 
 Most of this is self-explanatory, or nearly so. The line `self.params = [param for layer in ...]` bundles up the parameters for each layer into a single list. As anticipated above, the `Network.SGD` method will use `self.params` to figure out what variables in the `Network` can learn. The lines `self.x = T.matrix("x")` and `self.y = T.ivector("y")` define Theano symbolic variables named `x` and `y`. These will be used to represent the input and desired output from the network.
+
+大部分的内容几乎都是不言自明的。行 `self.params = [param for layer in ...]` 捆绑所有各个层的参数进入一个单独的链表。如上所述，函数 `Network.SGD` 将调用 `self.params` 来确定 `Network` 中的那些变量需要训练。行 `self.x = T.matrix("x")` 与 `self.y = T.ivector("y")` 定义 Theano 的符号变量 `x` 和 `y` ，他们将用来标注来自网络的输入与期望的输出。
 
 Now, this isn't a Theano tutorial, and so we won't get too deeply into what it means that these are symbolic variables*.
 
