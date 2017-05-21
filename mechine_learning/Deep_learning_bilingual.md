@@ -726,9 +726,15 @@ Much of the `__init__` method is self-explanatory, but a few remarks may help cl
 
 The `set_inpt` method is used to set the input to the layer, and to compute the corresponding output. I use the name `inpt` rather than `input` because `input` is a built-in function in Python, and messing with built-ins tends to cause unpredictable behavior and difficult-to-diagnose bugs. Note that we actually set the input in two separate ways: as `self.inpt` and`self.inpt_dropout`. This is done because during training we may want to use dropout. If that's the case then we want to remove a fraction `self.p_dropout` of the neurons. That's what the function `dropout_layer`in the second-last line of the `set_inpt` method is doing. So `self.inpt_dropout` and `self.output_dropout` are used during training, while `self.inpt` and `self.output` are used for all other purposes, e.g., evaluating accuracy on the validation and test data.
 
+`set_inpt` 函数用于将输入设置到层中，并且计算对应的输出。我宁愿用 `inpt` 而不是用 `input` 来命名，是因为 `input` 是 Python 的内建函数，搅混内建函数的名字会导致不可预测的行为以及难以诊断的缺陷。注意我们有两个分立的途径来设置输入：即 `self.inpt` 和 `self.inpt_dropout` 。这样做的目的是因为，我们可能在训练的过程中需要应用辍学。如果是这样，我们就会希望通过 `self.p_dropout` 移除部分神经元。这就是在函数 `set_inpt` 的倒数第二行中的 `dropout_layer` 函数所做的事情。所以，`self.inpt_dropout` 和 `self.output_dropout` 用于训练期间，而 `self.inpu` 和 `self.output` 则用于所有的其他目的，譬如，在验证数据与测试数据中评估精度。
+
 The `ConvPoolLayer` and `SoftmaxLayer` class definitions are similar to `FullyConnectedLayer`. Indeed, they're so close that I won't excerpt the code here. If you're interested you can look at the full listing for `network3.py`, later in this section.
 
+`ConvPoolLayer` 和 `SoftmaxLayer` 类的定义与 `FullyConnectedLayer` 类似。事实上，他们是如此接近，乃至我都不想在这里摘录它们的源码了。如果你有兴趣，你可以在本段后续部分看到它们完整的列举。
+
 However, a couple of minor differences of detail are worth mentioning. Most obviously, in both `ConvPoolLayer` and `SoftmaxLayer` we compute the output activations in the way appropriate to that layer type. Fortunately, Theano makes that easy, providing built-in operations to compute convolutions, max-pooling, and the softmax function.
+
+尽管如此，还是有些细节上的差异值得注意。非常明显，我们用 `ConvPoolLayer` 和 `SoftmaxLayer` 在合适的层中计算激活的输出值。幸运的是，Theano 提供的内建算子使我们非常容易计算卷积，极值池化，和 softmax 函数。
 
 Less obviously, when we [introduced the softmax layer](http://neuralnetworksanddeeplearning.com/chap3.html#softmax), we never discussed how to initialize the weights and biases. Elsewhere we've argued that for sigmoid layers we should initialize the weights using suitably parameterized normal random variables. But that heuristic argument was specific to sigmoid neurons (and, with some amendment, to tanh neurons). However, there's no particular reason the argument should apply to softmax layers. So there's no *a priori* reason to apply that initialization again. Rather than do that, I shall initialize all the weights and biases to be 0. This is a rather *ad hoc* procedure, but works well enough in practice.
 
