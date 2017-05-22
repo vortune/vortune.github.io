@@ -884,9 +884,15 @@ In these lines we symbolically set up the regularized log-likelihood cost functi
 
 The remainder of the `SGD` method is self-explanatory - we simply iterate over the epochs, repeatedly training the network on mini-batches of training data, and computing the validation and test accuracies.
 
+`SGD` 函数剩余的部分就不言自明了 - 我们只要简单地迭代轮次，将训练数据的小批次反复训练网络，然后计算验证数据与测试数据的精度。
+
 Okay, we've now understood the most important pieces of code in`network3.py`. Let's take a brief look at the entire program. You don't need to read through this in detail, but you may enjoy glancing over it, and perhaps diving down into any pieces that strike your fancy. The best way to really understand it is, of course, by modifying it, adding extra features, or refactoring anything you think could be done more elegantly. After the code, there are some problems which contain a few starter suggestions for things to do. Here's the code*.
 
+Okay，我们现在已经理解了 `network3.py` 中大部分的重要代码片段。让我们简要回顾一下整个程序。你不必阅读细节，不过你可以从旁欣赏，或者沉浸到那些触动你的想象力的代码片段中。理解这份代码的最佳方法，当然就是修改它，加入些扩展的功能，又或者重构任何你认为可以做得更优雅的东西。有源码之后，会列举一些问题，它们包含对初学者要做的几件事情的建议。
+
 > Using Theano on a GPU can be a little tricky. In particular, it's easy to make the mistake of pulling data off the GPU, which can slow things down a lot. I've tried to avoid this. With that said, this code can certainly be sped up quite a bit further with careful optimization of Theano's configuration. See the Theano documentation for more details.
+>
+> 在 GPU 上运行 Theano 可能会有点棘手。特别是，将数据从 GPU 中抽取时容易发生错误，会使运行非常缓慢。我曾经试图避免。话虽如此，这份代码一定可以通过仔细优化 Theano 的配置来进一步加速。请参考 Theano 的文档了解更多细节。
 
 ```python
 """network3.py
