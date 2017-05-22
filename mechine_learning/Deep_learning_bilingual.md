@@ -1213,14 +1213,39 @@ def dropout_layer(layer, p_dropout):
 
 #### Problems
 
+#### 问题
+
 * At present, the `SGD` method requires the user to manually choose the number of epochs to train for. Earlier in the book we discussed an automated way of selecting the number of epochs to train for, known as [early stopping](http://neuralnetworksanddeeplearning.com/chap3.html#early_stopping). Modify `network3.py` to implement early stopping.
+
+  目前，`SGD` 函数需要用户手工选择训练轮次的数量。在本书早前的章节中，我们讨论过训练轮次的自动化选择的问题，称为[早期停止](http://neuralnetworksanddeeplearning.com/chap3.html#early_stopping)。修改 `network3.py` 实现早期停止。
+
 * Add a `Network` method to return the accuracy on an arbitrary data set.
-* Modify the `SGD` method to allow the learning rate ηη to be a function of the epoch number. *Hint: After working on this problem for a while, you may find it useful to see the discussion at this link.*
+
+  加入一个 `network` 函数，返回对任意数据集的分类精度。
+
+* Modify the `SGD` method to allow the learning rate $\eta$ to be a function of the epoch number. *Hint: After working on this problem for a while, you may find it useful to see the discussion at [this link](https://groups.google.com/forum/#!topic/theano-users/NQ9NYLvleGc).*
+
+  修改函数 `SGD` 容许学习步长 $\eta$ 成为轮次数量的函数。*提示：在这个问题中工作过一段时间之后，你会发现它是非常有用的，参考[这个链接](https://groups.google.com/forum/#!topic/theano-users/NQ9NYLvleGc)*。
+
 * Earlier in the chapter I described a technique for expanding the training data by applying (small) rotations, skewing, and translation. Modify `network3.py` to incorporate all these techniques. *Note: Unless you have a tremendous amount of memory, it is not practical to explicitly generate the entire expanded data set. So you should consider alternate approaches.*
+
+  本章较早的时候，我描述过通过旋转，倾斜，和平移来扩展训练数据的技术。修改 `network3.py` 合并所有这些技术。注意：除非你有一个海量的内存，否则生成一整套扩展数据集是不现实的。所以，你应该考虑替代方案。
+
 * Add the ability to load and save networks to `network3.py`.
+
+  在 `network3.py` 中增加加载与保存网络的功能。
+
 * A shortcoming of the current code is that it provides few diagnostic tools. Can you think of any diagnostics to add that would make it easier to understand to what extent a network is overfitting? Add them.
+
+  当前源码的缺点是它只提供了有限的诊断工具。你能想到任何的诊断功能，使程序更容易了解过拟合的程度吗？添加他们。
+
 * We've used the same initialization procedure for rectified linear units as for sigmoid (and tanh) neurons. Our [argument for that initialization](http://neuralnetworksanddeeplearning.com/chap3.html#weight_initialization) was specific to the sigmoid function. Consider a network made entirely of rectified linear units (including outputs). Show that rescaling all the weights in the network by a constant factor $c>0$ simply rescales the outputs by a factor $c^{L−1}$, where $L$ is the number of layers. How does this change if the final layer is a softmax? What do you think of using the sigmoid initialization procedure for the rectified linear units? Can you think of a better initialization procedure? *Note: This is a very open-ended problem, not something with a simple self-contained answer. Still, considering the problem will help you better understand networks containing rectified linear units.*
+
+  我们已经用与初始化 sigmoid（与 tanh）神经元相同的初始化过程初始化纠正线性单元。考虑一个网络，它完全由纠正线性单元（包括输出）组成。展现一下以常数因子 $c>0$ 来重整网络的所有权值，以因子 $c^{L-1}$ 重整输出，这里 $L$ 是层编号。如果最后一层是 softmax，应该如何变通？你认为有更好的初始化途径吗？*提示：这是一个无止境的问题，没有什么东西自带简单答案。不过，思考这个问题将帮助你更好地理解包含纠正线性单元的网络*。
+
 * Our [analysis](http://neuralnetworksanddeeplearning.com/chap5.html#what's_causing_the_vanishing_gradient_problem_unstable_gradients_in_deep_neural_nets) of the unstable gradient problem was for sigmoid neurons. How does the analysis change for networks made up of rectified linear units? Can you think of a good way of modifying such a network so it doesn't suffer from the unstable gradient problem? *Note: The word good in the second part of this makes the problem a research problem. It's actually easy to think of ways of making such modifications. But I haven't investigated in enough depth to know of a really good technique.*
+
+  我们对梯度不稳的问题的[分析](http://neuralnetworksanddeeplearning.com/chap5.html#what's_causing_the_vanishing_gradient_problem_unstable_gradients_in_deep_neural_nets)是针对 sigmoid 神经元的。对于纠正线性单元组成的网络，分析会如何改变呢？你能想到什么好主意让网络免受梯度失稳的问题影响呢？提示：第二个问题的提法很好，它使得问题成为一个科研问题。想办法作出如此这般的修改，其实很容易。不过，我还没有对真正好的技术做过足够深入的调查。
 
 ### Recent progress in image recognition
 
