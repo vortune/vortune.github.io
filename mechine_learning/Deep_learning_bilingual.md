@@ -770,13 +770,19 @@ class Network(object):
 
 Most of this is self-explanatory, or nearly so. The line `self.params = [param for layer in ...]` bundles up the parameters for each layer into a single list. As anticipated above, the `Network.SGD` method will use `self.params` to figure out what variables in the `Network` can learn. The lines `self.x = T.matrix("x")` and `self.y = T.ivector("y")` define Theano symbolic variables named `x` and `y`. These will be used to represent the input and desired output from the network.
 
-大部分的内容几乎都是不言自明的。行 `self.params = [param for layer in ...]` 捆绑所有各个层的参数进入一个单独的链表。如上所述，函数 `Network.SGD` 将调用 `self.params` 来确定 `Network` 中的那些变量需要训练。行 `self.x = T.matrix("x")` 与 `self.y = T.ivector("y")` 定义 Theano 的符号变量 `x` 和 `y` ，他们将用来标注来自网络的输入与期望的输出。
+大部分的内容几乎都是不言自明的。行 `self.params = [param for layer in ...]` 捆绑所有各个层的参数进入一个单独的链表。如上所述，函数 `Network.SGD` 将调用 `self.params` 来确定 `Network` 中的那些变量需要训练。行 `self.x = T.matrix("x")` 与 `self.y = T.ivector("y")` 定义 Theano 的符号变量 `x` 和 `y` ，它们将用来标注来自网络的输入与期望的输出。
 
 Now, this isn't a Theano tutorial, and so we won't get too deeply into what it means that these are symbolic variables*.
 
+现在，这是一个 Theano 的教程，因而我们不打算对符号变量的含义涉及太深。
+
 > The [Theano documentation](http://deeplearning.net/software/theano/index.html) provides a good introduction to Theano. And if you get stuck, you may find it helpful to look at one of the other tutorials available online. For instance, [this tutorial](http://nbviewer.ipython.org/github/craffel/theano-tutorial/blob/master/Theano%20Tutorial.ipynb) covers many basics.
+>
+> [Theano 文档](http://deeplearning.net/software/theano/index.html) 提供了一个很好的介绍。如果你学习上卡壳了，你也会发现它能帮助你找到一个一个的在线教程。作为例子，[这个教程](http://nbviewer.ipython.org/github/craffel/theano-tutorial/blob/master/Theano%20Tutorial.ipynb)覆盖了很多的基础知识。
 
 But the rough idea is that these represent mathematical variables, *not* explicit values. We can do all the usual things one would do with such variables: add, subtract, and multiply them, apply functions, and so on. Indeed, Theano provides many ways of manipulating such symbolic variables, doing things like convolutions, max-pooling, and so on. But the big win is the ability to do fast symbolic differentiation, using a very general form of the backpropagation algorithm. This is extremely useful for applying stochastic gradient descent to a wide variety of network architectures. In particular, the next few lines of code define symbolic outputs from the network. We start by setting the input to the initial layer, with the line
+
+不过粗略的印象是它们表示数学上的变量，而未进行赋值。我们通常可以对它们进行常规的操作：加法，减法，以及相乘与函数引用，如此等等。事实上，Theano 提供很多途径对符号变量进行操作，譬如，卷积，极值池化等等。Theano 的最大的优点还在于进行非常通用的反向传播算法计算时，能够进行快速的符号微分运算。这个特性对于在广泛类型的网络架构中，实行随机梯度下降计算非常有用。特别地，在下面几行源码中，定义网络的符号输出项。我们通过设置初始层的输入项来作为起点
 
 ```pyton
         init_layer.set_inpt(self.x, self.x, self.mini_batch_size)
@@ -784,7 +790,11 @@ But the rough idea is that these represent mathematical variables, *not* explici
 
 Note that the inputs are set one mini-batch at a time, which is why the mini-batch size is there. Note also that we pass the input `self.x` in twice: this is because we may use the network in two different ways (with or without dropout). The `for` loop then propagates the symbolic variable `self.x` forward through the layers of the `Network`. This allows us to define the final `output` and `output_dropout` attributes, which symbolically represent the output from the `Network`.
 
+注意了，如果在输入集中设置微批量（mini-batch），这就是为什么在这里设置微批量尺寸的地方。注意我们还两次设置了输入项 `self.x` ：这是因为我们可能会以两种不同的途径应用该网络（是否辍学）。`for` 循环通过符号变量 `self.x` 的步进历遍整个网络。这里还可以定义最终的 `output` 和 `output_dropout` 属性，它是表示网络的符号下标标示的输出。
+
 Now that we've understood how a `Network` is initialized, let's look at how it is trained, using the `SGD` method. The code looks lengthy, but its structure is actually rather simple. Explanatory comments after the code.
+
+到现在，我们已经理解了网络是如何初始化的，让我们来看看他是如何用 `SGD` 函数训练的吧。
 
 ```python
 def SGD(self, training_data, epochs, mini_batch_size, eta, 
