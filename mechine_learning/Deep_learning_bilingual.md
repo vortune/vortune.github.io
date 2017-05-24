@@ -1245,11 +1245,15 @@ def dropout_layer(layer, p_dropout):
 
 * Our [analysis](http://neuralnetworksanddeeplearning.com/chap5.html#what's_causing_the_vanishing_gradient_problem_unstable_gradients_in_deep_neural_nets) of the unstable gradient problem was for sigmoid neurons. How does the analysis change for networks made up of rectified linear units? Can you think of a good way of modifying such a network so it doesn't suffer from the unstable gradient problem? *Note: The word good in the second part of this makes the problem a research problem. It's actually easy to think of ways of making such modifications. But I haven't investigated in enough depth to know of a really good technique.*
 
-  我们对梯度不稳的问题的[分析](http://neuralnetworksanddeeplearning.com/chap5.html#what's_causing_the_vanishing_gradient_problem_unstable_gradients_in_deep_neural_nets)是针对 sigmoid 神经元的。对于纠正线性单元组成的网络，分析会如何改变呢？你能想到什么好主意让网络免受梯度失稳的问题影响呢？提示：第二个问题的提法很好，它使得问题成为一个科研问题。想办法作出如此这般的修改，其实很容易。不过，我还没有对真正好的技术做过足够深入的调查。
+  我们对梯度不稳的问题的[分析](http://neuralnetworksanddeeplearning.com/chap5.html#what's_causing_the_vanishing_gradient_problem_unstable_gradients_in_deep_neural_nets)是针对 sigmoid 神经元的。对于纠正线性单元组成的网络，分析会如何改变呢？你能想到什么好主意让网络免受梯度失稳的问题影响呢？提示：第二个问题的提法很好，它使得问题成为一个科研课题。想办法作出如此这般的修改，其实很容易。不过，我还没有对真正好的技术做过足够深入的调查。
 
 ### Recent progress in image recognition
 
+### 图像识别的近期进展
+
 In 1998, the year MNIST was introduced, it took weeks to train a state-of-the-art workstation to achieve accuracies substantially worse than those we can achieve using a GPU and less than an hour of training. Thus, MNIST is no longer a problem that pushes the limits of available technique; rather, the speed of training means that it is a problem good for teaching and learning purposes. Meanwhile, the focus of research has moved on, and modern work involves much more challenging image recognition problems. In this section, I briefly describe some recent work on image recognition using neural networks.
+
+1998 年，MNIST 推出，它在一台当时最先进的工作站上经历了几周的训练，但是分类精度比我们在 GPU 上实现的差多了，而且我们仅用了个把小时来训练。因而，MNIST 不再是推进可用技术的限制的问题；相反，训练的速度问题反而成为了很好的教学与学习的目的。同时，研究的重点也发生了改变，并且当前的工作涉及更多的挑战图像识别的问题。在本节中，我主要叙述目前在应用神经网络进行图像识别的工作。
 
 The section is different to most of the book. Through the book I've focused on ideas likely to be of lasting interest - ideas such as backpropagation, regularization, and convolutional networks. I've tried to avoid results which are fashionable as I write, but whose long-term value is unknown. In science, such results are more often than not ephemera which fade and have little lasting impact. Given this, a skeptic might say: "well, surely the recent progress in image recognition is an example of such ephemera? In another two or three years, things will have moved on. So surely these results are only of interest to a few specialists who want to compete at the absolute frontier? Why bother discussing it?"
 
