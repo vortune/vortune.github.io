@@ -1295,13 +1295,19 @@ One difficulty in running the ILSVRC competition is that many ImageNet images co
 
 It's worth briefly describing KSH's network, since it has inspired much subsequent work. It's also, as we shall see, closely related to the networks we trained earlier in this chapter, albeit more elaborate. KSH used a deep convolutional neural network, trained on two GPUs. They used two GPUs because the particular type of GPU they were using (an NVIDIA GeForce GTX 580) didn't have enough on-chip memory to store their entire network. So they split the network into two parts, partitioned across the two GPUs.
 
+简要描述一下 KSH 网络是值得的，因为它启发了很多后续的工作。正如我们看到的那样，它与我们在本章早前训练的网络密前相关，尽管复杂很多。KSH 使用一个深度网络，在两个 GPU 上训练。他们使用两个 GPU，是因为他们所使用的 GPU 型号（NVIDIA GeForce GTX 580）缺乏足够的片上内存来存放他们的整个网络。所以他们将网络分成两个部分，分隔在两个GPU 中。
+
 The KSH network has 7 layers of hidden neurons. The first 5 hidden layers are convolutional layers (some with max-pooling), while the next 2 layers are fully-connected layers. The output layer is a 1,000-unit softmax layer, corresponding to the 1,000 image classes. Here's a sketch of the network, taken from the KSH paper*. The details are explained below. Note that many layers are split into 2 parts, corresponding to the 2 GPUs.
+
+KSH 网络有 7 个隐藏神经元层。前面 5 个隐藏层是卷积层（有些带极值池化），后面是两个全连层。输出层是 1,000 单元的逻辑多分类层，对应 1,000 个图像分类。这里是网络的简图，摘取自 KSH 论文。详情将在下面解释。注意，许多层被分成两个部分，对应于两个 GPU。
 
 > Thanks to Ilya Sutskever.
 
 ![](../meta/KSH.jpg)
 
 The input layer contains 3×224×224 neurons, representing the RGB values for a 224×224 image. Recall that, as mentioned earlier, ImageNet contains images of varying resolution. This poses a problem, since a neural network's input layer is usually of a fixed size. KSH dealt with this by rescaling each image so the shorter side had length 256. They then cropped out a 256×256 area in the center of the rescaled image. Finally, KSH extracted random 224×224 subimages (and horizontal reflections) from the 256×256 images. They did this random cropping as a way of expanding the training data, and thus reducing overfitting. This is particularly helpful in a large network such as KSH's. It was these 224×224 images which were used as inputs to the network. In most cases the cropped image still contains the main object from the uncropped image.
+
+输入层包含 3x224x224 个神经元，表示在 224x224 图片中的 RGB 值。回忆一下，早前我们注意到，ImageNet 不同解析度的图片。这就提出了一个问题，因为神经网络的输入层通常都是固定大小的。KSH 通过缩放每个图片来处理这个问题，使得每个图片的短边长度统一为 256。然后他们从缩放之后的图片的中心裁出 256x256 的区域。最后，KSH 从 256x256 的图像中，随机抽取 224x224 的子图（结合水平镜像）。他们通过这种随机剪裁的途径来扩展训练数据，避免过拟合。这个对于像 KSH 这样的大型网络来说，特别有帮助。这些 224x224 的图片就是用于网络输入的数据了。在大部分情况下，剪裁过的图片，依然包含在原图上的主要物体。
 
 Moving on to the hidden layers in KSH's network, the first hidden layer is a convolutional layer, with a max-pooling step. It uses local receptive fields of size 11×11, and a stride length of 4 pixels. There are a total of 96 feature maps. The feature maps are split into two groups of 48 each, with the first 48 feature maps residing on one GPU, and the second 48 feature maps residing on the other GPU. The max-pooling in this and later layers is done in 3×3 regions, but the pooling regions are allowed to overlap, and are just 2 pixels apart.
 
