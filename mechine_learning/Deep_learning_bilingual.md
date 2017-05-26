@@ -1315,6 +1315,8 @@ Moving on to the hidden layers in KSH's network, the first hidden layer is a con
 
 The second hidden layer is also a convolutional layer, with a max-pooling step. It uses 5×5 local receptive fields, and there's a total of 256 feature maps, split into 128 on each GPU. Note that the feature maps only use 48 input channels, not the full 96 output from the previous layer (as would usually be the case). This is because any single feature map only uses inputs from the same GPU. In this sense the network departs from the convolutional architecture we described earlier in the chapter, though obviously the basic idea is still the same.
 
+第二个隐藏层也是卷积层，带一个极值池化。它使用 5x5 的局部接收域，总共有 256 个特征图，每个 GPU 分配 128 个。注意这里的特征图仅使用 48 个输入通道，而不是一一对应上一层的 96 个输出（正常情况下是这样）。这是因为任何一个单独的特征图，仅使用来自同一 GPU 的输入。从这个意义上说，网络已经离开了我们在本章早前讨论的卷积架构，然而，基本思想显然是一致的。
+
 The third, fourth and fifth hidden layers are convolutional layers, but unlike the previous layers, they 		do not involve max-pooling. Their respectives parameters are: (3) 384 feature maps, with 3×3 local receptive fields, and 256 input channels; (4) 384 feature maps, with 3×3 local receptive fields, and 192 input channels; and (5) 256 feature maps, with 3×3 local receptive fields, and 192 input channels. Note that the third layer involves some inter-GPU communication (as depicted in the figure) in order that the feature maps use all 256 input channels.
 
 The sixth and seventh hidden layers are fully-connected layers, with 4,096 neurons in each layer.
