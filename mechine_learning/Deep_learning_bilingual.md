@@ -1319,11 +1319,19 @@ The second hidden layer is also a convolutional layer, with a max-pooling step. 
 
 The third, fourth and fifth hidden layers are convolutional layers, but unlike the previous layers, they 		do not involve max-pooling. Their respectives parameters are: (3) 384 feature maps, with 3×3 local receptive fields, and 256 input channels; (4) 384 feature maps, with 3×3 local receptive fields, and 192 input channels; and (5) 256 feature maps, with 3×3 local receptive fields, and 192 input channels. Note that the third layer involves some inter-GPU communication (as depicted in the figure) in order that the feature maps use all 256 input channels.
 
+第三，四和五个隐藏层是卷积层，不过与前面的层不同，它们不包括极值池化。它们的接收参数为：（3）384 个特征图，带 3x3 局部接收域，及 256 个输入通道；（4）384 个特征图，3x3 局部接收域，及 192 个输入通道；（5）256 个特征图，3x3 的局部接收域，192 个输入通道。注意，在第三层包括了某种 GPU 间的通讯机制（如图所示）以便特征图能用上所有 256 个输入通道。
+
 The sixth and seventh hidden layers are fully-connected layers, with 4,096 neurons in each layer.
+
+第六和第七个隐藏层是全连层，每层带有 4,096 个神经元。
 
 The output layer is a 1,000-unit softmax layer.
 
+输出层是 1,000 单元的 softmax 层。
+
 The KSH network takes advantage of many techniques. Instead of using the sigmoid or tanh activation functions, KSH use rectified linear units, which sped up training significantly. KSH's network had roughly 60 million learned parameters, and was thus, even with the large training set, susceptible to overfitting. To overcome this, they expanded the training set using the random cropping strategy we discussed above. They also further addressed overfitting by using a variant of [l2 regularization](http://neuralnetworksanddeeplearning.com/chap3.html#regularization), and [dropout](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization). The network itself was trained using [momentum-based](http://neuralnetworksanddeeplearning.com/chap3.html#variations_on_stochastic_gradient_descent) mini-batch stochastic gradient descent.
+
+KSH 取得了不少的技术进步。KSH  使用显著提高训练速度的纠正线性单元，替换掉 sigmoid 或者 tanh 激活函数。KSH 网络具有 6000 万个学习参数，有鉴于此，即使是使用巨大的训练集，也很容易导致过拟合。为了克服这个问题，他们使用我们在上面讨论过的随机裁切策略来扩展训练数据集。他们还使用了 [l2 正则化](http://neuralnetworksanddeeplearning.com/chap3.html#regularization)的变体, 和[辍学](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization)来进一步解决过拟合的问题。网络本身使用[动量基](http://neuralnetworksanddeeplearning.com/chap3.html#variations_on_stochastic_gradient_descent)小批量样本随机梯度下降来训练。
 
 That's an overview of many of the core ideas in the KSH paper. I've omitted some details, for which you should look at the paper. You can also look at Alex Krizhevsky's [cuda-convnet](https://code.google.com/p/cuda-convnet/) (and successors), which contains code implementing many of the ideas. A Theano-based implementation has also been developed*,  with the code available [here](https://github.com/uoguelph-mlrg/theano_alexnet). The code is recognizably along similar lines to that developed in this chapter, although the use of multiple GPUs complicates things somewhat. The Caffe neural nets framework also includes a version of the KSH network, see their [Model Zoo](http://caffe.berkeleyvision.org/model_zoo.html) for details.
 
