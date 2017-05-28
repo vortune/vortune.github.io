@@ -1375,7 +1375,7 @@ One encouraging practical set of results comes from a team at Google, who applie
 
 I've perhaps given the impression that it's all a parade of encouraging results. Of course, some of the most interesting work reports on fundamental things we don't yet understand. For instance, a 2013 paper* showed that deep networks may suffer from  what are effectively blind spots. Consider the lines of images below. On the left is an ImageNet image classified correctly by their network. On the right is a slightly perturbed image (the perturbation is in the middle) which is classified *incorrectly* by the network. The authors found that there are such "adversarial" images for every sample image, not just a few special ones.
 
-我可能给大家过分吹嘘那些令人鼓舞的结果的印象了。的确，很多有趣的工作报告说，对于一些底层的问题，我们仍然未能搞懂。例如，一篇 2013 年的论文\*指出，深度网络可能会因为盲点而变糟。考虑下面的图片线索。左边的是被他们的网络正确分类的 ImageNet 图片。右边是一张经过轻度扰动的图片（扰动部位在中间），网络那就*不能正确*分类了。作者还发现每个样品图片都有这样的“敌对”图片，而不是个别现象。
+我可能给大家一个印象，就是过分吹嘘那些令人鼓舞的结果了。的确，很多有趣的工作报告说，对于一些底层的问题，我们仍然未能搞懂。例如，一篇 2013 年的论文\*指出，深度网络可能会因为盲点而变糟。考虑下面的图片线索。左边的是被他们的网络正确分类的 ImageNet 图片。右边是一张经过轻度扰动的图片（扰动部位在中间），网络那就*不能正确*分类了。作者还发现每个样品图片都有这样的“敌对”图片，而不是个别现象。
 
 ![](../meta/adversarial.jpg)
 
@@ -1387,7 +1387,11 @@ This is a disturbing result. The paper used a network based on the same code as 
 
 Now, these results are not quite as bad as they sound. Although such adversarial images are common, they're also unlikely in practice. As the paper notes:
 
+目前，结果完全不像他们说的那样糟糕。尽管那些敌对图片很普遍，不过它们在实践中并非太常见。正如论文中指出的那样：
+
 > > The existence of the adversarial negatives appears to be in contradiction with the network’s ability to achieve high generalization performance. Indeed, if the network can generalize well, how can it be confused by these adversarial negatives, which are indistinguishable from the regular examples? The explanation is that the set of adversarial negatives is of extremely low probability, and thus is never (or rarely) observed in the test set, yet it is dense (much like the rational numbers), and so it is found near virtually every test case.
+> >
+> > 敌对负面问题的出现与网络实现的高度泛化的能力相矛盾。的确，如果网络泛化得好，它又是如何被那些敌对数据所扰乱的，而那些现象又无法从常规的案例中区分？解释是敌对数据是概率极其低的数据集，以至于无法（或者很少）在测试数据集中被观察到，而它的密度（非常类似于有理数），又足以在每个测试集中被发现。
 
 Nonetheless, it is distressing that we understand neural nets so poorly that this kind of result should be a recent discovery. Of course, a major benefit of the results is that they have stimulated much followup work. For example, one recent paper* shows that given a trained network it's possible to generate images which look to a human like white noise, but which the network classifies as being in a known category with a very high degree of confidence. This is another demonstration that we have a long way to go in understanding neural networks and their use in image recognition.
 
