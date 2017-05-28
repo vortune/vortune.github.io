@@ -1391,13 +1391,19 @@ Now, these results are not quite as bad as they sound. Although such adversarial
 
 > > The existence of the adversarial negatives appears to be in contradiction with the network’s ability to achieve high generalization performance. Indeed, if the network can generalize well, how can it be confused by these adversarial negatives, which are indistinguishable from the regular examples? The explanation is that the set of adversarial negatives is of extremely low probability, and thus is never (or rarely) observed in the test set, yet it is dense (much like the rational numbers), and so it is found near virtually every test case.
 > >
-> > 敌对负面问题的出现与网络实现的高度泛化的能力相矛盾。的确，如果网络泛化得好，它又是如何被那些敌对数据所扰乱的，而那些现象又无法从常规的案例中区分？解释是敌对数据是概率极其低的数据集，以至于无法（或者很少）在测试数据集中被观察到，而它的密度（非常类似于有理数），又足以在每个测试集中被发现。
+> > 敌对负面问题的出现与网络实现的高度泛化的能力相矛盾。的确，如果网络泛化得好，它又是如何被那些敌对数据所扰乱的，而那些现象又无法从常规的案例中区分？解释是，敌对数据出现在测试数据集中的概率极低，以至于无法（或者很少）在测试数据集中被观察到，而以它的密度（非常类似于有理数），又足以在全部实际测试案例中发现。
 
 Nonetheless, it is distressing that we understand neural nets so poorly that this kind of result should be a recent discovery. Of course, a major benefit of the results is that they have stimulated much followup work. For example, one recent paper* shows that given a trained network it's possible to generate images which look to a human like white noise, but which the network classifies as being in a known category with a very high degree of confidence. This is another demonstration that we have a long way to go in understanding neural networks and their use in image recognition.
 
+尽管如此，令人郁闷的是，我们对神经网络的了解是如此贫乏，这类问题是最近才发现的。当然，这个结果的主要好处是，将会激发很多的后续工作。例如，最近一篇论文\*指出，给一个训练好的神经网络产生一些图片，这些图片人类看起来就像是白噪声，然而网络会以非常高的自信度将它归类为某个它学习过的类型。这是另外一个事例，说明我们在理解神经网络并将其用在图像识别上，还有很长的路要走。
+
 > [Deep Neural Networks are Easily Fooled: High Confidence Predictions for Unrecognizable Images](http://arxiv.org/abs/1412.1897), by Anh Nguyen, Jason Yosinski, and Jeff Clune (2014).
+>
+> 译注： 这篇论文的试验结果表明，深度神经网络甚至可以将人类看起来是白噪声的一张图片，以 99.99% 的确信度判定为是一只狮子！
 
 Despite results like this, the overall picture is encouraging. We're seeing rapid progress on extremely difficult benchmarks, like ImageNet. We're also seeing rapid progress in the solution of real-world problems, like recognizing street numbers in StreetView. But while this is encouraging it's not enough just to see improvements on benchmarks, or even real-world applications. There are fundamental phenomena which we still understand poorly, such as the existence of adversarial images. When such fundamental problems are still being discovered (never mind solved), it is premature to say that we're near solving the problem of image recognition. At the same time such problems are an exciting stimulus to further work.
+
+尽管有诸如此类的问题，总体上还是令人鼓舞的。即使在有如 ImageNet 那样极端困难的基准下，我们正在看到快速的发展。我们同样看到对真实世界问题的解决方案上的快速发展，譬如，在街景中的门牌号码识别。尽管令人鼓舞，但在基准的发展，或者在现实世界的应用上，进步还不足够。还有一些根本的问题，我们仍然了解得很少，譬如，敌对图片的现象。当这类的根本问题仍然不断被发现（从来未专心去解决），那么要说我们已经接近解决图像识别的问题，为时尚早。同时，这样的问题也是对未来工作的一个让人兴奋的激励。
 
 ### Other approaches to deep neural nets
 
