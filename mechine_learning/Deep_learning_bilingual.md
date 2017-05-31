@@ -1473,11 +1473,19 @@ Let me finish this section by mentioning a particularly fun paper. It combines d
 
 ### On the future of neural networks
 
-**Intention-driven user interfaces:** There's an old joke in which an impatient professor tells a confused student: "don't listen to what I say; listen to what I *mean*". Historically, computers have often been, like the confused student, in the dark about what their users mean. But this is changing. I still remember my surprise the first time I misspelled a Google search query, only to have Google say "Did you mean [corrected query]?" and to offer the corresponding search results. Google CEO Larry Page[once described the perfect search engine as understanding exactly what [your queries\] mean and giving you back exactly what you want](http://googleblog.blogspot.ca/2012/08/building-search-engine-of-future-one.html).
+### 神经网络的未来
+
+**Intention-driven user interfaces:** There's an old joke in which an impatient professor tells a confused student: "don't listen to what I say; listen to what I *mean*". Historically, computers have often been, like the confused student, in the dark about what their users mean. But this is changing. I still remember my surprise the first time I misspelled a Google search query, only to have Google say "Did you mean [corrected query]?" and to offer the corresponding search results. Google CEO Larry Page [once described the perfect search engine as understanding exactly what (your queries) mean and giving you back exactly what you want](http://googleblog.blogspot.ca/2012/08/building-search-engine-of-future-one.html).
+
+**意念驱动的用户界面：** 有个老笑话，说得是一个不耐烦的教授对一个已经蒙逼的学生说：“必要听我说的话，要听我的*意思*”。有史以来，计算机对用户意向的理解，就像那个蒙逼的学生，都是一抹黑的。不过这正在改变。我仍然记得第一被 Google 是搜索吓到的情形，我拼写出错时，只听得 Google 说“你的意思是搜索xxx吗？”，并且给出了相关搜索的结果。Google 的 CEO Larry Page [有一次这样描述，完美的搜索引擎应该是准确地理解你查询什么，并且准确地给出你想要的东西](http://googleblog.blogspot.ca/2012/08/building-search-engine-of-future-one.html)。
 
 This is a vision of an *intention-driven user interface*. In this vision, instead of responding to users' literal queries, search will use machine learning to take vague user input, discern precisely what was meant, and take action on the basis of those insights.
 
+这个就是*意念驱动用户界面*的景愿。在这个景愿中，取代对用户书面查询的相应的是，搜索引擎将以机器学习去取得用户的模糊输入，准确领会用户的意图，并且基于理解而采取行动。
+
 The idea of intention-driven interfaces can be applied far more broadly than search. Over the next few decades, thousands of companies will build products which use machine learning to make user interfaces that can tolerate imprecision, while discerning and acting on the user's true intent. We're already seeing early examples of such intention-driven interfaces: Apple's Siri; Wolfram Alpha; IBM's Watson; systems which can [annotate photos and videos](http://arxiv.org/abs/1411.4555); and much more.
+
+意念驱动界面可以应用到比搜索引擎更广阔的领域。今后几十年，成千上万的公司将建立使用机器学习的用户界面，它可以容忍欠准确的输入，领会用户的真实意图并采取行动。我们已经可以看到早期的意念驱动界面的例子：苹果公司的 Siri；Wolfram Alpha；IBM 公司的 Watson；可以[给图片和视频写评语](http://arxiv.org/abs/1411.4555)的系统；还有很多。
 
 Most of these products will fail. Inspired user interface design is hard, and I expect many companies will take powerful machine learning technology and use it to build insipid user interfaces. The best machine learning in the world won't help if your user interface concept stinks. But there will be a residue of products which succeed. Over time that will cause a profound change in how we relate to computers. Not so long ago - let's say, 2005 - users took it for granted that they needed precision in most interactions with computers. Indeed, computer literacy to a great extent meant internalizing the idea that computers are extremely literal; a single misplaced semi-colon may completely change the nature of an interaction with a computer. But over the next few decades I expect we'll develop many successful intention-driven user interfaces, and that will dramatically change what we expect when interacting with computers.
 
