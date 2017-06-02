@@ -1497,9 +1497,15 @@ Most of these products will fail. Inspired user interface design is hard, and I 
 
 **The role of neural networks and deep learning:** I've been talking broadly about machine learning as a creator of new opportunities for technology. What will be the specific role of neural networks and deep learning in all this?
 
+**神经网络与深度学习的角色：** 我已经广泛谈及关于机器学习是新的技术机遇的缔造者。那么神经网络和深度学习在这里扮演什么特殊的角色呢？
+
 To answer the question, it helps to look at history. Back in the 1980s there was a great deal of excitement and optimism about neural networks, especially after backpropagation became widely known. That excitement faded, and in the 1990s the machine learning baton passed to other techniques, such as support vector machines. Today, neural networks are again riding high, setting all sorts of records, defeating all comers on many problems. But who is to say that tomorrow some new approach won't be developed that sweeps neural networks away again? Or perhaps progress with neural networks will stagnate, and nothing will immediately arise to take their place?
 
+回答这个问题，需要回顾一下历史。在 20 世纪 80 年代，大家对神经网络曾经有过巨大的热情和乐观，特别是反向传播被广泛认识之后。热情的冷却是在 20 世纪 90 年代，机器学习的接力棒传给了其他的技术，譬如，支持向量机。今天，神经网络再次攀上高位，搅乱了所有的江湖地位，在很多问题上击败了所有参与者。谁敢说明天没有新的技术再次绊倒神经网络呢？或者神经网络的进步就此停滞不前，以及无法迅速上位呢？
+
 For this reason, it's much easier to think broadly about the future of machine learning than about neural networks specifically. Part of the problem is that we understand neural networks so poorly. Why is it that neural networks can generalize so well? How is it that they avoid overfitting as well as they do, given the very large number of parameters they learn? Why is it that stochastic gradient descent works as well as it does? How well will neural networks perform as data sets are scaled? For instance, if ImageNet was expanded by a factor of 10, would neural networks' performance improve more or less than other machine learning techniques? These are all simple, fundamental questions. And, at present, we understand the answers to these questions very poorly. While that's the case, it's difficult to say what role neural networks will play in the future of machine learning.
+
+基于这样的理由，以开阔的思路去考虑机器学习的未来，比单纯考虑神经网络更容易。部分的理由是，我们对神经网络的了解是那么贫乏。为什么神经网络可以泛化得那么好？它们被设定了数量庞大的参数需要学习，它们是如何避免过拟合的？为什么随机梯度下降运作起来那么有效？神经网络的表现如何伴随数据集的扩展而对应发展呢？例如，如果 ImageNet 扩大了 10 倍，神经网络的表现提高得比其他机器学习的技术更大还是更小呢？这些是简单而根本的问题。现在，我们对这些问题的答案了解得非常贫乏。在这样的情况下，很难说神经网络在未来的机器学习中扮演什么角色。
 
 I will make one prediction: I believe deep learning is here to stay. The ability to learn hierarchies of concepts, building up multiple layers of abstraction, seems to be fundamental to making sense of the world. This doesn't mean tomorrow's deep learners won't be radically different than today's. We could see major changes in the constituent units used, in the architectures, or in the learning algorithms. Those changes may be dramatic enough that we no longer think of the resulting systems as neural networks. But they'd still be doing deep learning.
 
