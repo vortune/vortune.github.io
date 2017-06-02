@@ -1513,7 +1513,9 @@ I will make one prediction: I believe deep learning is here to stay. The ability
 
 **Will neural networks and deep learning soon lead to artificial intelligence?** In this book we've focused on using neural nets to do specific tasks, such as classifying images. Let's broaden our ambitions, and ask: what about general-purpose thinking computers? Can neural networks and deep learning help us solve the problem of (general) artificial intelligence (AI)? And, if so, given the rapid recent progress of deep learning, can we expect general AI any time soon?
 
-Addressing these questions comprehensively would take a separate book. Instead, let me offer one observation. It's based on an idea known as[Conway's law](http://en.wikipedia.org/wiki/Conway%27s_law):
+**神经网络和深度学习会很快导致人工智能吗？** 在本书中，我们聚焦在应用神经网络去解决专门的任务，例如，图像分类。让我们拓宽一下我们的雄心，再追问：拥有通用目的思维的计算机情况如何呢？神经网络和深度学习能够帮助我们解决（通用）人工智能（AI）的问题吗？以现在深度学习的快速发展，我们能够期待通用 AI 很快出现吗？
+
+Addressing these questions comprehensively would take a separate book. Instead, let me offer one observation. It's based on an idea known as [Conway's law](http://en.wikipedia.org/wiki/Conway%27s_law):
 
 > > Any organization that designs a system... will inevitably produce a design whose structure is a copy of the organization's communication structure.
 
