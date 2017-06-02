@@ -1509,6 +1509,8 @@ For this reason, it's much easier to think broadly about the future of machine l
 
 I will make one prediction: I believe deep learning is here to stay. The ability to learn hierarchies of concepts, building up multiple layers of abstraction, seems to be fundamental to making sense of the world. This doesn't mean tomorrow's deep learners won't be radically different than today's. We could see major changes in the constituent units used, in the architectures, or in the learning algorithms. Those changes may be dramatic enough that we no longer think of the resulting systems as neural networks. But they'd still be doing deep learning.
 
+我来做个预测：我相信深度学习是会留存下来的。对概念的分层学习的能力，构筑多层的抽象，似乎是理解世界的基本原理。这并不意味着明天的深度学习，相比于今天的不可以有根本的差别。我们可以看到主要的改变会发生在结构单元的使用，架构，或者是训练算法。这些的戏剧性的变化，足以让我们不再将系统视为神经网络。不过，它们做的仍然是深度学习。
+
 **Will neural networks and deep learning soon lead to artificial intelligence?** In this book we've focused on using neural nets to do specific tasks, such as classifying images. Let's broaden our ambitions, and ask: what about general-purpose thinking computers? Can neural networks and deep learning help us solve the problem of (general) artificial intelligence (AI)? And, if so, given the rapid recent progress of deep learning, can we expect general AI any time soon?
 
 Addressing these questions comprehensively would take a separate book. Instead, let me offer one observation. It's based on an idea known as[Conway's law](http://en.wikipedia.org/wiki/Conway%27s_law):
