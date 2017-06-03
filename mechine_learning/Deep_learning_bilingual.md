@@ -1521,7 +1521,7 @@ Addressing these questions comprehensively would take a separate book. Instead, 
 
 > > Any organization that designs a system... will inevitably produce a design whose structure is a copy of the organization's communication structure.
 > >
-> > 任何系统设计的组织者 ... 将不可避免地产生一个设计，它的结构是组织者的通讯结构的副本。
+> > 任何系统设计的组织 ... 将不可避免地产生一个设计，它的结构是组织者的通讯结构的副本。
 
 So, for example, Conway's law suggests that the design of a Boeing 747 aircraft will mirror the extended organizational structure of Boeing and its contractors at the time the 747 was designed. Or for a simple, specific example, consider a company building a complex software application. If the application's dashboard is supposed to be integrated with some machine learning algorithm, the person building the dashboard better be talking to the company's machine learning expert. Conway's law is merely that observation, writ large.
 
@@ -1529,7 +1529,7 @@ So, for example, Conway's law suggests that the design of a Boeing 747 aircraft 
 
 What about the other objection, that Conway's law is banal and obvious? This may perhaps be true, but I don't think so, for organizations too often act with disregard for Conway's law. Teams building new products are often bloated with legacy hires or, contrariwise, lack a person with some crucial expertise. Think of all the products which have useless complicating features. Or think of all the products which have obvious major deficiencies - e.g., a terrible user interface. Problems in both classes are often caused by a mismatch between the team that was needed to produce a good product, and the team that was actually assembled. Conway's law may be obvious, but that doesn't mean people don't routinely ignore it.
 
-
+那些反对的意见呢，Conway 定律是那么平淡无奇吗？这可能是对的，不过我不是这样认为，那些组织经常不尊重  Conway 定律而行事。新产品的开发经常充斥着老旧员工，或者因循守旧，缺乏有关键专业知识的人。回想一下各种产品所包含的无用而复杂的属性，或者是主要功能的缺陷 - 例如，可怕的用户界面。两个类型的问题，经常是由于现实和理想的不匹配造成的，好的产品需要好的团队，而团队的集结又只能与现实条件妥协。Conway 定律也许平凡，但是并不意味着人们不会经常性地忽视它。
 
 Conway's law applies to the design and engineering of systems where we start out with a pretty good understanding of the likely constituent parts, and how to build them. It can't be applied directly to the development of artificial intelligence, because AI isn't (yet) such a problem: we don't know what the constituent parts are. Indeed, we're not even sure what basic questions to be asking. In others words, at this point AI is more a problem of science than of engineering. Imagine beginning the design of the 747 without knowing about jet engines or the principles of aerodynamics. You wouldn't know what kinds of experts to hire into your organization. As Wernher von Braun put it, "basic research is what I'm doing when I don't know what I'm doing". Is there a version of Conway's law that applies to problems which are more science than engineering?
 
