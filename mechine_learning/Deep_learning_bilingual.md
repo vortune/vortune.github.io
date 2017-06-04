@@ -1549,9 +1549,15 @@ This is a common pattern that has been repeated in many well-established science
 
 So what's this got to do with deep learning or AI?
 
+那么这些与深度学习和 AI 有什么关系呢？
+
 Well, since the early days of AI there have been arguments about it that go, on one side, "Hey, it's not going to be so hard, we've got [super-special weapon] on our side", countered by "[super-special weapon] won't be enough". Deep learning is the latest super-special weapon I've heard used in such arguments*; earlier versions of the argument used logic, or Prolog, or expert systems, or whatever the most powerful technique of the day was. The problem with such arguments is that they don't give you any good way of saying just how powerful any given candidate super-special weapon is. Of course, we've just spent a chapter reviewing evidence that deep learning can solve extremely challenging problems. It certainly looks very exciting and promising. But that was also true of systems like Prolog or [Eurisko](http://en.wikipedia.org/wiki/Eurisko) or expert systems in their day. And so the mere fact that a set of ideas looks very promising doesn't mean much. How can we tell if deep learning is truly different from these earlier ideas? Is there some way of measuring how powerful and promising a set of ideas is? Conway's law suggests that as a rough and heuristic proxy metric we can evaluate the complexity of the social structure associated to those ideas.
 
+在 AI 的早期阶段，就已经有各种争论在进行，一边说，“嘿，它没有那么难的，我们找到了超级专杀武器了”，反对的声音说“超级专杀武器还不靠谱”。在我听到的这些争论之中，深度学习是最新在使用的超级专杀武器\*；早期版本的争论，用的是逻辑学，或者 [Prolog 语言](https://en.wikipedia.org/wiki/Prolog)，或者专家系统，又或者是随便什么当时最强有力的技术。这些争论的问题是它们无法给你一个说法，说明那些超级专杀武器到底有多强大。尽管我们已经花费了一章的篇幅来回顾深度学习可以解决极具挑战性的问题的证据。它的确让人兴奋和充满期待。不过类似的系统，譬如，Prolog 或者 [Eurisko](http://en.wikipedia.org/wiki/Eurisko) 或者专家系统，在它们的日子里，看起来也很靠谱。然而，这堆技术的现实表现并不如人们期待的那样。我们如何能确定深度学习确实比之前的各种技术更有力呢？Conway 定律指出，我们可以用这些技术的关联复杂度来作为一个粗略的，启发性的替代指标。
+
 > Interestingly, often not by leading experts in deep learning, who have been quite restrained. See, for example, this [thoughtful post](https://www.facebook.com/yann.lecun/posts/10152348155137143) by Yann LeCun. This is a difference from many earlier incarnations of the argument.
+>
+> 有趣的是，争论一般不会由深度学习的专家挑起，他们是比较矜持的。请看个例子，这个是 Yann LeCun 写的深思熟虑的帖子。它与那些早期的那些肉搏式的争论，明显不同。
 
 So, there are two questions to ask. First, how powerful a set of ideas are associated to deep learning, according to this metric of social complexity? Second, how powerful a theory will we need, in order to be able to build a general artificial intelligence?
 
