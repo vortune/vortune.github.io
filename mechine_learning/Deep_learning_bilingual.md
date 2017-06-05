@@ -18,11 +18,17 @@ The [main part of the chapter](http://neuralnetworksanddeeplearning.com/chap6.ht
 
 We'll start our account of convolutional networks with the shallow networks used to attack this problem earlier in the book. Through many iterations we'll build up more and more powerful networks. As we go we'll explore many powerful techniques: convolutions, pooling, the use of GPUs to do far more training than we did with our shallow networks, the algorithmic expansion of our training data (to reduce overfitting), the use of the dropout technique (also to reduce overfitting), the use of ensembles of networks, and others. The result will be a system that offers near-human performance. Of the 10,000 MNIST test images - images not seen during training! - our system will classify 9,967 correctly. Here's a peek at the 33 images which are misclassified. Note that the correct classification is in the top right; our program's classification is in the bottom right:
 
+我们叙述卷积网络的起点，是本书早前介绍过的以浅度网络解决这个问题的内容。经过多次迭代，我们将构建越来越强大的网络。在我们的历程中，我们将探索许多强大的技术：卷积，池化，使用 GPUs 做相比于浅层网络更多的训练，以算法扩展训练数据（抑制过拟合），使用辍学技术（同样可以抑制过拟合），使用协作网络，等等。最后的结果是系统提供了接近人类的表现。在 10,000 个 MNIST 测试图片中 - 系统在训练期间从来没有看过这些图片 - 我们的系统准确识别 9,967 张。下面是 33 张被错误识别的。请留意，正确的分类标注在右上；程序的分类标注在右下：
+
 ![ensemble_errors](../meta/ensemble_errors.png)
 
 Many of these are tough even for a human to classify. Consider, for example, the third image in the top row. To me it looks more like a "9" than an "8", which is the official classification. Our network also thinks it's a "9". This kind of "error" is at the very least understandable, and perhaps even commendable. We conclude our discussion of image recognition with a [survey of some of the spectacular recent progress](http://neuralnetworksanddeeplearning.com/chap6.html#recent_progress_in_image_recognition) using networks (particularly convolutional nets) to do image recognition.
 
+这堆东西即便是人类来分辨都很艰难。考虑一个例子，第一行的第三个图片。对于我来说，它更像 “9” 而不是 “8”，而官方的分类是 8 。我们的网络当然也将它视为 “9” 。这类的“错误”至少是可以理解的，甚至是可取的。我们通过一个[调查](http://neuralnetworksanddeeplearning.com/chap6.html#recent_progress_in_image_recognition)来结束我们关于图像识别的讨论，调查中包含了洋洋大观的用网络（特别是卷积网络）进行图像识别的当前进展。
+
 The remainder of the chapter discusses deep learning from a broader and less detailed perspective. We'll [briefly survey other models of neural networks](http://neuralnetworksanddeeplearning.com/chap6.html#things_we_didn't_cover_but_which_you'll_eventually_want_to_know), such as recurrent neural nets and long short-term memory units, and how such models can be applied to problems in speech recognition, natural language processing, and other areas. And we'll [speculate about the future of neural networks and deep learning](http://neuralnetworksanddeeplearning.com/chap6.html#on_the_future_of_neural_networks), ranging from ideas like intention-driven user interfaces, to the role of deep learning in artificial intelligence.
+
+
 
 The chapter builds on the earlier chapters in the book, making use of and integrating ideas such as backpropagation, regularization, the softmax function, and so on. However, to read the chapter you don't need to have worked in detail through all the earlier chapters. It will, however, help to have read [Chapter 1](http://neuralnetworksanddeeplearning.com/chap1.html), on the basics of neural networks. When I use concepts from Chapters 2 to 5, I provide links so you can familiarize yourself, if necessary.
 
