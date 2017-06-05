@@ -8,7 +8,11 @@ In the [last chapter](http://neuralnetworksanddeeplearning.com/chap5.html) we le
 
 The chapter is a long one. To help you navigate, let's take a tour. The sections are only loosely coupled, so provided you have some basic familiarity with neural nets, you can jump to whatever most interests you.
 
+这一章有点长。为了帮助你浏览，让我们先做个参观。段落之间是松散结合的，所以如果你有一定的神经网络的基础，你可以跳到任何你感兴趣的内容中。
+
 The [main part of the chapter](http://neuralnetworksanddeeplearning.com/chap6.html#convolutional_networks) is an introduction to one of the most widely used types of deep network: deep convolutional networks. We'll work through a detailed example - code and all - of using convolutional nets to solve the problem of classifying handwritten digits from the MNIST data set:
+
+本章的主要部分是介绍一个最广泛使用的深度网络类型：深度卷积网络。我们的工作将贯穿一个详尽的例子 - 从源代码到所有东西 - 用卷积网络去解决从 MNIST 数据集中分辨手写数字的问题：
 
 ![digits](../meta/digits.png)
 
