@@ -28,11 +28,15 @@ Many of these are tough even for a human to classify. Consider, for example, the
 
 The remainder of the chapter discusses deep learning from a broader and less detailed perspective. We'll [briefly survey other models of neural networks](http://neuralnetworksanddeeplearning.com/chap6.html#things_we_didn't_cover_but_which_you'll_eventually_want_to_know), such as recurrent neural nets and long short-term memory units, and how such models can be applied to problems in speech recognition, natural language processing, and other areas. And we'll [speculate about the future of neural networks and deep learning](http://neuralnetworksanddeeplearning.com/chap6.html#on_the_future_of_neural_networks), ranging from ideas like intention-driven user interfaces, to the role of deep learning in artificial intelligence.
 
-
+本章的余下部分，从广义的与宏观远景的方式讨论深度学习。我们将[简要地调查神经网络的其他模型](http://neuralnetworksanddeeplearning.com/chap6.html#things_we_didn't_cover_but_which_you'll_eventually_want_to_know)，譬如，循环神经网络和长短期记忆单元，以及这些模型如何应用到语音识别，自然语言处理，与其他领域的问题。并且我们[展望神经网络与深度学习的未来](http://neuralnetworksanddeeplearning.com/chap6.html#on_the_future_of_neural_networks)，从意念驱动用户界面，到深度学习在人工智能中的角色。
 
 The chapter builds on the earlier chapters in the book, making use of and integrating ideas such as backpropagation, regularization, the softmax function, and so on. However, to read the chapter you don't need to have worked in detail through all the earlier chapters. It will, however, help to have read [Chapter 1](http://neuralnetworksanddeeplearning.com/chap1.html), on the basics of neural networks. When I use concepts from Chapters 2 to 5, I provide links so you can familiarize yourself, if necessary.
 
+本章建基于书中早前的章节，应用和整合的思想包括反向传播，正则化，softmax 函数，等等。不过，阅读本章你不需要涉及所有早前章节的细节。不过，阅读一下[第一章](http://neuralnetworksanddeeplearning.com/chap1.html)有关神经网络的基础是有帮助的。当我使用的概念来自第二到第五章的时候，我会提供对应的链接，以便你熟悉它们，如果有需要的话。
+
 It's worth noting what the chapter is not. It's not a tutorial on the latest and greatest neural networks libraries. Nor are we going to be training deep networks with dozens of layers to solve problems at the very leading edge. Rather, the focus is on understanding some of the core principles behind deep neural networks, and applying them in the simple, easy-to-understand context of the MNIST problem. Put another way: the chapter is not going to bring you right up to the frontier. Rather, the intent of this and earlier chapters is to focus on fundamentals, and so to prepare you to understand a wide range of current work.
+
+值得注意的是，什么东西不是本章的任务。它不是一个最新和最宏伟的神经网络库的教程。我们也不会去训练几十层的神经网络去解决非常前沿的问题。相反，会聚焦与理解一些深度神经网络背后的核心原理，以及将它们应用到像 MNIST 那样的简单的，易于理解来龙去脉的问题上。从另一面讲：本章不打算把你带到终极解决方案的面前。相反，这一章和早前章节的意愿是聚焦于基本原则，以及让你准备好去理解当前工作的方方面面。
 
 ## Introducing convolutional networks
 
