@@ -12,7 +12,7 @@ The chapter is a long one. To help you navigate, let's take a tour. The sections
 
 The [main part of the chapter](http://neuralnetworksanddeeplearning.com/chap6.html#convolutional_networks) is an introduction to one of the most widely used types of deep network: deep convolutional networks. We'll work through a detailed example - code and all - of using convolutional nets to solve the problem of classifying handwritten digits from the MNIST data set:
 
-本章的主要部分是介绍一个最广泛使用的深度网络类型：深度卷积网络。我们的工作将贯穿一个详尽的例子 - 从源代码到所有东西 - 用卷积网络去解决从 MNIST 数据集中分辨手写数字的问题：
+本章的主要部分是介绍一个最广泛使用的深度网络类型：深度卷积网络。我们的工作将贯穿一个详尽的例子 - 从源代码到方方面面 - 用卷积网络去解决从 MNIST 数据集中分辨手写数字的问题：
 
 ![digits](../meta/digits.png)
 
@@ -28,15 +28,15 @@ Many of these are tough even for a human to classify. Consider, for example, the
 
 The remainder of the chapter discusses deep learning from a broader and less detailed perspective. We'll [briefly survey other models of neural networks](http://neuralnetworksanddeeplearning.com/chap6.html#things_we_didn't_cover_but_which_you'll_eventually_want_to_know), such as recurrent neural nets and long short-term memory units, and how such models can be applied to problems in speech recognition, natural language processing, and other areas. And we'll [speculate about the future of neural networks and deep learning](http://neuralnetworksanddeeplearning.com/chap6.html#on_the_future_of_neural_networks), ranging from ideas like intention-driven user interfaces, to the role of deep learning in artificial intelligence.
 
-本章的余下部分，从广义的与宏观远景的方式讨论深度学习。我们将[简要地调查神经网络的其他模型](http://neuralnetworksanddeeplearning.com/chap6.html#things_we_didn't_cover_but_which_you'll_eventually_want_to_know)，譬如，循环神经网络和长短期记忆单元，以及这些模型如何应用到语音识别，自然语言处理，与其他领域的问题。并且我们[展望神经网络与深度学习的未来](http://neuralnetworksanddeeplearning.com/chap6.html#on_the_future_of_neural_networks)，从意念驱动用户界面，到深度学习在人工智能中的角色。
+本章的余下部分，从广义的与宏观远景的方式讨论深度学习。我们将[简要地讨论神经网络的其他模型](http://neuralnetworksanddeeplearning.com/chap6.html#things_we_didn't_cover_but_which_you'll_eventually_want_to_know)，譬如，循环神经网络和长短期记忆单元，以及这些模型如何应用到语音识别，自然语言处理，与其他领域的问题。并且我们[展望神经网络与深度学习的未来](http://neuralnetworksanddeeplearning.com/chap6.html#on_the_future_of_neural_networks)，从意念驱动用户界面，到深度学习在人工智能中的角色。
 
 The chapter builds on the earlier chapters in the book, making use of and integrating ideas such as backpropagation, regularization, the softmax function, and so on. However, to read the chapter you don't need to have worked in detail through all the earlier chapters. It will, however, help to have read [Chapter 1](http://neuralnetworksanddeeplearning.com/chap1.html), on the basics of neural networks. When I use concepts from Chapters 2 to 5, I provide links so you can familiarize yourself, if necessary.
 
-本章建基于书中早前的章节，应用和整合的思想包括反向传播，正则化，softmax 函数，等等。不过，阅读本章你不需要涉及所有早前章节的细节。不过，阅读一下[第一章](http://neuralnetworksanddeeplearning.com/chap1.html)有关神经网络的基础是有帮助的。当我使用的概念来自第二到第五章的时候，我会提供对应的链接，以便你熟悉它们，如果有需要的话。
+本章建基于书中早前的章节，应用和整合的思想包括反向传播，正则化，softmax 函数，等等。不过，阅读本章你不需要涉及所有早前章节的细节。然而，阅读一下[第一章](http://neuralnetworksanddeeplearning.com/chap1.html)有关神经网络的基础是有帮助的。当我使用的概念来自第二到第五章的时候，我会提供对应的链接，以便你熟悉它们，如果有需要的话。
 
 It's worth noting what the chapter is not. It's not a tutorial on the latest and greatest neural networks libraries. Nor are we going to be training deep networks with dozens of layers to solve problems at the very leading edge. Rather, the focus is on understanding some of the core principles behind deep neural networks, and applying them in the simple, easy-to-understand context of the MNIST problem. Put another way: the chapter is not going to bring you right up to the frontier. Rather, the intent of this and earlier chapters is to focus on fundamentals, and so to prepare you to understand a wide range of current work.
 
-值得注意的是，什么东西不是本章的任务。它不是一个最新和最宏伟的神经网络库的教程。我们也不会去训练几十层的神经网络去解决非常前沿的问题。相反，会聚焦与理解一些深度神经网络背后的核心原理，以及将它们应用到像 MNIST 那样的简单的，易于理解来龙去脉的问题上。从另一面讲：本章不打算把你带到终极解决方案的面前。相反，这一章和早前章节的意愿是聚焦于基本原则，以及让你准备好去理解当前工作的方方面面。
+值得注意的是，什么东西不是本章的任务。它不是一个最新和最宏伟的神经网络库的教程。我们也不会去训练几十层的神经网络去解决非常前沿的问题。相反，会聚焦于理解一些深度神经网络背后的核心原理，以及将它们应用到像 MNIST 那样的简单的，易于理解来龙去脉的问题上。从另一面讲：本章不打算把你带到终极解决方案那里去。相反，这一章和早前章节的意愿是聚焦于基本原则，以及让你准备好去理解当前神经网络的方方面面。
 
 ## Introducing convolutional networks
 
@@ -58,11 +58,11 @@ We did this using networks in which adjacent network layers are fully connected 
 
 In particular, for each pixel in the input image, we encoded the pixel's intensity as the value for a corresponding neuron in the input layer. For the 28×28 pixel images we've been using, this means our network has 784 (=28×28) input neurons. We then trained the network's weights and biases so that the network's output would - we hope! - correctly identify the input image: '0', '1', '2', ..., '8', or '9'.
 
-具体点说，对于输入图片中的每个像素，我们都将该像素的灰度编码为输入层中对应像素的神经元的值。我们采用28x28 的图片，这意味着我们的网络需要 784(=28x28) 个输入神经元。接着我们训练出网络的权重以及偏至，以便网络能像我们期待的那样区分输入的图片：’0‘，’1‘，’2‘，...’8‘，或者 ’9‘。
+具体点说，对于即将被输入的图片中的每个像素，我们都将该像素的灰度，编码为输入层中对应像素的神经元的值。我们采用 28x28 的图片，这意味着我们的网络需要 784(=28x28) 个输入神经元。接着我们训练出网络的权重以及偏至，以便网络能像我们期待的那样区分输入的图片：’0‘，’1‘，’2‘，...’8‘，或者 ’9‘。
 
 Our earlier networks work pretty well: we've [obtained a classification accuracy better than 98 percent](http://neuralnetworksanddeeplearning.com/chap3.html#98percent), using training and test data from the [MNIST handwritten digit data set](http://neuralnetworksanddeeplearning.com/chap1.html#learning_with_gradient_descent). But upon reflection, it's strange to use networks with fully-connected layers to classify images. The reason is that such a network architecture does not take into account the spatial structure of the images. For instance, it treats input pixels which are far apart and close together on exactly the same footing. Such concepts of spatial structure must instead be inferred from the training data. But what if, instead of starting with a network architecture which is *tabula rasa*, we used an architecture which tries to take advantage of the spatial structure? In this section I describe *convolutional neural networks* *. These networks use a special architecture which is particularly well-adapted to classify images. Using this architecture makes convolutional networks fast to train. This, in turn, helps us train deep, many-layer networks, which are very good at classifying images. Today, deep convolutional networks or some close variant are used in most neural networks for image recognition.
 
-我们早前的网络工作得不错：我们使用 [MNIST 手写数字数据集](http://neuralnetworksanddeeplearning.com/chap1.html#learning_with_gradient_descent)来训练和测试时，[取得了高于98%的识别率](http://neuralnetworksanddeeplearning.com/chap3.html#98percent)。不过值得反思的是，以层间全链接的网络来识别图像有点奇怪。理由是这样的网络架构没有考虑到图像的空间结构。举例来说，该架构对输入像素的处理方式，掩盖了它们的远近关系，然而，训练样本中的数据空间结构关系必须得到体现。我们如何白手起家地搭建一个可以充分利用数据空间结构的网络架构呢？在本章节中，我将介绍*卷积神经网络* \*. 这些网络具有非常适合图像分类的特殊架构。应用这些架构使得卷积网络实现快速训练。这样可以帮助我们训练那种深度的多层的网络，这种网络对于图像的分类效果很棒。今天，在神经网络图像识别领域中，*深度卷积网络*以及类似的变体应用得最多。
+我们早前的网络工作得不错：我们使用 [MNIST 手写数字数据集](http://neuralnetworksanddeeplearning.com/chap1.html#learning_with_gradient_descent)来训练和测试时，[取得了高于98%的识别率](http://neuralnetworksanddeeplearning.com/chap3.html#98percent)。不过值得反思的是，以层间全链接的网络来识别图像有点奇怪。理由是，这样的网络架构没有考虑到图像的空间结构。举例来说，该架构对输入像素的处理方式，掩盖了它们的远近关系，然而，训练样本中的数据空间结构关系必须得到体现。我们如何白手起家地搭建一个可以充分利用数据空间结构的网络架构呢？在本章节中，我将介绍*卷积神经网络* \*. 这些网络具有非常适合图像分类的特殊架构。应用这些架构使得卷积网络实现快速训练。这样可以帮助我们训练那种深度的多层的网络，这种网络对于图像的分类效果很棒。今天，在神经网络图像识别领域中，*深度卷积网络*以及类似的变体应用得最多。
 
 > The origins of convolutional neural networks go back to the 1970s. But the seminal paper establishing the modern subject of convolutional networks was a 1998 paper, ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf), by Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. LeCun has since made an interesting [remark](https://www.facebook.com/yann.lecun/posts/10152348155137143) on the terminology for convolutional nets: "The [biological] neural inspiration in models like convolutional nets is very tenuous. That's why I call them 'convolutional nets' not 'convolutional neural nets', and why we call the nodes 'units' and not 'neurons' ". Despite this remark, convolutional nets use many of the same ideas as the neural networks we've studied up to now: ideas such as backpropagation, gradient descent, regularization, non-linear activation functions, and so on. And so we will follow common practice, and consider them a type of neural network. I will use the terms "convolutional neural network" and "convolutional net(work)" interchangeably. I will also use the terms "[artificial] neuron" and "unit" interchangeably.
 >
@@ -82,11 +82,11 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 As per usual, we'll connect the input pixels to a layer of hidden neurons. But we won't connect every input pixel to every hidden neuron. Instead, we only make connections in small, localized regions of the input image.
 
-和通常一样，我们将把输入像素链接到一个隐藏层的神经元当中。不过这次我们不将所有的输入到连接到所有的隐藏层神经元之中。取而代之的是，我们仅建立对输入图像的小范围的，局部的链接关系。
+和通常一样，我们将把输入像素链接到一个隐藏层的神经元当中。不过，这次我们不再将所有的输入连接到，所有的隐藏层神经元之中。取而代之的是，我们仅建立对输入图像的小范围的，局部的链接关系。
 
 To be more precise, each neuron in the first hidden layer will be connected to a small region of the input neurons, say, for example, a 5×5 region, corresponding to 25 input pixels. So, for a particular hidden neuron, we might have connections that look like this:
 
-更准确的描述是，每个在第一个隐藏层的神经元将链接到一个细小的输入区域，譬如说一个 5x5 的区域，对应于25个输入像素。所以，对于一个隐藏层神经元，我们的链接看起来如下图：
+更准确的描述是，每个在第一个隐藏层的神经元，将链接到一个细小的输入区域，譬如说一个 5x5 的区域，对应于 25 个输入像素。所以，对于一个隐藏层神经元，我们的链接看起来如下图：
 
 ![Input neuron](../meta/tikz43.png)
 
@@ -1589,5 +1589,5 @@ On the second question: how complex and powerful a set of ideas will be needed t
 
 I've gone to a lot of trouble to construct an argument which is tentative, perhaps seems rather obvious, and which has an indefinite conclusion. This will no doubt frustrate people who crave certainty. Reading around online, I see many people who loudly assert very definite, very strongly held opinions about AI, often on the basis of flimsy reasoning and non-existent evidence. My frank opinion is this: it's too early to say. As the old joke goes, if you ask a scientist how far away some discovery is and they say "10 years" (or more), what they mean is "I've got no idea". AI, like controlled fusion and a few other technologies, has been 10 years away for 60 plus years. On the flipside, what we definitely do have in deep learning is a powerful technique whose limits have not yet been found, and many wide-open fundamental problems. That's an exciting creative opportunity.
 
-我经历过很多的困难想去构筑某个论点，哪怕它只是暂时性，或许看起来比较清晰的也好，然而最终只有不明确的结论。这毫无疑问会挫伤那些渴望得到明确答案的人。在线浏览时，我看到很多人在大声断言，非常明确，非常强烈地坚持关于 AI 的种种观点，而且经常是基于薄弱的理由和无中生有的证据。我坦诚的观点是：现在说什么都为时尚早，正如老笑话所说，如果你问一个科学家离获得发现还有多远，他们说“10 年”（或者更久），其实他们的意思是“我不知道”。AI，就像受控核聚变和其他某些技术那样，60 多年前就说用 10 年时间可以解决了。从反面来看，我们在深度学习中所掌握的，肯定是一种强大的技术，它的局限性还没有被发现，并且仍然存在许多根本性的问题需要解决。这是一个激动人心，充满创造性的机遇。
+我经历过很多的困难想去构筑某个论点，哪怕它只是暂时性，或许看起来比较清晰的也好，然而最终只有不明确的结论。这毫无疑问会挫伤那些渴望得到明确答案的人。在线浏览时，我看到很多人在大声断言，非常明确，非常强烈地坚持关于 AI 的种种观点，而且经常是基于薄弱的理由和无中生有的证据。我坦诚的观点是：现在说什么都为时尚早，正如老笑话所说，如果你问一个科学家离获得发现还有多远，他们说“10 年”（或者更久），其实他们的意思是“我不知道”。AI，就像受控核聚变和其他某些技术那样，60 多年前就说用 10 年时间可以解决了。从反面来看，我们在深度学习中所从事的，肯定是一种强大的技术，它的局限性还没有被发现，并且仍然存在许多根本性的问题需要解决。这是一个激动人心，充满创造性的机遇。
 
