@@ -341,7 +341,7 @@ This 97.80 percent accuracy is close to the 98.04 percent accuracy obtained back
 
 There were, however, two differences in the earlier network. First, we [regularized](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization) the earlier network, to help reduce the effects of overfitting. Regularizing the current network does improve the accuracies, but the gain is only small, and so we'll hold off worrying about regularization until later. Second, while the final layer in the earlier network used sigmoid activations and the cross-entropy cost function, the current network uses a softmax final layer, and the log-likelihood cost function. As [explained](http://neuralnetworksanddeeplearning.com/chap3.html#softmax) in Chapter 3 this isn't a big change. I haven't made this switch for any particularly deep reason - mostly, I've done it because softmax plus log-likelihood cost is more common in modern image classification networks.
 
-无论如何，前面的两个网络还是存在两个差别。首先，我们[正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization)过更早的那个网络，以改善过拟合的影响。正则化的确是提高了准确率，不过所得很有限，所以在后面我们不要为正则化过于分心。第二，在更早的网络中，最后一层是使用 sigmoid（反曲函数） 激活函数以及 cross-entropy（交叉熵）代价函数，当前的这个网络中，最后一层使用的是 softmax（逻辑多分类）以及 log-likelihood（对数似然函数）代价函数。正如在第三章中[说明](http://neuralnetworksanddeeplearning.com/chap3.html#softmax)的那样，这并不是什么大的改变。我其实并没有什么特别深入的理由来做这个转变的，我之所以这样做，只是因为在当代的图像分类网络中，softmax 比 log-likelihood 使用得更为广泛。
+无论如何，前面的两个网络还是存在两个差别。首先，我们[正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization)过更早的那个网络，以改善过拟合的影响。正则化的确是提高了准确率，不过所得很有限，所以在后面我们不要为正则化过于分心。第二，在更早的网络中，最后一层是使用 sigmoid（反曲函数） 激活函数，以及 cross-entropy（交叉熵）代价函数，当前的这个网络中，最后一层使用的是 softmax（逻辑多分类）以及 log-likelihood（对数似然函数）代价函数。正如在第三章中[说明](http://neuralnetworksanddeeplearning.com/chap3.html#softmax)的那样，这并不是什么大的改变。我其实并没有什么特别深入的理由来做这个转变的，我之所以这样做，只是因为在当代的图像分类网络中，softmax 比 log-likelihood 使用得更为广泛。
 
 Can we do better than these results using a deeper network architecture?
 
@@ -418,7 +418,7 @@ Let's try inserting a second convolutional-pooling layer. We'll make the inserti
 
 Once again, we get an improvement: we're now at 99.06 percent classification accuracy!
 
-我们在一场取得了进步：现在我们取得了 99.06% 的分类精度！
+我们再一次取得了进步：现在我们取得了 99.06% 的分类精度！
 
 There's two natural questions to ask at this point. The first question is: what does it even mean to apply a second convolutional-pooling layer? In fact, you can think of the second convolutional-pooling layer as having as input 12×12 "images", whose "pixels" represent the presence (or absence) of particular localized features in the original input image. So you can think of this layer as having as input a version of the original input image. That version is abstracted and condensed, but still has a lot of spatial structure, and so it makes sense to use a second convolutional-pooling layer.
 
@@ -426,7 +426,7 @@ There's two natural questions to ask at this point. The first question is: what 
 
 That's a satisfying point of view, but gives rise to a second question. The output from the previous layer involves 20 separate feature maps, and so there are 20×12×12 inputs to the second convolutional-pooling layer. It's as though we've got 20 separate images input to the convolutional-pooling layer, not a single image, as was the case for the first convolutional-pooling layer. How should neurons in the second convolutional-pooling layer respond to these multiple input images? In fact, we'll allow each neuron in this layer to learn from *all* 20×5×5 input neurons in its local receptive field. More informally: the feature detectors in the second convolutional-pooling layer have access to *all* the features from the previous layer, but only within their particular local receptive field *.
 
-这是一个令人满意的观点，不过也带出了第二个问题。上一层的输出包含 20 个分立的特征图，也就是有 20x12x12 个输入到第二个卷积池。亦即我们有 20 个分立的图像输入到卷积池，不像是第一个卷积池那样，只有一个图像输入。那么，在第二个卷积池中的神经元，应该如何应对这些并列的输入图像呢？事实上，我们容许每个在这一层中的神经元，从所有它自己的局部接收域中的 20x5x5 个输入神经元中学习。不是很正规的说法是：在第二个卷积池中的特征探测器，将会访问来自前一个层中的所有特征，不过仅限于他们专有的局部接收域\*。
+这是一个令人满意的观点，不过也带出了第二个问题。上一层的输出包含 20 个分立的特征图，也就是有 20x12x12 个输入到第二个卷积池。亦即我们有 20 个分立的图像输入到卷积池，不像是第一个卷积池那样，只有一个图像输入。那么，在第二个卷积池中的神经元，应该如何应对这些并列的输入图像呢？事实上，我们容许每个在这一层中的神经元，从所有它自己的局部接收域中的 20x5x5 个输入神经元中学习。非正式的说法是：在第二个卷积池中的特征探测器，将会访问来自前一个层中的所有特征，不过仅限于他们专有的局部接收域\*。
 
 > This issue would have arisen in the first layer if the input images were in color. In that case we'd have 3 input features for each pixel, corresponding to red, green and blue channels in the input image. So we'd allow the feature detectors to have access to all color information, but only within a given local receptive field.
 >
@@ -446,7 +446,7 @@ That's a satisfying point of view, but gives rise to a second question. The outp
 
   Begin with the same hyper-parameters as for the sigmoid network, but train for 20 epochs instead of 60. How well does your network perform? What if you continue out to 60 epochs? Try plotting the per-epoch validation accuracies for both tanh- and sigmoid-based networks, all the way out to 60 epochs. If your results are similar to mine, you'll find the tanh networks train a little faster, but the final accuracies are very similar. Can you explain why the tanh network might train faster? Can you get a similar training speed with the sigmoid, perhaps by changing the learning rate, or doing some rescaling * ?
 
-  开始时，就像 sigmoid 网络一样，以相同的超参数训练 20 个轮次而不是 60 个轮次。你的网络表现的还好吗？要是连续训练至 60 个轮次呢？试着描述出 tanh 与 sigmoid 网络的全部 60 个训练轮次的验证精度，如果你的结果与我的近似，你会发现 tanh 网络的训练速度要快一点，不过最终的精度是非常相似的。你可以解释为什么 tanh 网络会训练的更快一些呢？你可以在 sigmoid 网络中取得类似的训练速度吗？应该改变学习步长，还是做点其他的什么调整呢\*？
+  开始时，就像 sigmoid 网络一样，以相同的超参数训练 20 个轮次而不是 60 个轮次。你的网络表现得还好吗？要是连续训练至 60 个轮次呢？试着描述出 tanh 与 sigmoid 网络的全部 60 个训练轮次的验证精度，如果你的结果与我的近似，你会发现 tanh 网络的训练速度要快一点，不过最终的精度是非常相似的。你可以解释为什么 tanh 网络会训练的更快一些呢？你可以在 sigmoid 网络中取得类似的训练速度吗？应该改变学习步长，还是做点其他的什么调整呢\*？
 
   > You may perhaps find inspiration in recalling that  $\sigma(z) = \frac{1 + \text{tanh}(\frac{z}{2})}{2}$
   >
@@ -458,7 +458,7 @@ That's a satisfying point of view, but gives rise to a second question. The outp
 
 **Using rectified linear units:** The network we've developed at this point is actually a variant of one of the networks used in the seminal 1998 paper* introducing the MNIST problem, a network known as LeNet-5.  It's a good foundation for further experimentation, and for building up understanding and intuition. In particular, there are many ways we can vary the network in an attempt to improve our results.
 
-**使用纠正线性单元：**我们现在在这里开发的网络，实际上是那篇 1998 年的开创性的论文在介绍 MNIST 问题时所使用的网络的变体，它叫做 LeNet-5。无论对于进一步练习，理解深度学习，还是建立直觉来说，它都是很好的基础。特别是，还存在很多途径调整我们的网络，以改善我们的结果。
+**使用纠正线性单元：**我们现在在这里开发的网络，实际上是那篇 1998 年的开创性的论文\*在介绍 MNIST 问题时所使用的网络的变体，它叫做 LeNet-5。无论对于进一步练习，理解深度学习，还是建立直觉来说，它都是很好的基础。特别是，还存在很多途径调整我们的网络，以改善我们的结果。
 
 > ["Gradient-based learning applied to document recognition"](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf), by Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner (1998). There are many differences of detail, but broadly speaking our network is quite similar to the networks described in the paper.
 >
@@ -551,7 +551,7 @@ Using the expanded training data I obtained a 99.37 percent training accuracy. S
 
 **Inserting an extra fully-connected layer:** Can we do even better? One possibility is to use exactly the same procedure as above, but to expand the size of the fully-connected layer. I tried with 300 and 1,000 neurons, obtaining results of 99.46 and 99.43 percent, respectively. That's interesting, but not really a convincing win over the earlier result (99.37 percent).
 
-**插入一个额外的全连层：** 我们还可以做得更好吗？一个可能的途径是应用上面的相同步骤，但是扩展全连层的大小。我试过用 300 和 1,000 个神经元的，分别取得 99.46% 和 99.43% 的结果。这是有点意思，但完全不能令人信服地击败之前的结果（99.37）。
+**插入一个额外的全连层：** 我们还可以做得更好吗？一个可能的途径是应用上面的相同处理方式，不过，只扩展全连层的大小。我试过用 300 和 1,000 个神经元的，分别取得 99.46% 和 99.43% 的结果。这有点意思，但完全不能令人信服地击败之前的结果（99.37）。
 
 What about adding an extra fully-connected layer? Let's try inserting an extra fully-connected layer, so that we have two 100-hidden neuron fully-connected layers:
 
@@ -580,7 +580,7 @@ Doing this, I obtained a test accuracy of 99.43 percent. Again, the expanded net
 
 What's going on here? Is it that the expanded or extra fully-connected layers really don't help with MNIST? Or might it be that our network has the capacity to do better, but we're going about learning the wrong way? For instance, maybe we could use stronger regularization techniques to reduce the tendency to overfit. One possibility is the [dropout](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization) technique introduced back in Chapter 3. Recall that the basic idea of dropout is to remove individual activations at random while training the network. This makes the model more robust to the loss of individual pieces of evidence, and thus less likely to rely on particular idiosyncracies of the training data. Let's try applying dropout to the final fully-connected layers:
 
-这里到底发生了什么呢？是扩展或者是新增的全连层对 MNIST 没有帮助吗？还是可能我们的网络其实是有能力做得更好，但是我们在探索的过程中走错路了？例如，也许我们可以用更强的正则化技术去抑制过拟合的趋势。其中一个可选项，就是在第三章中介绍过的[辍学](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization)技术。回顾一下辍学的基本思想，就是在网络训练的过程中，随机地移除单个的活动单元。这将是我们的模型在面对数据的小片表征缺损时，表现得更加强健，并且尽可能少地脱离训练数据的个体特征的影响。让我们尝试一下将辍学应用到最后的全连层：
+这里到底发生了什么呢？是扩展或者是新增的全连层对 MNIST 没有帮助吗？还是可能我们的网络其实是有能力做得更好，但是我们在探索的过程中走错路了？例如，也许我们可以用更强的正则化技术去抑制过拟合的趋势。其中一个可选项，就是在第三章中介绍过的[辍学](http://neuralnetworksanddeeplearning.com/chap3.html#other_techniques_for_regularization)技术。回顾一下辍学的基本思想，就是在网络训练的过程中，随机地移除单个的活动单元。这将使得我们的模型在面对数据的小片表征缺损时，表现得更加强健，并且尽可能少地脱离训练数据的个体特征的影响。让我们尝试一下将辍学应用到最后的全连层：
 
 > > 译注：暂时用“辍学”来作为 dropout 的中文术语吧。我觉得也挺形象，毕竟那些神经元就是退出学习了。
 
