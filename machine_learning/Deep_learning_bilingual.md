@@ -10,9 +10,9 @@
 >
 > 计算机专业的人士，可以通过文章中对深度学习的原理解说，以及范例代码，实现快速入门。而作为非专业人士，也能非常形象地了解深度学习的原理，了解一个你必须面对的新生事物，一定不是坏事。
 >
-> 本文是作为开源项目放到[我个人的 Github 空间](https://vortune.github.io/)上。一般的用户可以直接下载本文的中英文双语版的 PDF 格式。
+> 本文是作为开源项目放到[我个人的 Github 空间](https://vortune.github.io/)上。一般的用户可以直接下载 PDF 格式的[深度学习中英文双语版](https://vortune.github.io/machine_learning/Deep_Learning_bilingual.pdf)。
 >
-> 罗峥嵘，2017年7月24日，于广州。
+> ​															罗峥嵘，2017年6月24日，于广州。
 
 In the [last chapter](http://neuralnetworksanddeeplearning.com/chap5.html) we learned that deep neural networks are often much harder to train than shallow neural networks. That's unfortunate, since we have good reason to believe that *if* we could train deep nets they'd be much more powerful than shallow nets. But while the news from the last chapter is discouraging, we won't let it stop us. In this chapter, we'll develop techniques which can be used to train deep networks, and apply them in practice. We'll also look at the broader picture, briefly reviewing recent progress on using deep nets for image recognition, speech recognition, and other applications. And we'll take a brief, speculative look at what the future may hold for neural nets, and for artificial intelligence.
 
