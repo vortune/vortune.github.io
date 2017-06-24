@@ -2,6 +2,18 @@
 
 # 深度学习
 
+> **译序**
+>
+> 随着近年来，计算机在多种复杂问题的处理表现上击败人类，无论是科学界还是平民百姓之中，都掀起了人工智能的热潮。而这些问题原来被认为需要高级智能才能正确处理的，它们包括：围棋、组织病理、自动驾驶等等。当前人工智能的基础是深度学习。我一直想寻找一篇深入浅出、具有系统性学习意义，又能帮助大家展望未来的文章来精读一下。[Deep Learning](http://neuralnetworksanddeeplearning.com/chap6.html) 就是这样的好文章。并且我发现它还没有中文版本，也就顺手翻译一下，供大家参考。
+>
+> 这篇文章，不管是对于专业人士，还是普通人，都极具意义。因为不管我们是否愿意，人工智能很快将进入我们生活的方方面面！
+>
+> 计算机专业的人士，可以通过文章中对深度学习的原理解说，以及范例代码，实现快速入门。而作为非专业人士，也能非常形象地了解深度学习的原理，了解一个你必须面对的新生事物，一定不是坏事。
+>
+> 本文是作为开源项目放到[我个人的 Github 空间](https://vortune.github.io/)上。一般的用户可以直接下载本文的中英文双语版的 PDF 格式。
+>
+> 罗峥嵘，2017年7月24日，于广州。
+
 In the [last chapter](http://neuralnetworksanddeeplearning.com/chap5.html) we learned that deep neural networks are often much harder to train than shallow neural networks. That's unfortunate, since we have good reason to believe that *if* we could train deep nets they'd be much more powerful than shallow nets. But while the news from the last chapter is discouraging, we won't let it stop us. In this chapter, we'll develop techniques which can be used to train deep networks, and apply them in practice. We'll also look at the broader picture, briefly reviewing recent progress on using deep nets for image recognition, speech recognition, and other applications. And we'll take a brief, speculative look at what the future may hold for neural nets, and for artificial intelligence.
 
 在[上一章](http://neuralnetworksanddeeplearning.com/chap5.html)中，我们研究过训练深度神经网络要比浅度神经网络艰难很多。真是不幸，因为我们有很好的理由相信，*如果*我们可以训练深度网络的话，它将比浅度网络强大很多。尽管上一章的消息的确令人沮丧，我们不会让它阻止我们。在本章中，我们将开发可以用于训练深度网络的技术，并将它们用于实践。我们还要扩大视野，简要地回顾当前深度网络用于图像识别，语音识别，以及其他应用的进展。我们也将简要地展望神经网络的未来，以及它在人工智能上的作用。
