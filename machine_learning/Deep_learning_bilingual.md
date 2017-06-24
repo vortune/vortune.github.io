@@ -10,7 +10,7 @@
 >
 > 计算机专业的人士，可以通过文章中对深度学习的原理解说，以及范例代码，实现快速入门。而作为非专业人士，也能非常形象地了解深度学习的原理，了解一个你必须面对的新生事物，一定不是坏事。
 >
-> 本文是作为开源项目放到[我个人的 Github 空间](https://vortune.github.io/)上。一般的用户可以直接下载 PDF 格式的[深度学习中英文双语版](https://vortune.github.io/machine_learning/Deep_Learning_bilingual.pdf)。
+> 本文是作为开源项目放到[我个人的 Github 空间](https://vortune.github.io/)上。一般的用户可以直接下载 PDF 格式的[深度学习中英文双语版](http://note.youdao.com/noteshare?id=76f8378fedd3380c9b41202c67031d40)。
 >
 > ​															罗峥嵘，2017年6月24日，于广州。
 
