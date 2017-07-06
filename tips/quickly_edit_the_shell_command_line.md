@@ -36,17 +36,17 @@
 $ ec
 ```
 
-按[Tab]，补齐为：
+按 `[Tab]`，补齐为：
 
 ``` shell
 $ echo
 ```
 
-### 查找和执行历史命令：[Ctrl+ r], [Ctrl + p], [Ctrl + n]
+### 查找和执行历史命令：[Ctrl + r], [Ctrl + p], [Ctrl + n]
 
 在终端中按住 `[Ctrl]` 键的同时 `[r]` 键，出现提示：(reverse-i-search)，此时你尝试一下输入你以前输入过的命令，当你每输入一个字符的时候，终端都会滚动显示你的历史命令。当显示到你想找的合适的历史命令的时候，直按`[Enter]`，就执行了历史命令。如果你想清晰地确认一下这个历史命令，也可以按 `[Ctrl + e]`。这样历史命令会出以正常的 Shell 提示状态下显示，你确认了之后，再按 `[Enter]` 键执行也可以。
 
-另外，[Ctrl+ p] 或 [Ctrl+ n] 快速向前或向后滚动查找一个历史命令，对于快速提取刚刚执行过不久的命令很有用。
+另外，`[Ctrl + p` 或 `[Ctrl + n]` 快速向前或向后滚动查找一个历史命令，对于快速提取刚刚执行过不久的命令很有用。
 
 **实验：**
 
@@ -59,16 +59,25 @@ $hello, world
 (reverse-i-search)`ch':echo "hello,world" [Enter]
 $hello,world
 ```
-### 取消本次命令输入：[Ctrl+ c]
+### 取消本次命令输入：[Ctrl + c]
 
 这个快捷键可以使你从一个可能你已经厌烦了的命令中安全地退出！！也许是个不值一提的小技巧，但是经验告诉我它很有用。很多 Unix 初学者会习惯性地按 `[Enter]` 以摆脱困境，但是说不定就会发生灾难性的事件，譬如删除了一个重要的配置文件 :( 。
 
 ### 光标跳转快捷键
 为了方便大家记忆，加点英语助记语在后面 :)
 
-* [Ctrl+ a]    跳转至命令行首        Ahead of line
-* [Ctrl+ e]    跳转至命令行尾        End of line
-* [Ctrl+ f]     向前跳转一个字符    jump Forward one character
-* [Ctrl+ b]    向后跳转一个字符    jump Backward one character
-* [Alt+ f]      向前跳转到下一个字的第一个字符
-* [Alt+ b]     向后跳转到下一个字的第一个字符
+* [Ctrl + a]    跳转至命令行首        Ahead of line
+* [Ctrl + e]    跳转至命令行尾        End of line
+* [Ctrl + f]     向前跳转一个字符    jump Forward one character
+* [Ctrl + b]    向后跳转一个字符    jump Backward one character
+* [Alt + f]      向前跳转到下一个字的第一个字符
+* [Alt + b]     向后跳转到下一个字的第一个字符
+
+### 编辑命令的快捷键
+
+* [Ctrl + w]     向后删除一个字，用来对付刚刚输入的错误字很有用
+* [Ctrl + u]      从光标当前位置删除所有字符至行首
+* [Ctrl + k]      从光标当前位置删除所有字符至行尾
+* [Ctrl + d]      删除光标当前位置的字符
+* [Ctrl + y]      粘贴最后一个被删除的字
+* [Alt + d]       删除从光标当前位置，到当前字的结尾字符
