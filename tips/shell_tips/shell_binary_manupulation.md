@@ -1,5 +1,7 @@
 # Shell 二进制文件操作
+Linux 上有多种二进制文件的处理工具，譬如：xxd，hexdump，dd 等等。
 
+## xxd
 xxd 命令可以方便地查看二进制文件：
 
 ``` shell
