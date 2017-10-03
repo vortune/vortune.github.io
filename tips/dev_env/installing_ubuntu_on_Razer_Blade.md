@@ -1,6 +1,6 @@
 # Installing Ubuntu on Razer Blade
 
-This documentation explains how to install the Ubuntu Desktop onto Razer Blade laptop. it also can be referenced for other brand and type PC.
+This documentation explains how to install the Ubuntu Desktop onto Razer Blade laptop. it also can be referenced for other brand and type of PC.
 
 ## Preparations
 Before starting the process of installing Ubuntu, please read the [Ubuntu Installation Guide](https://help.ubuntu.com/lts/installation-guide/amd64/index.html) and take care to the important contents such as :
@@ -8,8 +8,9 @@ Before starting the process of installing Ubuntu, please read the [Ubuntu Instal
 * [Preparing a USB stick using a hybrid CD or DVD image](https://help.ubuntu.com/lts/installation-guide/amd64/ch04s03.html)
 * [Pre-Partitioning for Multi-Boot Systems](https://help.ubuntu.com/lts/installation-guide/amd64/ch03s05.html)
   * [Systems with UEFI firmware](https://help.ubuntu.com/lts/installation-guide/amd64/ch03s06.html)
+* [Partitioning for Ubuntu](https://help.ubuntu.com/lts/installation-guide/amd64/apc.html)
 
-Download the [ISO image](https://www.ubuntu.com/download/desktop).
+And then **Download the [ISO image](https://www.ubuntu.com/download/desktop)**.
 
 ### Making a USB boot stick using a ISO image
 Copy the ISO image directly to the USB stick, shouldn't to its mount point. In here, the Linux host was assumed.
@@ -24,11 +25,13 @@ That is a little longer process. Where the 'X' in `/dev/sdX` is a storage device
 
 ### Testing Compatibility
 
-`UEFI: Generic Flash Disk 8.07` 
+I strongly recommend you test the compatibility of current version of Ubuntu on your laptop. Insert the USB boot stick into your laptop and reboot your laptop. during power on, press `F12` enter the boot menu, and select `UEFI: Generic Flash Disk 8.07` . 
 
-`Try Ubuntu without installing`
+While the optional entries appears to you, select `Try Ubuntu without installing` and press `Enter`, then the `Debian installer` will run Live Ubuntu on your laptop. Now you can test several function of the laptop, such as touch screen, sound, connectivities and etc.
 
 > Shutdown the laptop. After the Ubuntu on the USB stick has quited, It doesn't turnoff power directly, and in the QHD+ screen you may not read the notice massage. at that moment just press any key in order to turn off.
+
+You can get the [compatibility testing result and some trouble shooting for Razer Blade](https://help.ubuntu.com/community/RazerBlade) from Ubuntu community.
 
 ### Shrinking Space of Windows Partition
 
@@ -42,15 +45,29 @@ Once you open the Windows Disk Manager, right click the System Partition and sel
 
 > A recommended scheme for Windows partitions that has two partition which one for system and another for data. As the result of the layout, while you want to recovery Windows from any trouble, then only system partition will be formated. The space of Windows system partition recommend larger than 100 gigabyte.
 
+### Disable Windows "fast startup" Feature
+
+Read the section of [Disabling the Windows 8 “fast boot” feature](https://help.ubuntu.com/lts/installation-guide/amd64/ch03s06.html#UEFI) for the reason of disable Windows fast boot feature.
+
+Enabling or disabling this feature is quite easy and if we count the numbers, you just need 4-5 steps to do this. Just follow the below listed procedure.
+
+- Open your **Control Panel**. Look for Control Panel in start menu.
+- Now in **Control Panel **look for P**ower Options.**
+- Look for an option that reads **Choose what the power button does** and click it. This will open up a new Window and here you can see more options.
+- Now look for the check box with text **Turn on fast startup.**
+- Check it if you want Fast startup enabled and uncheck it if you don’t want it enabled.
+
+This is as easy as this. So, you just have to follow these options in order to **Enable or Disable Fast Startup in Windows 10.**
+
 ## Ubuntu Installation
 
 In the forth dialog name 'Installation type' of installer, we may select the "Some else" radio button.
 
 ```/ 
-/boot        1G
-/swap        16G
-/            80G
-/home        80G
-/ws          120G
+/boot        1		G
+/swap        16		G
+/            80		G
+/home        80		G
+/ws          120	G
 ```
 
