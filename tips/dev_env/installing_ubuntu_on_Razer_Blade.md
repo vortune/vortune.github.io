@@ -61,7 +61,9 @@ This is as easy as this. So, you just have to follow these options in order to *
 
 ## Ubuntu Installation
 
-In the forth dialog name 'Installation type' of installer, we may select the "Some else" radio button.
+Reboot the laptop, and press `F12` to enter `Debian installer`. Follow the installation guide to the forth dialog name 'Installation type' of installer, we may select the "Some else" radio button. It's where you have to decide your disk partition scheme that depends on the machine using for, learn more [Ubuntu partition scheme](https://help.ubuntu.com/lts/installation-guide/amd64/apc.html).
+
+My disk partition scheme was:
 
 ```/ 
 /boot        1		G
@@ -71,3 +73,12 @@ swap        16		G
 /ws          120	G
 ```
 
+You have to configure the mount points and apply the changes to disk, and click 'continue' to finish installation.
+
+### Enter a New Installation
+
+After all, the laptop has became a dual system machine. Reboot the laptop and select a system you want to enter.
+
+## Trouble shooting
+
+In my experiences, the ALSA (sound system) has ran into problem. I tried to shutdown (not reboot) to recover the machine working.
