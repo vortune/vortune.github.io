@@ -81,4 +81,6 @@ After all, the laptop has became a dual system machine. Reboot the laptop and se
 
 ## Trouble shooting
 
-In my experiences, the ALSA (sound system) has ran into problem. I tried to shutdown (not reboot) to recover the machine working.
+Problem 1 : In my dual system, in the first time that the laptop come back from Ubuntu from Windows, the sound system don't work. 
+
+Solution 1 :  Shutdown the laptop and power on again that resolve this issue.
