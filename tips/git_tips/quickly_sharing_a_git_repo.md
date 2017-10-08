@@ -1,6 +1,6 @@
 # Quickly sharing a Git Repository
 
-In a collaboration of small team, we hope to have a quick method to share the git repo to others. Assume you work with a laptop with wireless connectivity. The problem of sharing a git repo on wireless connectivity,  the wireless adapters usually were assigned a dynamic IP address. 
+In a collaboration of small team, we hope to have a quick method to share the git repo to others. Assume you work with a laptop with wireless connectivity. The problem of sharing a git repo on wireless connectivity,  is the wireless adapters usually were assigned a dynamic IP address. 
 
 As a result of using dynamic IP address, the Git repo may lose its host, because any machine in same local network will get a new IP address that may be different after rebooted.
 
@@ -29,13 +29,13 @@ wlp1s0    Link encap:Ethernet  HWaddr 9c:b6:d0:1d:3f:a5
           RX bytes:5729296 (5.7 MB)  TX bytes:139336197 (139.3 MB)
 ```
 
-We setup a virtual device named `wlp1s0:0` that was a relevancy of `wlp1s0` , and give it a new IP address in your teamwork convention. run :
+We will setup a virtual device named `wlp1s0:0` that was a relevancy of `wlp1s0` , and give it a new IP address in your teamwork's etiquette. run :
 
 ``` shell
 $ sudo ifconfig wlp1s0:0 192.168.1.28
 ```
 
-Check the configuration again :
+Checking the configuration again :
 
 ``` shell
 $ ifconfig
@@ -132,14 +132,17 @@ Strongly recommend every don't work on branch 'master'. we should work on a new 
 
 ``` shell
 $ git checkout -b hotfix master
+$ git branch
+* hotfix
+  master
 ```
-See [Git Branching](https://git-scm.com/book/en/v1/Git-Branching) for detial.
+See [Git Branching](https://git-scm.com/book/en/v1/Git-Branching) for detail.
 
-Then, you are on branch 'hotfix'. After to proof any thing clear, you are ready to merge your jobs. 
+Now, you are on branch 'hotfix'. You can do something on branch 'hotfix' and after to proof any thing clear, you are ready to merge your jobs. 
 
 ### Push Your Jobs
 
-Before merging any thing into branch 'master', don't forget update the it with remote branch.
+Before merging any thing into branch 'master', don't forget update it with remote branch.
 
 ``` shell
 $ git checkout master
@@ -148,7 +151,7 @@ $ git pull
 
 Above commands will merge remote branch 'master' into local branch 'master'. During the merging process, you have to resolve the conflicts between both branches if they existed. See [Basic Branching and Merging](https://git-scm.com/book/en/v1/Git-Branching-Basic-Branching-and-Merging) .
 
-After that, you can safely push you jobs:
+After that, you can safely push out you jobs:
 
 ``` shell
 $ git push origin master
