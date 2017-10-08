@@ -1,5 +1,7 @@
 # Quickly Sharing a Git Repository
 
+[TOC]
+
 In a collaboration of small team, we hope to have a quick method to share the git repo to others. Assume you work with a laptop with wireless connectivity. The problem of sharing a git repo on wireless connectivity,  is the wireless adapters usually were assigned a dynamic IP address. 
 
 As a result of using dynamic IP address, the Git repo may lose its host, because any machine in same local network will get a new IP address that may be different after rebooted.
@@ -64,7 +66,7 @@ wlp1s0:0  Link encap:Ethernet  HWaddr 9c:b6:d0:1d:3f:a5
 
 Bingo! we have a new IP address `192.168.1.28` .
 
-## Exporting Base Path of Git Repositories
+## Exporting Git Repository
 
 We assume you have a git repo named 'foo' in directory `/home/someone/git` .
 
@@ -73,12 +75,29 @@ $ ls /home/someone/git
 foo bar
 ```
 
- Very easy to export the all of git repositories in the the directory :
+### Making a Bare Git Repository
+
+By default Git configuration, only bare-repository accepts the remote uploading. so we should export a bare-repository. See [Getting Git on a Server](https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server) .
+
+cloning a bare-repository:
+
+``` shell
+$ mkdir -p /home/someone/repo
+$ cd /home/someone/repo
+$ git clone --bare /home/someone/git/foo
+...
+$ ls /home/someone/repo
+foo.git
+```
+
+### Exporting
+
+Very easy to export the all of git repositories in the the directory :
 
 ``` shell
 $ git daemon --export-all \
              --enable=receive-pack \
-             --base-path=/home/someone/git /home/someone/git
+             --base-path=/home/someone/repo /home/someone/repo
 ```
 
 Where:
@@ -88,10 +107,10 @@ Where:
 
 ## Remoting Clone
 
-Now, your partner can clone your git repo, He just runs :
+In your collaborator computer, it's very easy to clone your git repo, he just needs to run :
 
 ``` shell
-$ git clone git://192.168.1.28:/foo
+$ git clone git://192.168.1.28:/foo.git
 ```
 
 Remember via the **virtual static IP address** !
@@ -103,11 +122,11 @@ Remember via the **virtual static IP address** !
 Check the information of origin of the local git repo with git command `git remote` : 
 
 ``` shell
-$ cd /${PATH_TO_YOUR_GIT_BASE_PATH}/foo
+$ cd /${PATH_TO_GIT_BASE_PATH}/foo
 $ git remote show origin
 * remote origin
-  Fetch URL: git://192.168.1.28:/foo
-  Push  URL: git://192.168.1.28:/foo
+  Fetch URL: git://192.168.1.28:/foo.git
+  Push  URL: git://192.168.1.28:/foo.git
   HEAD branch: master
   Remote branch:
     master tracked
@@ -140,9 +159,9 @@ See [Git Branching](https://git-scm.com/book/en/v1/Git-Branching) for detail.
 
 Now, you are on branch 'hotfix'. You can do something on branch 'hotfix' and after to proof any thing clear, you are ready to merge your jobs. 
 
-### Push Your Jobs
+### Pushing Your Jobs out
 
-Before merging any thing into branch 'master', don't forget update it with remote branch.
+**CAUTION:** before merging any thing into branch 'master', don't forget update 'master' with remote branch.
 
 ``` shell
 $ git checkout master
