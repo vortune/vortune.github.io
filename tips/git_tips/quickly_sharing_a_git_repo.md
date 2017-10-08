@@ -107,7 +107,7 @@ Where:
 
 ## Remoting Clone
 
-In your collaborator computer, it's very easy to clone your git repo, he just needs to run :
+In your collaborator's computer, it's very easy to clone your git repo, he just needs to run :
 
 ``` shell
 $ git clone git://192.168.1.28:/foo.git
