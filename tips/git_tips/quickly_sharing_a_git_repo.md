@@ -1,4 +1,4 @@
-# Quickly sharing a Git Repository
+# Quickly Sharing a Git Repository
 
 In a collaboration of small team, we hope to have a quick method to share the git repo to others. Assume you work with a laptop with wireless connectivity. The problem of sharing a git repo on wireless connectivity,  is the wireless adapters usually were assigned a dynamic IP address. 
 
