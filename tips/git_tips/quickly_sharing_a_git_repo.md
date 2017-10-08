@@ -2,7 +2,7 @@
 
 In a collaboration of small team, we hope to have a quick method to share the git repo to others. Assume you work with a laptop with wireless connectivity. The problem of sharing a git repo on wireless connectivity,  the wireless adapters usually were assigned a dynamic IP address. 
 
-As a result of dynamic IP, 
+As a result of using dynamic IP address, the Git repo may lose its host, because any machine in same local network will get a new IP address that may be different after rebooted.
 
 ## Assigning a Virtual Static IP Address
 
@@ -96,7 +96,7 @@ $ git clone git://192.168.1.28:/foo
 
 Remember via the **virtual static IP address** !
 
-> you can also clone the git repo via dynamic IP address of '192.168.1.104', but the git repo will lost the remote host even host rebooted.
+> you can also clone the git repo via dynamic IP address of '192.168.1.104', but in that way, git repo might lost its remote host even the host rebooted.
 
 ### Inspecting Origin
 
@@ -118,6 +118,44 @@ $ git remote show origin
 ```
 
 ## Collaboration
+
+After cloning a git repo from remote host, the current git branch is a mirror of the branch master of remote repo.
+
+``` shell
+$ git branch
+* master
+```
+
+### Working on Your Private Branch
+
+Strongly recommend every don't work on branch 'master'. we should work on a new purposive branch, like :
+
+``` shell
+$ git checkout -b hotfix master
+```
+See [Git Branching](https://git-scm.com/book/en/v1/Git-Branching) for detial.
+
+Then, you are on branch 'hotfix'. After to proof any thing clear, you are ready to merge your jobs. 
+
+### Push Your Jobs
+
+Before merging any thing into branch 'master', don't forget update the it with remote branch.
+
+``` shell
+$ git checkout master
+$ git pull
+```
+
+Above commands will merge remote branch 'master' into local branch 'master'. During the merging process, you have to resolve the conflicts between both branches if they existed. See [Basic Branching and Merging](https://git-scm.com/book/en/v1/Git-Branching-Basic-Branching-and-Merging) .
+
+After that, you can safely push you jobs:
+
+``` shell
+$ git push origin master
+```
+
+Enjoin Your Teamwork !
+
 
 
 
