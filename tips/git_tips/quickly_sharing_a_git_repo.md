@@ -62,11 +62,11 @@ wlp1s0:0  Link encap:Ethernet  HWaddr 9c:b6:d0:1d:3f:a5
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
 ```
 
-Bingo! we have a new IP address of `192.168.1.28` .
+Bingo! we have a new IP address `192.168.1.28` .
 
 ## Exporting Base Path of Git Repositories
 
-We assume you have a git repo named 'foo' in directory of `/home/someone/git` .
+We assume you have a git repo named 'foo' in directory `/home/someone/git` .
 
 ``` shell
 $ ls /home/someone/git
@@ -96,7 +96,7 @@ $ git clone git://192.168.1.28:/foo
 
 Remember via the **virtual static IP address** !
 
-> you can also clone the git repo via dynamic IP address of '192.168.1.104', but in that way, git repo might lost its remote host even the host rebooted.
+> you can also clone the git repo via dynamic IP address '192.168.1.104', but in that way, git repo might lost its remote host even the host rebooted.
 
 ### Inspecting Origin
 
