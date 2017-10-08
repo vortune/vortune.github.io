@@ -96,7 +96,7 @@ $ git clone git://192.168.1.28:/foo
 
 Remember via the **virtual static IP address** !
 
-> you can also clone the git repo via dynamic IP address '192.168.1.104', but in that way, git repo might lost its remote host even the host rebooted.
+> you can also clone the git repo via dynamic IP address '192.168.1.104', but in that way, git repo might lost its remote host even the host just rebooted.
 
 ### Inspecting Origin
 
