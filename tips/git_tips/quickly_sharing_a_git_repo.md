@@ -29,7 +29,7 @@ wlp1s0    Link encap:Ethernet  HWaddr 9c:b6:d0:1d:3f:a5
           RX bytes:5729296 (5.7 MB)  TX bytes:139336197 (139.3 MB)
 ```
 
-We will setup a virtual device named `wlp1s0:0` that was a relevancy of `wlp1s0` , and give it a new IP address in your teamwork's etiquette. run :
+We will setup a virtual device named `wlp1s0:0` that was a relevancy of `wlp1s0` , and give it a new IP address according to your teamwork's etiquette. run :
 
 ``` shell
 $ sudo ifconfig wlp1s0:0 192.168.1.28
@@ -150,6 +150,24 @@ $ git pull
 ```
 
 Above commands will merge remote branch 'master' into local branch 'master'. During the merging process, you have to resolve the conflicts between both branches if they existed. See [Basic Branching and Merging](https://git-scm.com/book/en/v1/Git-Branching-Basic-Branching-and-Merging) .
+
+#### Merging your local jobs
+
+Branch 'master' is alway starting point to push out anything, so you should merge any local jobs into 'master':
+
+``` shell
+$ git branch
+* master
+  hotfix
+```
+
+Seriously confirm 'master' is current active branch, and merge:
+
+``` shell
+$ git merge hotfix
+```
+
+#### Now ready to push
 
 After that, you can safely push out you jobs:
 
