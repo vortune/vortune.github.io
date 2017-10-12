@@ -26,13 +26,13 @@ The [main part of the chapter](http://neuralnetworksanddeeplearning.com/chap6.ht
 
 本章的主要部分是介绍一个最广泛使用的深度网络类型：深度卷积网络。我们的工作将贯穿一个详尽的例子 - 从源代码到方方面面 - 用卷积网络去解决从 MNIST 数据集中分辨手写数字的问题：
 
-![digits](../meta/digits.png)
+![digits](../../meta/digits.png)
 
 We'll start our account of convolutional networks with the shallow networks used to attack this problem earlier in the book. Through many iterations we'll build up more and more powerful networks. As we go we'll explore many powerful techniques: convolutions, pooling, the use of GPUs to do far more training than we did with our shallow networks, the algorithmic expansion of our training data (to reduce overfitting), the use of the dropout technique (also to reduce overfitting), the use of ensembles of networks, and others. The result will be a system that offers near-human performance. Of the 10,000 MNIST test images - images not seen during training! - our system will classify 9,967 correctly. Here's a peek at the 33 images which are misclassified. Note that the correct classification is in the top right; our program's classification is in the bottom right:
 
 我们叙述卷积网络的起点，是本书早前介绍过的以浅度网络解决这个问题的内容。经过多次迭代，我们将构建越来越强大的网络。在我们的历程中，我们将探索许多强大的技术：卷积，池化，使用 GPUs 做相比于浅层网络更多的训练，以算法扩展训练数据（抑制过拟合），使用辍学技术（同样可以抑制过拟合），使用协作网络，等等。最后的结果是系统提供了接近人类的表现。在 10,000 个 MNIST 测试图片中 - 系统在训练期间从来没有看过这些图片 - 我们的系统准确识别 9,967 张。下面是 33 张被错误识别的。请留意，正确的分类标注在右上；程序的分类标注在右下：
 
-![ensemble_errors](../meta/ensemble_errors.png)
+![ensemble_errors](../../meta/ensemble_errors.png)
 
 Many of these are tough even for a human to classify. Consider, for example, the third image in the top row. To me it looks more like a "9" than an "8", which is the official classification. Our network also thinks it's a "9". This kind of "error" is at the very least understandable, and perhaps even commendable. We conclude our discussion of image recognition with a [survey of some of the spectacular recent progress](http://neuralnetworksanddeeplearning.com/chap6.html#recent_progress_in_image_recognition) using networks (particularly convolutional nets) to do image recognition.
 
@@ -58,13 +58,13 @@ In earlier chapters, we taught our neural networks to do a pretty good job recog
 
 在前面的章节中，我们训练了一个工作起来还不错的神经网络，它可以从图片中识别手写的数字：
 
-![digits](../meta/digits.png)
+![digits](../../meta/digits.png)
 
 We did this using networks in which adjacent network layers are fully connected to one another. That is, every neuron in the network is connected to every neuron in adjacent layers:
 
 我们是通过一个相邻的层之间都是全链接的网络来做到这一点的。就是，网络中的每个神经元都与相邻层中的所有神经元链接：
 
-![Fully connected network](../meta/tikz41.png)
+![Fully connected network](../../meta/tikz41.png)
 
 
 
@@ -88,7 +88,7 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 **局部接收域：** 在早前陈述的全链接层中，输入数据被展开到一个神经元的纵行之中。在卷积网络中，它帮助我们将 28x28 个像素的灰度值的输入，看作是一个由 28x28 个输入点组成的方阵。
 
-![Input neuron](../meta/tikz42.png)
+![Input neuron](../../meta/tikz42.png)
 
 
 
@@ -100,7 +100,7 @@ To be more precise, each neuron in the first hidden layer will be connected to a
 
 更准确的描述是，每个在第一个隐藏层的神经元，将链接到一个细小的输入区域，譬如说一个 5x5 的区域，对应于 25 个输入像素。所以，对于一个隐藏层神经元，我们的链接看起来如下图：
 
-![Input neuron](../meta/tikz43.png)
+![Input neuron](../../meta/tikz43.png)
 
 
 
@@ -112,7 +112,7 @@ We then slide the local receptive field across the entire input image. For each 
 
 我们接着将局部接收域滑动扫描过整张输入图片。对于每个局部接收域，都在第一个隐藏层，有一个独立的神经元与之对应。为了具体地说明这个机制，让我们从左上角开始：
 
-![Input neuron](../meta/tikz44.png)
+![Input neuron](../../meta/tikz44.png)
 
 
 
@@ -120,7 +120,7 @@ Then we slide the local receptive field over by one pixel to the right (i.e., by
 
 我们将局部接收域向右滑动一个像素（这里是一个神经元），并连接到第二个隐藏层神经元：
 
-![Input neuron](../meta/tikz45.png)
+![Input neuron](../../meta/tikz45.png)
 
 
 
@@ -172,7 +172,7 @@ The network structure I've described so far can detect just a single kind of loc
 
 我一路以来介绍的网络结构都是抽取一个局部特征的。要做到图像识别，我们需要不止一个的特征映射。所以完善的卷积层会包含若干个特征图：
 
-![Input neurons to first hidden layer](../meta/tikz46.png)
+![Input neurons to first hidden layer](../../meta/tikz46.png)
 
 
 
@@ -188,7 +188,7 @@ I've shown just 3 feature maps, to keep the diagram above simple. However, in pr
 >
 > 这里展示的特征图来自我们最后训练出来的卷积网络，看[这里](http://neuralnetworksanddeeplearning.com/chap6.html#final_conv) 。
 
-![](../meta/net_full_layer_0.png)
+![](../../meta/net_full_layer_0.png)
 
 The 20 images correspond to 20 different feature maps (or filters, or kernels). Each map is represented as a 5×5 block image, corresponding to the 5×5 weights in the local receptive field. Whiter blocks mean a smaller (typically, more negative) weight, so the feature map responds less to corresponding input pixels. Darker blocks mean a larger weight, so the feature map responds more to the corresponding input pixels. Very roughly speaking, the images above show the type of features the convolutional layer responds to.
 
@@ -222,7 +222,7 @@ In detail, a pooling layer takes each feature map\* output from the convolutiona
 >
 > 这个术语在这里用得有点随意。特别地，相比于使用激活值这个术语，我会用“特征图”来表示通过卷积层来的计算方法获得的结果。这种术语的随意使用的情况，在科研类文章中很常见。
 
-![Pooling layers](../meta/tikz47.png)
+![Pooling layers](../../meta/tikz47.png)
 
 
 
@@ -234,7 +234,7 @@ As mentioned above, the convolutional layer usually involves more than a single 
 
 正如上面提及的那样，卷积网络通常包含一个以上的特征图。我们分别对每个特征图应用极值池化。所以，如果我们有三个特征图，卷积层和池化层结合后的样子应该像这样：
 
-![](../meta/tikz48.png)
+![](../../meta/tikz48.png)
 
 
 
@@ -250,7 +250,7 @@ Max-pooling isn't the only technique used for pooling. Another common approach i
 
 **总体集成：**我们现在可以将所有的构思集结到一起形成完整的卷积神经网络了。它看起来很像我们刚刚看过的架构，不过还附加了 10 个神经元，对应于 MNIST 数字可能的值。
 
-![](../meta/tikz49.png)
+![](../../meta/tikz49.png)
 
 The network begins with 28×28 input neurons, which are used to encode the pixel intensities for the MNIST image. This is then followed by a convolutional layer using a 5×5 local receptive field and 3 feature maps. The result is a layer of 3×24×24 hidden feature neurons. The next step is a max-pooling layer, applied to 2×2 regions, across each of the 3 feature maps. The result is a layer of 3×12×12 hidden feature neurons.
 
@@ -363,7 +363,7 @@ Let's begin by inserting a convolutional layer, right at the beginning of the ne
 
 让我们从插入一个卷积层开始，亦即在网络开始处的右边插入。我们将使用一个 5 乘 5 的局部接收域，步长为 1，以及 20 个特征图。我们当然还需要插入一个极值池化层，它以一个 2 乘 2 的池化窗口进行特征合并。网络的整体架构，看起来就像我们在上一段讨论的那样，除了还外挂了一个全链接层之外。
 
-![](../meta/simple_conv.png)
+![](../../meta/simple_conv.png)
 
 In this architecture, we can think of the convolutional and pooling layers as learning about local spatial structure in the input training image, while the later, fully-connected layer learns at a more abstract level, integrating global information from across the entire image. This is a common pattern in convolutional neural networks.
 
@@ -644,7 +644,7 @@ The remaining errors in the test set are shown below. The label in the top right
 
 测试集中还留下的错误都在下面显示了。右上的标签是 MNIST 数据中标定的正确分类，而右下是我们的多个网络的协作分类的输出：
 
-![ensemble_errors](../meta/ensemble_errors.png)
+![ensemble_errors](../../meta/ensemble_errors.png)
 
 It's worth looking through these in detail. The first two digits, a 6 and a 5, are genuine errors by our ensemble. However, they're also understandable errors, the kind a human could plausibly make. That 6 really does look a lot like a 0, and the 5 looks a lot like a 3. The third image, supposedly an 8, actually looks to me more like a 9. So I'm siding with the network ensemble here: I think it's done a better job than whoever originally drew the digit. On the other hand, the fourth image, the 6, really does seem to be classified badly by our networks.
 
@@ -1295,7 +1295,7 @@ Such a skeptic is right that some of the finer details of recent papers will gra
 
 **2012 LRMD 论文：** 让我从 2012 年的一篇论文开始吧，它来自一个斯坦福大学与谷歌的研究者组成的小组。我将称其为 LRMD，这个简称是以论文前四位作者的姓氏的第一个字母组成的。LRMD 用一个神经网络从 [ImageNet](http://www.image-net.org/) 进行图像分类，它是一个富有挑战性的图像识别问题。他们使用的 2011 年的 ImageNet 数据包含一千六百万个真彩图片，两万个分类。图片是从开放的网络中扒下来的，有来自 Amazon's Mechanical Turk 的工作者分类。下面是其中的几张图片。
 
-![](../meta/imagenet1.jpg) ![](../meta/imagenet2.jpg) ![](../meta/imagenet3.jpg) ![](../meta/imagenet4.jpg)
+![](../../meta/imagenet1.jpg) ![](../../meta/imagenet2.jpg) ![](../../meta/imagenet3.jpg) ![](../../meta/imagenet4.jpg)
 
 
 
@@ -1331,7 +1331,7 @@ KSH 网络有 7 个隐藏神经元层。前面 5 个隐藏层是卷积层（有�
 
 > Thanks to Ilya Sutskever.
 
-![](../meta/KSH.jpg)
+![](../../meta/KSH.jpg)
 
 The input layer contains 3×224×224 neurons, representing the RGB values for a 224×224 image. Recall that, as mentioned earlier, ImageNet contains images of varying resolution. This poses a problem, since a neural network's input layer is usually of a fixed size. KSH dealt with this by rescaling each image so the shorter side had length 256. They then cropped out a 256×256 area in the center of the rescaled image. Finally, KSH extracted random 224×224 subimages (and horizontal reflections) from the 256×256 images. They did this random cropping as a way of expanding the training data, and thus reducing overfitting. This is particularly helpful in a large network such as KSH's. It was these 224×224 images which were used as inputs to the network. In most cases the cropped image still contains the main object from the uncropped image.
 
@@ -1345,7 +1345,7 @@ The second hidden layer is also a convolutional layer, with a max-pooling step. 
 
 第二个隐藏层也是卷积层，带一个极值池化。它使用 5x5 的局部接收域，总共有 256 个特征图，每个 GPU 分配 128 个。注意这里的特征图仅使用 48 个输入通道，而不是一一对应上一层的 96 个输出（正常情况下是这样）。这是因为任何一个单独的特征图，仅使用来自同一 GPU 的输入。从这个意义上说，网络已经离开了我们在本章早前讨论的卷积架构，然而，基本思想显然是一致的。
 
-The third, fourth and fifth hidden layers are convolutional layers, but unlike the previous layers, they 		do not involve max-pooling. Their respectives parameters are: (3) 384 feature maps, with 3×3 local receptive fields, and 256 input channels; (4) 384 feature maps, with 3×3 local receptive fields, and 192 input channels; and (5) 256 feature maps, with 3×3 local receptive fields, and 192 input channels. Note that the third layer involves some inter-GPU communication (as depicted in the figure) in order that the feature maps use all 256 input channels.
+The third, fourth and fifth hidden layers are convolutional layers, but unlike the previous layers, they do not involve max-pooling. Their respectives parameters are: (3) 384 feature maps, with 3×3 local receptive fields, and 256 input channels; (4) 384 feature maps, with 3×3 local receptive fields, and 192 input channels; and (5) 256 feature maps, with 3×3 local receptive fields, and 192 input channels. Note that the third layer involves some inter-GPU communication (as depicted in the figure) in order that the feature maps use all 256 input channels.
 
 第三，四和五个隐藏层是卷积层，不过与前面的层不同，它们不包括极值池化。它们的接收参数为：（3）384 个特征图，带 3x3 局部接收域，及 256 个输入通道；（4）384 个特征图，3x3 局部接收域，及 192 个输入通道；（5）256 个特征图，3x3 的局部接收域，192 个输入通道。注意，在第三层包括了某种 GPU 间的通讯机制（如图所示）以便特征图能用上所有 256 个输入通道。
 
@@ -1405,7 +1405,7 @@ I've perhaps given the impression that it's all a parade of encouraging results.
 
 我可能给大家一个印象，就是过分吹嘘那些令人鼓舞的结果了。的确，很多有趣的工作报告说，对于一些底层的问题，我们仍然未能搞懂。例如，一篇 2013 年的论文\*指出，深度网络可能会因为盲点而变糟。考虑下面的图片线索。左边的是被他们的网络正确分类的 ImageNet 图片。右边是一张经过轻度扰动的图片（扰动部位在中间），网络那就*不能正确*分类了。作者还发现每个样品图片都存在这样的“敌对”图片，而不是个别现象。
 
-![](../meta/adversarial.jpg)
+![](../../meta/adversarial.jpg)
 
 > [Intriguing properties of neural networks](http://arxiv.org/abs/1312.6199), by Christian Szegedy, Wojciech Zaremba, Ilya Sutskever, Joan Bruna, Dumitru Erhan, Ian Goodfellow, and Rob Fergus (2013)
 
