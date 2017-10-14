@@ -1,4 +1,4 @@
-# Vim Highlighting for Octave File
+# Vim Highlighting the Octave Code
 
 Obtain the the vim script for octave file *.oct or *.m :
 
