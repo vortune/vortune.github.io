@@ -11,3 +11,15 @@ $ echo 'Tile of Testing
 ```
 
 Don't worry about the special character, such as 'space', new line`\n`, 'tab' and etc, no necessary using escape character `\n`, `\t` and etc.
+
+If you want to use escape character to get the text rendering, using parameter `-e` in the `echo` command line, for example :
+
+```shell
+$ echo 'hello, world!'
+hello, world!
+$ echo 'hello\tworld!'
+hello\tworld!
+$ echo -e 'hello\tworld!'
+hello	world!
+```
+
