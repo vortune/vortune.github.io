@@ -6,11 +6,11 @@ The chapter is a long one. To help you navigate, let's take a tour. The sections
 
 The [main part of the chapter](http://neuralnetworksanddeeplearning.com/chap6.html#convolutional_networks) is an introduction to one of the most widely used types of deep network: deep convolutional networks. We'll work through a detailed example - code and all - of using convolutional nets to solve the problem of classifying handwritten digits from the MNIST data set:
 
-![digits](../meta/digits.png)
+![digits](../../meta/digits.png)
 
 We'll start our account of convolutional networks with the shallow networks used to attack this problem earlier in the book. Through many iterations we'll build up more and more powerful networks. As we go we'll explore many powerful techniques: convolutions, pooling, the use of GPUs to do far more training than we did with our shallow networks, the algorithmic expansion of our training data (to reduce overfitting), the use of the dropout technique (also to reduce overfitting), the use of ensembles of networks, and others. The result will be a system that offers near-human performance. Of the 10,000 MNIST test images - images not seen during training! - our system will classify 9,967 correctly. Here's a peek at the 33 images which are misclassified. Note that the correct classification is in the top right; our program's classification is in the bottom right:
 
-![ensemble_errors](../meta/ensemble_errors.png)
+![ensemble_errors](../../meta/ensemble_errors.png)
 
 Many of these are tough even for a human to classify. Consider, for example, the third image in the top row. To me it looks more like a "9" than an "8", which is the official classification. Our network also thinks it's a "9". This kind of "error" is at the very least understandable, and perhaps even commendable. We conclude our discussion of image recognition with a [survey of some of the spectacular recent progress](http://neuralnetworksanddeeplearning.com/chap6.html#recent_progress_in_image_recognition) using networks (particularly convolutional nets) to do image recognition.
 
@@ -24,11 +24,11 @@ It's worth noting what the chapter is not. It's not a tutorial on the latest and
 
 In earlier chapters, we taught our neural networks to do a pretty good job recognizing images of handwritten digits:
 
-![digits](../meta/digits.png)
+![digits](../../meta/digits.png)
 
 We did this using networks in which adjacent network layers are fully connected to one another. That is, every neuron in the network is connected to every neuron in adjacent layers:
 
-![Fully connected network](../meta/tikz41.png)
+![Fully connected network](../../meta/tikz41.png)
 
 
 
@@ -42,7 +42,7 @@ Convolutional neural networks use three basic ideas: *local receptive fields*, *
 
 **Local receptive fields:** In the fully-connected layers shown earlier, the inputs were depicted as a vertical line of neurons. In a convolutional net, it'll help to think instead of the inputs as a 28×2828×28 square of neurons, whose values correspond to the 28×2828×28 pixel intensities we're using as inputs:
 
-![Input neuron](../meta/tikz42.png)
+![Input neuron](../../meta/tikz42.png)
 
 
 
@@ -50,7 +50,7 @@ As per usual, we'll connect the input pixels to a layer of hidden neurons. But w
 
 To be more precise, each neuron in the first hidden layer will be connected to a small region of the input neurons, say, for example, a 5×5 region, corresponding to 25 input pixels. So, for a particular hidden neuron, we might have connections that look like this:
 
-![Input neuron](../meta/tikz43.png)
+![Input neuron](../../meta/tikz43.png)
 
 
 
@@ -58,13 +58,13 @@ That region in the input image is called the *local receptive field* for the hid
 
 We then slide the local receptive field across the entire input image. For each local receptive field, there is a different hidden neuron in the first hidden layer. To illustrate this concretely, let's start with a local receptive field in the top-left corner:
 
-![Input neuron](../meta/tikz44.png)
+![Input neuron](../../meta/tikz44.png)
 
 
 
 Then we slide the local receptive field over by one pixel to the right (i.e., by one neuron), to connect to a second hidden neuron:
 
-![Input neuron](../meta/tikz45.png)
+![Input neuron](../../meta/tikz45.png)
 
 
 
@@ -92,7 +92,7 @@ For this reason, we sometimes call the map from the input layer to the hidden la
 
 The network structure I've described so far can detect just a single kind of localized feature. To do image recognition we'll need more than one feature map. And so a complete convolutional layer consists of several different feature maps:
 
-![Input neurons to first hidden layer](../meta/tikz46.png)
+![Input neurons to first hidden layer](../../meta/tikz46.png)
 
 
 
@@ -102,7 +102,7 @@ I've shown just 3 feature maps, to keep the diagram above simple. However, in pr
 
 > The feature maps illustrated come from the final convolutional network we train, see [here](http://neuralnetworksanddeeplearning.com/chap6.html#final_conv).
 
-![](../meta/net_full_layer_0.png)
+![](../../meta/net_full_layer_0.png)
 
 The 20 images correspond to 20 different feature maps (or filters, or kernels). Each map is represented as a 5×5 block image, corresponding to the 5×5 weights in the local receptive field. Whiter blocks mean a smaller (typically, more negative) weight, so the feature map responds less to corresponding input pixels. Darker blocks mean a larger weight, so the feature map responds more to the corresponding input pixels. Very roughly speaking, the images above show the type of features the convolutional layer responds to.
 
@@ -122,7 +122,7 @@ In detail, a pooling layer takes each feature map * output from the convolutiona
 
 For instance, each unit in the pooling layer may summarize a region of (say) 2×2 neurons in the previous layer. As a concrete example, one common procedure for pooling is known as *max-pooling*. In max-pooling, a pooling unit simply outputs the maximum activation in the 2×2 input region, as illustrated in the following diagram:
 
-![Pooling layers](../meta/tikz47.png)
+![Pooling layers](../../meta/tikz47.png)
 
 
 
@@ -130,7 +130,7 @@ Note that since we have 24×24 neurons output from the convolutional layer, afte
 
 As mentioned above, the convolutional layer usually involves more than a single feature map. We apply max-pooling to each feature map separately. So if there were three feature maps, the combined convolutional and max-pooling layers would look like:
 
-![](../meta/tikz48.png)
+![](../../meta/tikz48.png)
 
 
 
@@ -140,7 +140,7 @@ Max-pooling isn't the only technique used for pooling. Another common approach i
 
 **Putting it all together:** We can now put all these ideas together to form a complete convolutional neural network. It's similar to the architecture we were just looking at, but has the addition of a layer of 10 output neurons, corresponding to the 10 possible values for MNIST digits ('0', '1', '2', *etc*):
 
-![](../meta/tikz49.png)
+![](../../meta/tikz49.png)
 
 
 
@@ -207,7 +207,7 @@ Can we do better than these results using a deeper network architecture?
 
 Let's begin by inserting a convolutional layer, right at the beginning of the network. We'll use 5 by 5 local receptive fields, a stride length of 1, and 20 feature maps. We'll also insert a max-pooling layer, which combines the features using 2 by 2 pooling windows. So the overall network architecture looks much like the architecture discussed in the last section, but with an extra fully-connected layer:
 
-![](../meta/simple_conv.png)
+![](../../meta/simple_conv.png)
 
 In this architecture, we can think of the convolutional and pooling layers as learning about local spatial structure in the input training image, while the later, fully-connected layer learns at a more abstract level, integrating global information from across the entire image. This is a common pattern in convolutional neural networks.
 
@@ -950,7 +950,7 @@ Such a skeptic is right that some of the finer details of recent papers will gra
 
 **The 2012 LRMD paper:** Let me start with a 2012 paper* from a group of researchers from Stanford and Google. I'll refer to this paper as LRMD, after the last names of the first four authors. LRMD used a neural network to classify images from [ImageNet](http://www.image-net.org/), a very challenging image recognition problem. The 2011 ImageNet data that they used included 16 million full color images, in 20 thousand categories. The images were crawled from the open net, and classified by workers from Amazon's Mechanical Turk service. Here's a few ImageNet images*:
 
-![](../meta/imagenet1.jpg) ![](../meta/imagenet2.jpg) ![](../meta/imagenet3.jpg) ![](../meta/imagenet4.jpg)
+![](../../meta/imagenet1.jpg) ![](../../meta/imagenet2.jpg) ![](../../meta/imagenet3.jpg) ![](../../meta/imagenet4.jpg)
 
 
 
@@ -972,7 +972,7 @@ The KSH network has 7 layers of hidden neurons. The first 5 hidden layers are co
 
 > Thanks to Ilya Sutskever.
 
-![](../meta/KSH.jpg)
+![](../../meta/KSH.jpg)
 
 The input layer contains 3×224×224 neurons, representing the RGB values for a 224×224 image. Recall that, as mentioned earlier, ImageNet contains images of varying resolution. This poses a problem, since a neural network's input layer is usually of a fixed size. KSH dealt with this by rescaling each image so the shorter side had length 256. They then cropped out a 256×256 area in the center of the rescaled image. Finally, KSH extracted random 224×224 subimages (and horizontal reflections) from the 256×256 images. They did this random cropping as a way of expanding the training data, and thus reducing overfitting. This is particularly helpful in a large network such as KSH's. It was these 224×224 images which were used as inputs to the network. In most cases the cropped image still contains the main object from the uncropped image.
 
@@ -980,7 +980,7 @@ Moving on to the hidden layers in KSH's network, the first hidden layer is a con
 
 The second hidden layer is also a convolutional layer, with a max-pooling step. It uses 5×5 local receptive fields, and there's a total of 256 feature maps, split into 128 on each GPU. Note that the feature maps only use 48 input channels, not the full 96 output from the previous layer (as would usually be the case). This is because any single feature map only uses inputs from the same GPU. In this sense the network departs from the convolutional architecture we described earlier in the chapter, though obviously the basic idea is still the same.
 
-The third, fourth and fifth hidden layers are convolutional layers, but unlike the previous layers, they 		do not involve max-pooling. Their respectives parameters are: (3) 384 feature maps, with 3×3 local receptive fields, and 256 input channels; (4) 384 feature maps, with 3×3 local receptive fields, and 192 input channels; and (5) 256 feature maps, with 3×3 local receptive fields, and 192 input channels. Note that the third layer involves some inter-GPU communication (as depicted in the figure) in order that the feature maps use all 256 input channels.
+The third, fourth and fifth hidden layers are convolutional layers, but unlike the previous layers, they do not involve max-pooling. Their respectives parameters are: (3) 384 feature maps, with 3×3 local receptive fields, and 256 input channels; (4) 384 feature maps, with 3×3 local receptive fields, and 192 input channels; and (5) 256 feature maps, with 3×3 local receptive fields, and 192 input channels. Note that the third layer involves some inter-GPU communication (as depicted in the figure) in order that the feature maps use all 256 input channels.
 
 The sixth and seventh hidden layers are fully-connected layers, with 4,096 neurons in each layer.
 
@@ -1014,7 +1014,7 @@ One encouraging practical set of results comes from a team at Google, who applie
 
 I've perhaps given the impression that it's all a parade of encouraging results. Of course, some of the most interesting work reports on fundamental things we don't yet understand. For instance, a 2013 paper* showed that deep networks may suffer from  what are effectively blind spots. Consider the lines of images below. On the left is an ImageNet image classified correctly by their network. On the right is a slightly perturbed image (the perturbation is in the middle) which is classified *incorrectly* by the network. The authors found that there are such "adversarial" images for every sample image, not just a few special ones.
 
-![](../meta/adversarial.jpg)
+![](../../meta/adversarial.jpg)
 
 > [Intriguing properties of neural networks](http://arxiv.org/abs/1312.6199), by Christian Szegedy, Wojciech Zaremba, Ilya Sutskever, Joan Bruna, Dumitru Erhan, Ian Goodfellow, and Rob Fergus (2013)
 
