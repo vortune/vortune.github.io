@@ -46,7 +46,7 @@ $ git remote show robin
     ml_octave pushes to ml_octave (up to date)
 ```
 
-## Pulling Something on Remote
+## Pulling Something from Remote
 
 If we want to pull something from the remote 'robin', we have to explicitly specify which branch you want to pull into your repository.
 
@@ -67,3 +67,19 @@ Already up-to-date.
 ```
 
 Above operation `git pull` is a shorthand for `git fetch robin master` followed by `git merge FETCH_HEAD` . See [git pull document](https://www.git-scm.com/docs/git-pull).
+
+## Pushing some to Remote
+
+Unlike only one remote, we have to explicitly specify a remote branch as pushing destination.
+
+``` shell
+$ git push robin master
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.27 KiB | 0 bytes/s, done.
+Total 5 (delta 1), reused 0 (delta 0)
+To /home/robin/tmp/vortune.github.io.git
+   e11413c..d96e6a0  master -> master
+```
+
