@@ -59,3 +59,10 @@ $ echo "set tags=tags;\" >> ~/.vimrc
 * H :       光标跳到页头；
 * L :        光标跳到页尾；
 * M :      光标跳到页中；
+
+## 光标的跳转控制
+
+* `'.` :  Jump to last modification line.
+* ``.` : Jump to exact spot in last modification line
+* 'CTRL-O' : Retrace your movements in file in backwards.
+* 'CTRL-I : Retrace your movements in file in forwards.
