@@ -31,7 +31,7 @@ If this kind of thing interests you, you should [sign up for my newsletter](htt
 
 ## Backpropagation in Python
 
-##Python 语言实现的反向传播
+## Python 语言实现的反向传播
 
 You can play around with a Python script that I wrote that implements the backpropagation algorithm in [this Github repo](https://github.com/mattm/simple-neural-network).
 
