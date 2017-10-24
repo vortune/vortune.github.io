@@ -1,4 +1,9 @@
-# SSHD
+# Setting up a SSHD Server
+
+Reference:
+
+* [OpenSSH Server on Ubuntu](https://help.ubuntu.com/lts/serverguide/openssh-server.htmlhttps://help.ubuntu.com/lts/serverguide/openssh-server.html)
+* [SSH on Gentoo](https://wiki.gentoo.org/wiki/SSH)
 
 ## Installation and starting daemon
 
