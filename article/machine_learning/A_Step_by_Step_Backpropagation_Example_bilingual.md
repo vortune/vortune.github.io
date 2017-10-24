@@ -55,7 +55,7 @@ If you find this tutorial useful and want to continue learning about neural netw
 
 ## Overview
 
-##概述
+## 概述
 
 For this tutorial, we’re going to use a neural network with two inputs, two hidden neurons, two output neurons. Additionally, the hidden and output neurons will include a bias.
 
@@ -229,7 +229,7 @@ $$
 
 ## The Backwards Pass
 
-##向后传播
+## 向后传播
 
 Our goal with backpropagation is to update each of the weights in the network so that they cause the actual output to be closer the target output, thereby minimizing the error for each output neuron and the network as a whole.
 
