@@ -52,7 +52,7 @@ Read the section of [Disabling the Windows 8 “fast boot” feature](https://he
 Enabling or disabling this feature is quite easy and if we count the numbers, you just need 4-5 steps to do this. Just follow the below listed procedure.
 
 - Open your **Control Panel**. Look for Control Panel in start menu.
-- Now in **Control Panel **look for P**ower Options.**
+- Now in **Control Panel **look for **Power Options.**
 - Look for an option that reads **Choose what the power button does** and click it. This will open up a new Window and here you can see more options.
 - Now look for the check box with text **Turn on fast startup.**
 - Check it if you want Fast startup enabled and uncheck it if you don’t want it enabled.
