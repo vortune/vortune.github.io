@@ -57,7 +57,7 @@ Enabling or disabling this feature is quite easy and if we count the numbers, yo
 - Now look for the check box with text **Turn on fast startup.**
 - Check it if you want Fast startup enabled and uncheck it if you don’t want it enabled.
 
-This is as easy as this. So, you just have to follow these options in order to **Enable or Disable Fast Startup in Windows 10.**
+It is as easy as this. So, you just have to follow these options in order to **Enable or Disable Fast Startup in Windows 10.**
 
 ## Ubuntu Installation
 
