@@ -31,12 +31,12 @@ def cnn_model_fn(features, labels, mode):
 	# Convolutional layer #2 and Pooling layer #2
 	conv2 = tf.layers.conv2d(
 			inputs = pool1,
-			filers = 64,
+			filters = 64,
 			kernel_size = [5, 5],
 			padding = "same",
 			activation = tf.nn.relu)
 	
-	pool2 = tf.layers2.max_pooling2d(
+	pool2 = tf.layers.max_pooling2d(
 			inputs = conv2,
 			pool_size = [2, 2],
 			strides = 2)
@@ -46,14 +46,14 @@ def cnn_model_fn(features, labels, mode):
 	dense = tf.layers.dense(
 			inputs = pool2_flat,
 			units = 1024,
-			activation = tf.nn.lelu)
+			activation = tf.nn.relu)
 	dropout = tf.layers.dropout(
 			inputs = dense,
 			rate = 0.4,
 			training = mode == tf.estimator.ModeKeys.TRAIN)
 
 	# Logits layer
-	logits = tf.layers.dense(input = dropout, units = 10)
+	logits = tf.layers.dense(inputs = dropout, units = 10)
 	
 	predictions = {
 		# Generate predictions (for PREDICT and EVAL mode)
@@ -68,8 +68,8 @@ def cnn_model_fn(features, labels, mode):
 				mode = mode, predictions = predictions)
 	
 	# Calculate loss(for both TRAIN and EVAL modes)
-	loss = tf.losses.spare_softmax_cross_entropy(
-			lobels = lobels, logits = logits)
+	loss = tf.losses.sparse_softmax_cross_entropy(
+			labels = labels, logits = logits)
 
 	# Configure the training Op (for TRAIN mode)
 	if mode == tf.estimator.ModeKeys.TRAIN:
@@ -93,16 +93,41 @@ def main(unused_argv):
 	# Data reshaping ...
 	mnist = tf.contrib.learn.datasets.load_dataset("mnist")
 	train_data = mnist.train.images	# Returns np.array
-	train_labels = np.asarray(mnist.train.lobels, dtype = np.int32)
+	train_labels = np.asarray(mnist.train.labels, dtype = np.int32)
 	eval_data = mnist.test.images	# Returns np.array
 	eval_labels = np.asarray(mnist.test.labels, dtype = np.int32)
 
 	# Create the Estimator
 	mnist_classifier = tf.estimator.Estimator(
 			model_fn = cnn_model_fn,
-			model_dir = "/tmp/mnist_convnet_modle")
+			model_dir = "/tmp/mnist_convnet_model")
 
-	print('Hello, Tensorflow.')
+	# Set up logging for prediction
+	# Log the values in the "Softmax" tensor with label "probabilitieso"
+	tensor_to_log = {"probabilities": "softmax_tensor"}
+	logging_hook = tf.train.LoggingTensorHook(
+			tensors = tensor_to_log, every_n_iter = 50)
+
+	# Train the model
+	train_input_fn = tf.estimator.inputs.numpy_input_fn(
+			x = {"x": train_data},
+			y = train_labels,
+			batch_size = 100,
+			num_epochs = None,
+			shuffle = True)
+	mnist_classifier.train(
+			input_fn = train_input_fn,
+			steps = 20000,
+			hooks = [logging_hook])
+
+	# Evaluate the model and print results
+	eval_input_fn = tf.estimator.inputs.numpy_input_fn(
+			x = {"x": eval_data},
+			y = eval_labels,
+			num_epochs = 1,
+			shuffle = False)
+	eval_results = mnist_classifier.evaluate(input_fn = eval_input_fn)
+	print(eval_results)
 
 if __name__ == "__main__":
 	tf.app.run()
