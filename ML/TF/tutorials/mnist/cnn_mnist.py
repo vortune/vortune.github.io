@@ -88,7 +88,20 @@ def cnn_model_fn(features, labels, mode):
 	return tf.estimator.EstimatorSpec(
 			mode = mode, loss = loss, eval_metric_ops = eval_metric_ops)	
 
-def main(args):
+def main(unused_argv):
+	# Load training and eval data
+	# Data reshaping ...
+	mnist = tf.contrib.learn.datasets.load_dataset("mnist")
+	train_data = mnist.train.images	# Returns np.array
+	train_labels = np.asarray(mnist.train.lobels, dtype = np.int32)
+	eval_data = mnist.test.images	# Returns np.array
+	eval_labels = np.asarray(mnist.test.labels, dtype = np.int32)
+
+	# Create the Estimator
+	mnist_classifier = tf.estimator.Estimator(
+			model_fn = cnn_model_fn,
+			model_dir = "/tmp/mnist_convnet_modle")
+
 	print('Hello, Tensorflow.')
 
 if __name__ == "__main__":
