@@ -4,7 +4,74 @@ Using VIM as python integrated development environment, have to collect various 
 
 ## Auto Completion
 
+Auto completing tool is very important for productivity of coding python.
+
+### pydiction
+
+Installation:
+
+``` shell
+$ mkdir -p ~/.vim/bundle
+$ cd ~/.vim/bundle
+$ git clone https://github.com/rkulla/pydiction.git
+$ cp -fr pydiction/after ~/.vim
+```
+
+Confirming the structure of files likes below:
+
+``` shell
+$ tree ~/.vim
+~/.vim
+├── after
+│   └── ftplugin
+│       └── python_pydiction.vim
+└── bundle
+    └── pydiction/root
+        └── complete-dict
+```
+
+Configuring the `~/.vimrc` . 
+
+> **NOTICE:** Replace the location of `complete_dict` with your real home directory.
+
+``` shell
+$ touch ~/.vimrc
+$ echo "filetype plugin on" >> ~/.vimrc
+$ echo "let g:pydiction_location = '/home/robin/.vim/bundle/pydiction/complete-dict'" >> ~/.vimrc
+$ echo "let g:pydiction_menu_height = 3" >> ~/.vimrc
+```
+
+For checking your installation and configuration, you could open python file and type `sys.` and press `tab`. pydiction will pop out the menu of possibilities:
+
+```
+sys
+sys                          /home/robin/.vim/bundle/pydiction/complete-dict   
+sysconf(                     /home/robin/.vim/bundle/pydiction/complete-dict   
+sysconf_names                /home/robin/.vim/bundle/pydiction/complete-dict       
+```
+
+Updating `complete_dict` with new module. the dictionary that pydiction default support is very limited. So you have to update the dictionary file `complete_dict` manually. 
+
+``` shell
+$ cd ~/.vim/bundle/pydiction
+$ python3 pydiction.py tensorflow
+```
+
+After that,  the original `complete_dict` has been backed up with name `complete_dict.last` . if you open `complete_dict`, you can find a lot of new dictionary item with keyword 'tensorflow' .
+
+Many time, I would give a module a new name in coding practice, such as :
+
+``` python
+import tensorflow as tf
+```
+
+Ideally, a excellent auto completing tool can recognize the alias `tf` as `tensorflow`. But pydiction doesn't support this function yet. 
+
+**IMPORTANT TIPS:** A compromise is to duplicate all of dictionary item of `tensorflow` in `complete_dict` and replace 'tensorflow' with it's alias 'tf'.
+
 ## Syntax Checking
+
+## Running Code
 
 ## Debugging
 
