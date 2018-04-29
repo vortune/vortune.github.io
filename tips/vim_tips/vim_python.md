@@ -8,7 +8,9 @@ Auto completing tool is very important for productivity of coding python.
 
 ### pydiction
 
-Installation:
+[Github entry of Pydiction](https://github.com/rkulla/pydiction)
+
+#### Installation and configuration
 
 ``` shell
 $ mkdir -p ~/.vim/bundle
@@ -50,6 +52,8 @@ sysconf(                     /home/robin/.vim/bundle/pydiction/complete-dict
 sysconf_names                /home/robin/.vim/bundle/pydiction/complete-dict       
 ```
 
+#### Updating dictionary manually
+
 Updating `complete_dict` with new module. the dictionary that pydiction default support is very limited. So you have to update the dictionary file `complete_dict` manually. 
 
 ``` shell
@@ -59,6 +63,8 @@ $ python3 pydiction.py tensorflow
 
 After that,  the original `complete_dict` has been backed up with name `complete_dict.last` . if you open `complete_dict`, you can find a lot of new dictionary item with keyword 'tensorflow' .
 
+#### Generating dictionary item for alias
+
 Many time, I would give a module a new name in coding practice, such as :
 
 ``` python
@@ -67,7 +73,18 @@ import tensorflow as tf
 
 Ideally, a excellent auto completing tool can recognize the alias `tf` as `tensorflow`. But pydiction doesn't support this function yet. 
 
-**IMPORTANT TIPS:** A compromise is to duplicate all of dictionary item of `tensorflow` in `complete_dict` and replace 'tensorflow' with it's alias 'tf'.
+**IMPORTANT TIPS:** A compromise is to duplicate all of dictionary item of `tensorflow` in `complete_dict` and replace 'tensorflow' with it's alias 'tf'. We strongly recommend you backup original dictionary file:
+
+``` shell
+$ cd ~/.vim/bundle/pydiction
+$ cp -f complete_dict complete_dict.orig
+```
+
+Let's try to generating the dictionary item for `np` that alias `numpy`.  **You just need one shell command:** 
+
+```shell
+grep '^numpy\.' complete-dict | sed 's/^numpy/np/g' >> complete_dict
+```
 
 ## Syntax Checking
 
