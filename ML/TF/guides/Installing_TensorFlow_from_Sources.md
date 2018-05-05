@@ -1,14 +1,19 @@
+
+
 # Installing TensorFlow from Sources
 
-[The official instruction of Installing TensorFlow from Sources](https://tensorflow.google.cn/install/install_sources). Here we assume our deployment of installation :
+Read [The official instruction of Installing TensorFlow from Sources](https://tensorflow.google.cn/install/install_sources). Here we assume our deployment of installation :
 
-* TensorFlow with CPU only
+* TensorFlow V 1.8.0 (with CPU only)
 * Ubuntu Linux in x86_64
-* Python3 was default
+* Python 3.6.5
+* Bazel 0.13.0
+* Pip 9.0.1 (Python 3.6)
 
 ## Clone TensorFlow Git Repo
 
-We determine to use version 1.8.0. Clone git repo:
+We、
+ZXCVd*/etermine to use version 1.8.0. Clone git repo:
 
 ``` shell
 $ git clone https://github.com/tensorflow/tensorflow
@@ -32,7 +37,7 @@ Before building TensorFlow on Linux, install the following build tools on your s
 ### Install Bazel
 Install prerequisites:
 ``` shell
-sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python
+sudo apt-get install pkg-config zip g++ zlib1g-dev unzip
 ```
 Bazel officially recommend using the binary installer. we can download the installer from [[Bazel releases page on GitHub](https://github.com/bazelbuild/bazel/releases) .
 
@@ -68,39 +73,22 @@ $ echo '' >> ~/.bashrc										# blank line
 $ echo 'export PATH=${PATH}:/home/robin/bin' >> ~/.bashrc
 ```
 
+Make sure the new `PATH` setting effective...
+
+```shell
+$ source ~/.bashrc
+```
+
 ### Install TensorFlow Python Dependencies
 
 ``` shell
 $ sudo apt-get install python3-numpy python3-dev python3-pip python3-wheel
 ```
 
-**Configure the `python3` as your system default**, via `update-alternatives`. 
+Compiling TensorFlow 1.8.0 only needs python 3.6.5 that was defaultly installed in Ubuntu 18.04. But Bazel have to call `/usr/bin/python` in compile process. Make a link...
 
 ``` shell
-$ update-alternatives --list python
-update-alternatives: error: no alternatives for python
-```
-
-If you never configure the default item of python, you need to install options for each python version:
-
-``` shell
-$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
-$ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.5 2
-```
-
-Here, we finish to prepare environment and prerequisites. Next we have to configure ...
-
-``` shell
-$ sudo update-alternatives --config python
-There are 2 choices for the alternative python (providing /usr/bin/python).
-
-  Selection    Path                Priority   Status
-------------------------------------------------------------
-* 0            /usr/bin/python3.5   2         auto mode
-  1            /usr/bin/python2.7   1         manual mode
-  2            /usr/bin/python3.5   2         manual mode
-
-Press <enter> to keep the current choice[*], or type selection number: 2
+$ sudo ln -fs /usr/bin/python3.6 /usr/bin/python
 ```
 
 ## Configure the Installation
@@ -168,15 +156,37 @@ Configuration finished
 
 ## Build the pip package
 
-``` shell
-$ bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+Compile the Tensorflow ...
+```shell
+  $ bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+```
+Make a coffee break to wait a long time compile.
+
+After successful compilation, `bazel build` command generates a script named `build_pip_package` that can make the `pip` package`*.whl`. Run the the script and indicate the directory that store the tensorflow install package.
+
+```shell
+$ bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 ```
 
- ``` shell
-$ sudo pip install --upgrade pip
-Installing collected packages: pip
-  Found existing installation: pip 9.0.3
-    Uninstalling pip-9.0.3:
-      Successfully uninstalled pip-9.0.3
-Successfully installed pip-10.0.1
- ```
+## Install TensorFlow pip package
+
+```shell
+$ sudo pip3 install tensorflow-1.8.0-cp36-cp36m-linux_x86_64.whl 
+```
+
+## Validate installation
+
+Enter python environment :
+
+```shell
+$ python3
+```
+And test a `hello world` with tensorflow ...
+```python
+>>> import tensorflow as tf
+>>> hello = tf.constant('hello, tensorflow!')
+>>> sess = tf.Session()
+>>> print(sess.run(hello))
+b'hello, tensorflow!'
+```
+
