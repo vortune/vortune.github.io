@@ -23,21 +23,19 @@
 
 ```mermaid
 graph LR
-Li_work($HOME/software/longjing)--> |push|Li_bare{/repo/software/longjing.git}
-Li_bare{/repo/software/longjing.git}-->|pull|Li_work($HOME/software/longjing)
+Li_work($HOME/software/git4team)--> |push|Li_bare{/repo/software/git4team.git}
+Li_bare{/repo/software/git4team.git}-->|pull|Li_work($HOME/software/git4team)
 ```
 
-老张的工作机上，至少有两个“git4team”项目相关的 Git 库：
+## 创建项目的起始库
 
-* 一个工作库。假设放置在他自己的家目录（$HOME）中；
-* 一个裸库。假设发在目录 `/repo` 中；
+**项目的起始库由公司的项目负责人创建**。老张的工作机上，至少有两个 git4team 项目相关的 Git 库：
 
 老张首先创建自己的工作库：
 
 ``` shell
-$ cd ~
-$ mkdir git4team
-$ cd git4team
+$ mkdir ~/git/sotfware/git4team
+$ cd ~/git/sotfware/git4team
 $ echo '这是 git4team 项目的源码库' > README.md
 $ git init .
 $ git add .
