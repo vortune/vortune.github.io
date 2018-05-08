@@ -3,7 +3,7 @@
 
 为了表述方便，我们假设一个项目的名称，以及参与项目开发及管理的成员名称。
 
-- 项目的代号：龙井
+- 项目的代号：git4team
 
 * 项目的成员：
   * 老张 -- 团队领导，项目负责人（假设 IP 地址为：192.168.1.100）
@@ -27,7 +27,7 @@ Li_work($HOME/software/longjing)--> |push|Li_bare{/repo/software/longjing.git}
 Li_bare{/repo/software/longjing.git}-->|pull|Li_work($HOME/software/longjing)
 ```
 
-老张的工作机上，至少有两个“龙井”项目相关的 Git 库：
+老张的工作机上，至少有两个“git4team”项目相关的 Git 库：
 
 * 一个工作库。假设放置在他自己的家目录（$HOME）中；
 * 一个裸库。假设发在目录 `/repo` 中；
@@ -36,11 +36,11 @@ Li_bare{/repo/software/longjing.git}-->|pull|Li_work($HOME/software/longjing)
 
 ``` shell
 $ cd ~
-$ mkdir longjing
-$ cd longjing
-$ echo '这是龙井项目的源码库' > README.md
+$ mkdir git4team
+$ cd git4team
+$ echo '这是 git4team 项目的源码库' > README.md
 $ git init .
 $ git add .
-$ git commit -m 'initial commit of project longjing'
+$ git commit -m 'initial commit of project git4team'
 ```
 
