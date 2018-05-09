@@ -27,7 +27,14 @@ Li_work($HOME/software/git4team)--> |push|Li_bare{/repo/software/git4team.git}
 Li_bare{/repo/software/git4team.git}-->|pull|Li_work($HOME/software/git4team)
 ```
 
-## 创建项目的起始库
+## 项目领导对源码库管理工作
+
+这里主要介绍大李的工作与操作。
+
+* 创建项目的起始库；
+* 为项目的 Release 版本打标签；
+
+### 创建项目的起始库
 
 **项目的起始库由公司的项目负责人创建**。老张的工作机上，至少有两个 git4team 项目相关的 Git 库：
 
@@ -42,3 +49,6 @@ $ git add .
 $ git commit -m 'initial commit of project git4team'
 ```
 
+## 各个专业组长对源码库的管理工作
+
+* 以专项任务分支的形式，查看各个工程师的工作；
