@@ -41,14 +41,49 @@ Li_bare{/repo/software/git4team.git}-->|pull|Li_work($HOME/software/git4team)
 老张首先创建自己的工作库：
 
 ``` shell
-$ mkdir ~/git/sotfware/git4team
-$ cd ~/git/sotfware/git4team
+$ mkdir ~/git/software/git4team
+$ cd ~/git/software/git4team
 $ echo '这是 git4team 项目的源码库' > README.md
 $ git init .
 $ git add .
 $ git commit -m 'initial commit of project git4team'
 ```
 
-## 各个专业组长对源码库的管理工作
+接着创建项目的裸库：
+
+```shell
+$ mkdir -p /repo/software
+$ cd /repo/software
+$ git clone --bare ~/git/sotfware/git4team
+$ ls
+git4team.git
+```
+
+返回工作库，设定工作库的源头：
+
+```shell
+$ cd ~/git/software/git4team
+$ git remote add origin /repo/software/git4team.git
+$ git remote -v														# 确认一下
+origin	/repo/software/git4team.git (fetch)
+origin	/repo/software/git4team.git (push)
+```
+
+并且将裸库的 `master` 分支，设定为工作库的上游分支：
+
+```shell
+$ git branch --set-upstream-to=origin/master master
+Branch master set up to track remote branch master from origin.
+$ git pull															# 确认一下
+Already up-to-date.
+```
+
+准备好上述工作后，可以向对应的专业工作组发布网络 Git 服务。
+
+### 启动 Git 协议网络服务
+
+
+
+## 专业组长对源码库的管理工作
 
 * 以专项任务分支的形式，查看各个工程师的工作；
