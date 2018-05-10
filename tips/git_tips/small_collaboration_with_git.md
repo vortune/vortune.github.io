@@ -1,7 +1,5 @@
-# 用 Git 进行小团队合作开发
-本文说明一个以 Git 进行小团队开发的组织管理模板。模板以分布式方式进行管理。
-
-为了表述方便，我们假设一个项目的名称，以及参与项目开发及管理的成员名称。
+# 用 Git 进行小团队协同开发
+本文说明一个以 Git 进行小团队开发的组织管理模板。模板以分布式方式进行管理。为了表述方便，我们假设一个项目的名称，以及参与项目开发及管理的成员名称。
 
 - 项目的代号：git4team
 
@@ -10,6 +8,13 @@
   * 大李 -- 软件组组长，负责领导软件开发（假设 IP 地址为：192.168.1.101）
   * 小明 -- 软件组工程师（假设 IP 地址为：192.168.1.102）
   * 小芳 -- 软件组工程师（假设 IP 地址为：192.168.1.103）
+
+预备知识：
+
+* [Git 教程](https://git-scm.com/book/zh/v2)
+
+* [Git 守护进程](https://git-scm.com/docs/git-daemon) / [如何快速分享一个 Git 库](./quickly_sharing_a_git_repo.md)
+* [Git 的分支操作](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches)
 
 ## 源码的管理约定
 
@@ -29,7 +34,7 @@ Li_bare{/repo/software/git4team.git}-->|pull|Li_work($HOME/software/git4team)
 
 ## 项目领导对源码库管理工作
 
-这里主要介绍大李的工作与操作。
+这里主要介绍老张的工作与操作。
 
 * 创建项目的起始库；
 * 为项目的 Release 版本打标签；
@@ -101,3 +106,9 @@ $ git daemon --export-all \
 * 以专项任务分支的形式，查看各个工程师的工作；
 * 对各个开发节点打标签；
 * 提出 Release 标签建议；
+
+## 专业工程师如何用 Git 进行协同工作
+
+## 思考题
+
+* `git pull` 与 `git fetch` 两个命令的区别？
