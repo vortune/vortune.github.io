@@ -169,12 +169,14 @@ $ git daemon --export-all \
 
 * 所有成员，都必须以相同的源码库配备进行工作。即，在 `$HOME/git` 目录下的工作库，以及在 `/repo` 目录下的裸库；
 * 除项目负责人外，小组所有成员的 git 网络服务设置为只读，即 `--disable=receive-pack` ；
-* 永远不用 `master` 分支进行编码、测试等工作，保证 `master` 总是用于代码的整合。所有不同性质的工作应该放在不同的分支中进行；
+* 永远不用 `master` 分支进行编码、测试等工作，保证 `master` 总是用于代码的整合；
+* 所有不同性质的工作应该放在不同的分支中进行；
 * 以专业组长的裸库的 `master` 分支，作为整个专业组开发工作的同步基准；
+* 原则上，代码的合并有组长负责。各个分部责任工程师之间，不进行代码的合并；
 
 下面我们以一个分部功能的开放来说明如何协同工作。
 
-### 总是在分部功能开发分支上编码
+### 总是在分部开发分支上编码
 
 我们以项目组的软件工程师小明为例，他接到大李的通知之后，克隆大李的裸库，并且也按照上述的约定在自己的工作机上配备好了自己的工作库和裸库。
 
@@ -246,9 +248,70 @@ $ git push local image_rendering
 > $ git push local --delete image_rendering
 > ```
 
-至此，小麦可以在这个 `image_rendering` 分支上，持续工作至达到满意的效果，他可以打开 git 网络服务，与大李交换代码。
+至此，小明可以在这个 `image_rendering` 分支上，持续工作达到满意的效果后，他可以打开 git 网络服务，与大李交换代码。
 
+### 代码的交换与合并
 
+代码的查阅与合并，是各个专业组长的责任。
+
+当大李被小明告知可以接收图像渲染的代码后，他应该首先抓取小明的这部分代码进行审查：
+
+```shell
+$ cd ~/git/software/git4team
+$ git remote add xiaoming git://192.168.1.102:/software/git4team.git
+$ git fetch xiaoming image_rendering				# 将小明的裸库中的分支，抓取到本地工作库
+From git://192.168.1.108:/software/git4team
+ * branch            image_rendering -> FETCH_HEAD
+ * [new branch]      image_rendering -> xiaoming/image_rendering
+```
+
+此时，在本地取出小明的图像渲染分支的代码，进行审核：
+
+```shell
+$ git checkout -b xiaoming_image_rendering xiaoming/image_rendering
+Branch 'xiaoming_image_rendering' set up to track remote branch 'image_rendering' from 'xiaoming'.
+Switched to a new branch 'xiaoming_image_rendering'
+
+$ git branch
+  master
+* xiaoming_image_rendering
+```
+
+大李对小明的工作审核无误后，可以将小明的工作合并进项目的主分支：
+
+```shell
+$ git checkout master
+$ git merge xiaoming_image_rendering
+$ git push local master						# 记得更新裸库
+```
+
+### 代码的全局协同
+
+大李对整个专业小组的工作进行整合后，可以向老张汇报项目的源码：
+
+```shell
+$ git checkout master
+$ git push -u origin master
+```
+
+> **注意**：此处的参数 `-u` 指示老张的主分支才是上游分支，如果老张的主分支存在与大李不同的内容，命令会提示首先更新合并上游分支的内容。
+
+小明和小芳也可以拉入大李的主分支，并且合并到合适的分支上，开始新的工作：
+
+```shell
+$ git checkout master
+$ git pull
+$ git push local master						# 将项目组的其他人的工作，更新到本地裸库
+```
+
+如果小明还需要进行图像渲染的其他工作，那么：
+
+```shell
+$ git checkout image_rendering
+$ git merge master
+```
+
+至此，专业小组的完成了一个轮次的协同工作。
 
 ## 思考题
 
