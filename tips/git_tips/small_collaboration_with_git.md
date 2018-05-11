@@ -11,7 +11,7 @@
 
 预备知识：
 
-* [Git 教程](https://git-scm.com/book/zh/v2)
+* [Git 教程][git_book]
 
 * [Git 守护进程](https://git-scm.com/docs/git-daemon) / [如何快速分享一个 Git 库](./quickly_sharing_a_git_repo.md)
 * [Git 的分支操作](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches)
@@ -97,7 +97,7 @@ $ git daemon --export-all \
              --base-path=/repo /repo
 ```
 
-打开了网络 git 协议服务后，老张可以通知大李克隆项目。并且应该在大李克隆完之后，关闭 git 服务。
+打开了网络 git 协议服务后，老张可以通知大李克隆项目。并且应该在大李克隆完之后，关闭 git 服务。这里，我们设置打开 git daemon 的 `receive-pack` 服务项，以便大李可以向老张以 `git push` 命令来提交代码。
 
 ## 专业组长对源码库的管理工作
 
@@ -107,8 +107,29 @@ $ git daemon --export-all \
 * 对各个开发节点打标签；
 * 提出 Release 标签建议；
 
+### 搭建专业组的源码库
+
+每个专业组长，就是对应专业源码管理的核心。
+
+首先大李需要从老张那里克隆项目的源头代码库：
+
+```shell
+$ mkdir -p ~/git/software
+$ cd ~/git/software
+$ git clone git://192.168.1.100:/software/git4team.git
+```
+
+
+
 ## 专业工程师如何用 Git 进行协同工作
 
 ## 思考题
 
 * `git pull` 与 `git fetch` 两个命令的区别？
+
+## 参考资料
+
+[git_book]:  https://git-scm.com/book/zh/v2	"Git 中文教程"
+[git_daemon]: https://git-scm.com/docs/git-daemon)    "Git daemon 文档"
+[share_repo]: ./quickly_sharing_a_git_repo.md   "快速分享一个 git 库"
+[git_branch]: https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches  "Git 分支管理"
