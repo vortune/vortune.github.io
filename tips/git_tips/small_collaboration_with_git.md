@@ -161,12 +161,94 @@ $ git daemon --export-all \
 
 注意，这里设置了 `--disable=receive-pack` 服务选项，亦即这个 git 库是网络只读的。这个问题，将在下一章讲述。
 
+大李的 git 网络服务假设好后，可以通知小组成员克隆他的裸库了。
+
 ## 如何用 Git 进行协同工作
 
 专业组的工作，以组长的裸库为中心，有组长进行统一管理。这里先为以 git 为基础的协同工作做一些约定：
 
-* 所有成员，都必须以相同的源码库配备进行工作。即，在 `$HOME/git` 目录下的工作库，以及在 `/repo` 目录下的裸库。
-* 除项目负责人外，小组所有成员的 git 网络服务设置为只读，即 `--disable=receive-pack` 。
+* 所有成员，都必须以相同的源码库配备进行工作。即，在 `$HOME/git` 目录下的工作库，以及在 `/repo` 目录下的裸库；
+* 除项目负责人外，小组所有成员的 git 网络服务设置为只读，即 `--disable=receive-pack` ；
+* 永远不用 `master` 分支进行编码、测试等工作，保证 `master` 总是用于代码的整合。所有不同性质的工作应该放在不同的分支中进行；
+* 以专业组长的裸库的 `master` 分支，作为整个专业组开发工作的同步基准；
+
+下面我们以一个分部功能的开放来说明如何协同工作。
+
+### 总是在分部功能开发分支上编码
+
+我们以项目组的软件工程师小明为例，他接到大李的通知之后，克隆大李的裸库，并且也按照上述的约定在自己的工作机上配备好了自己的工作库和裸库。
+
+小明克隆大李的裸库：
+
+```shell
+$ cd ~/git/software/
+$ git clone git://192.168.1.101:/software/git4team.git				# 大李的裸库地址
+```
+
+默认地，git 库将克隆的远程库命名为 `origin` 。为了避免混乱，小明应该将它重命名：
+
+```shell
+$ cd ~/git/software/git4team
+$ git remote rename origin dali								# 以大李（dali）来命名
+$ git remote -v
+dali	git://192.168.1.101:/software/git4team.git (fetch)
+dali	git://192.168.1.101:/software/git4team.git (push)
+$ git branch
+* master
+$ git branch --set-upstream-to=/dali/master			# 重新定向 master 分支的上游分支
+```
+
+按照约定，小明也应该创建一个自己的本地裸库 `/repo/software/git4team.git` 。
+
+并且，创建一个指向自己裸库的远程库名，按照约定统一命名为 `local` 。
+
+```shell
+$ git remote add local /repo/software/git4team.git
+$ git remote -v
+dali	git://192.168.1.101:/software/git4team.git (fetch)
+dali	git://192.168.1.101:/software/git4team.git (push)
+local	/repo/software/git4team.git (fetch)
+local	/repo/software/git4team.git (push)
+```
+
+假设，小明现在负责实现软件的一个图像渲染功能。此时，小明应该创建一个以 `master` 分支为起点的，专门的分支来进行图像渲染的开发，并且大李和小明约定这个分支名叫 `image_rendering`：
+
+```shell
+$ cd ~/git/software/git4team
+$ git branch
+* master
+$ git checkout -b image_rendering
+$ git branch
+* image_rendering
+  master
+```
+
+小明可以将这个分支 `poush` 到本地裸库 `local` 上：
+
+``` shell
+$ git push local image_rendering
+Total 0 (delta 0), reused 0 (delta 0)
+To /repo/software/git4team.git
+ * [new branch]      image_rendering -> image_rendering 
+```
+
+此时小明的裸库上，同样有了一个叫 `image_rendering` 的分支。小明可以随时利用这个分支来备份工作：
+
+```shell
+$ git branch
+* image_rendering
+$ git push local image_rendering
+```
+
+> 今后，当小明认为已经不需要 `local` 上的 `image_rendering` 分支时，可以通过以下的命令将它删除：
+>
+> ``` shell
+> $ git push local --delete image_rendering
+> ```
+
+至此，小麦可以在这个 `image_rendering` 分支上，持续工作至达到满意的效果，他可以打开 git 网络服务，与大李交换代码。
+
+
 
 ## 思考题
 
