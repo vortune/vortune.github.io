@@ -13,14 +13,14 @@
 
 * [Git 教程][git_book]
 
-* [Git 守护进程](https://git-scm.com/docs/git-daemon) / [如何快速分享一个 Git 库](./quickly_sharing_a_git_repo.md)
-* [Git 的分支操作](https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches)
+* [Git 守护进程][git_daemon] / [如何快速分享一个 Git 库][share_repo]
+* [Git 的分支操作][git_branch]
 
 ## 源码的管理约定
 
 - 原则上，不要在 `master` 分支下进行编码工作，而是将其他的工作分支上的代码和并入 `master` 分支；
 - 一般情况下，项目组中的所有成员必须通过组长合并源代码；
-- 每个人确定一个固定的虚拟 IP 地址，用于 Git 网络服务。参考[如何快速分享一个 Git 库](./quickly_sharing_a_git_repo.md)；
+- 每个人确定一个固定的虚拟 IP 地址，用于 Git 网络服务。参考[如何快速分享一个 Git 库][share_repo]；
 - 每个人必须创建一个项目的工作库。建议在个人的根目录下，如 `~/git`；
 - 每个人必须创建一个项目的裸库。建议这个裸库放在一个专门的分区之中，而这个分区以 `/repo` 作为挂载点；
 
@@ -99,7 +99,7 @@ $ git daemon --export-all \
 
 打开了网络 git 协议服务后，老张可以通知大李克隆项目。并且应该在大李克隆完之后，关闭 git 服务。这里，我们设置打开 git daemon 的 `receive-pack` 服务项，以便大李可以向老张以 `git push` 命令来提交代码。
 
-## 专业组长对源码库的管理工作
+## 专业小组的工作以组长的裸库为中心
 
 各个专业组的组长全权负责对应的专业源码库维护工作。
 
@@ -119,13 +119,59 @@ $ cd ~/git/software
 $ git clone git://192.168.1.100:/software/git4team.git
 ```
 
+这个时候，大李可以保持项目的远程库的名称 `origin` 不变。
 
+```shell
+$ cd ~/git/software/git4team
+$ git remote -v
+origin	git://192.168.1.100:/software/git4team.git (fetch)
+origin	git://192.168.1.100:/software/git4team.git (push)
+```
 
-## 专业工程师如何用 Git 进行协同工作
+**大李需要创建自己的本地裸库**。实际上，每个专业组长的裸库，才是对应专业的源码中心。
+
+```shell
+$ mkdir -p /repo/software
+$ git clone --bare ~/git/software/git4team
+```
+
+大李再在自己的工作库上增加一个名为 `local` 的远程库栏目，指向自己的本地裸库：
+
+```shell
+$ cd ~/git/software/git4team
+$ git remote add local /repo/software/git4team.git
+$ git remote -v
+origin	git://192.168.1.100:/software/git4team.git (fetch)
+origin	git://192.168.1.100:/software/git4team.git (push)
+local	/repo/software/git4team.git (fetch)
+local	/repo/software/git4team.git (push)
+```
+
+为着交换代码方便，大李可能还需要增加各个专业工程师的裸库，作为远程库。这个将在下一章中介绍。
+
+### 发布专业小组的 git 网络服务
+
+大李以自己的裸库为基础发布小组的 git 网络服务：
+
+```shell
+$ git daemon --export-all \
+			 --disable=receive-pack \
+             --base-path=/repo /repo
+```
+
+注意，这里设置了 `--disable=receive-pack` 服务选项，亦即这个 git 库是网络只读的。这个问题，将在下一章讲述。
+
+## 如何用 Git 进行协同工作
+
+专业组的工作，以组长的裸库为中心，有组长进行统一管理。这里先为以 git 为基础的协同工作做一些约定：
+
+* 所有成员，都必须以相同的源码库配备进行工作。即，在 `$HOME/git` 目录下的工作库，以及在 `/repo` 目录下的裸库。
+* 除项目负责人外，小组所有成员的 git 网络服务设置为只读，即 `--disable=receive-pack` 。
 
 ## 思考题
 
 * `git pull` 与 `git fetch` 两个命令的区别？
+* `git merge` 与 `git-rebase` 两个命令的区别？
 
 ## 参考资料
 
