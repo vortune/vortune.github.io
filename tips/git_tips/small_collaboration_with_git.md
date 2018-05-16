@@ -232,7 +232,7 @@ $ git branch
   master
 ```
 
-小明可以将这个分支 `poush` 到本地裸库 `local` 上：
+小明可以将这个分支 `push` 到本地裸库 `local` 上：
 
 ``` shell
 $ git push local image_rendering
