@@ -74,11 +74,18 @@ origin	/repo/software/git4team.git (fetch)
 origin	/repo/software/git4team.git (push)
 ```
 
+设置了新的 remote 之后，必须将远程库的信息更新到工作库：
+
+```shell
+$ git fetch origin
+```
+
 并且将裸库的 `master` 分支，设定为工作库的上游分支：
 
 ```shell
 $ git branch --set-upstream-to=origin/master master
 Branch master set up to track remote branch master from origin.
+
 $ git pull															# 确认一下
 Already up-to-date.
 ```
@@ -197,7 +204,7 @@ dali	git://192.168.1.101:/software/git4team.git (fetch)
 dali	git://192.168.1.101:/software/git4team.git (push)
 $ git branch
 * master
-$ git branch --set-upstream-to=/dali/master			# 重新定向 master 分支的上游分支
+$ git branch --set-upstream-to=dali/master			# 重新定向 master 分支的上游分支
 ```
 
 按照约定，小明也应该创建一个自己的本地裸库 `/repo/software/git4team.git` 。
