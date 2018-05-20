@@ -12,14 +12,13 @@ Read [The official instruction of Installing TensorFlow from Sources](https://te
 
 ## Clone TensorFlow Git Repo
 
-We、
-ZXCVd*/etermine to use version 1.8.0. Clone git repo:
+We choose to use version 1.8.0. Clone git repo:
 
 ``` shell
 $ git clone https://github.com/tensorflow/tensorflow
 ```
 
-Great a new branch refers to tag `v1.8.0` :
+Create a new branch refers to tag `v1.8.0` :
 
 ``` shell
 $ cd tensorflow
