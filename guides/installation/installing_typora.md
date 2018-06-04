@@ -7,10 +7,10 @@ gpg: key BA300B7755AFCFAE: "Abner Lee <abner@typora.io>" not changed
 gpg: Total number processed: 1
 gpg:              unchanged: 1
 
-sudo add-apt-repository 'deb https://typora.io/linux ./'
+$ sudo add-apt-repository 'deb https://typora.io/linux ./'
 
-sudo apt-get update
+$ sudo apt-get update
 
 # install typora
-sudo apt-get install typora
+$ sudo apt-get install typora
 ```
