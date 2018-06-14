@@ -31,7 +31,7 @@ $ ctags -R .
 这样将在源码根目录下产生 `tags` 文件，该文件记录了项目源码的所有标志。不过，当我们在下一级目录中，以 vim 编辑源码时，按 `Ctrl + ]` 键，并不能检索到对应的 `tag` 。运行如下命令：
 
 ``` shell
-$ echo "set tags=tags;\" >> ~/.vimrc
+$ echo "set tags=tags;/" >> ~/.vimrc
 ```
 
 > 注意：上面 shell 命令中的 `tags=tags;\` 不能留空格。
@@ -47,10 +47,6 @@ $ echo "set tags=tags;\" >> ~/.vimrc
 * gd :           跳转至当前光标所指的单词的局部变量定义；
 * \* :             跳转至当前光标所指的单词下一次出现的地方；
 * \# :             跳转至当前光标所指的单词上一次出现的地方；
-
-### ctage 与 matlab
-
-
 
 ## Vim 文件浏览快捷键
 
