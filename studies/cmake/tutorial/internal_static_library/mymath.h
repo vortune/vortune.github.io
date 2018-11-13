@@ -1,6 +1,6 @@
 #ifndef MYMATH_H
 #define MYMATH_H
 
-double sum(double a, double b);
+long int myrandom();
 
 #endif	/* MYMATH_H */

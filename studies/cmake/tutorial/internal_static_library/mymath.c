@@ -1,6 +1,12 @@
+#include <time.h>
 #include "mymath.h"
 
-double sum(double a, double b)
+long int myrandom()
 {
-	return a + b;
+	unsigned int seed;
+	seed = (unsigned int)time(NULL);
+	srandom(seed);
+	long int num;
+	num = random();
+	return num;
 }
