@@ -1,4 +1,5 @@
 #include <time.h>
+#include <stdlib.h>
 #include "mymath.h"
 
 long int myrandom()
