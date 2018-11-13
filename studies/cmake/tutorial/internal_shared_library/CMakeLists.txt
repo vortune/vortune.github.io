@@ -1,0 +1,5 @@
+cmake_minimum_required (VERSION 2.6)
+project (Tutorial)
+add_library (mymath SHARED mymath.c)
+add_executable (Tutorial tutorial.c)
+target_link_libraries (Tutorial mymath)
