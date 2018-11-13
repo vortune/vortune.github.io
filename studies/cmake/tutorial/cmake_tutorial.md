@@ -22,8 +22,28 @@ project (Tutorial)
 add_executable (Tutorial tutorial.c)
 ```
 
+### Build and Clean up
+
+Compile and link the project.
+
+``` bash
+$ cd hello_world
+$ mkdir build
+$ cd build
+$ cmake ..
+```
+
+Clean up project.
+
+``` bash
+$ cd hello_world
+$ rm -fr build
+```
+
+
 
 **Reference: **
+
 [1]:  https://cmake.org/cmake-tutorial/ "CMake official tutorial"
 
 [2]:  https://www.hiroom2.com/2016/09/07/convert-makefile-to-cmakelists-txt-manually/ "Convert a makefile to a cmakelist.txt"
