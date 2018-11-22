@@ -12,5 +12,23 @@ $ find . -maxdepth 1 -type d | xargs chmod a-x
 $ find . -type d -exec sudo chmod a-x {} \;
 ```
 
+Find file with multiple pattern, use the `-o` before other `-name`. The option of `-o` means "or".
 
-
+``` bash
+$ find . -type f -name "CMakeLists.txt" -o -name "*.cmake"
+./test/CMakeLists.txt
+./cmake/clang-cxx-dev-tools.cmake
+./cmake/Modules/cotire.cmake
+./cmake/Modules/FindNNPACK.cmake
+./cmake/Modules/FindINTELMKL.cmake
+./cmake/Modules/FindTBB.cmake
+./cmake/summary.cmake
+./cmake/protoc.cmake
+./cmake/DownloadProject/DownloadProject.cmake
+./cmake/DownloadProject/CMakeLists.txt
+./CMakeLists.txt
+./benchmarks/CMakeLists.txt
+./docs/CMakeLists.txt
+./examples/caffe_converter/CMakeLists.txt
+./examples/CMakeLists.txt
+```
