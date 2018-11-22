@@ -39,8 +39,8 @@ Clean up project.
 $ cd hello_world
 $ rm -fr build
 ```
-
-
+## Type of Library
+Two examples that name `internal_shared_library` and `internal_static_library` demonstrate how to create and link library. 
 
 **Reference: **
 
