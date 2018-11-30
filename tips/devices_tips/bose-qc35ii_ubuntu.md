@@ -20,6 +20,6 @@ The accepted answer did not work for me. [This blog entry worked: ](http://erikd
    ```
 3. Restart bluetooth
 
-4. Connect your headphones
+4. Connect your headphones **[NOTE] Push forward the power button on the right side of headset and hold 5 second**.
 
 5. Choose `High Fidelity Playback (A2DP sink)`-mode in sound options
