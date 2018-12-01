@@ -34,6 +34,15 @@ $ sudo /usr/sbin/sshd
 > ```
 
 ## Client login
+
+Keygen:
+
+``` bash
+$ ssh-keygen -f "/home/robin/.ssh/known_hosts" -R "192.168.1.168"
+```
+
+logon:
+
 ``` shell
 $ ssh username@192.168.1.168
 ```
