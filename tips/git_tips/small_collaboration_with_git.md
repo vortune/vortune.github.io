@@ -292,6 +292,17 @@ $ git merge xiaoming_image_rendering
 $ git push local master						# 记得更新裸库
 ```
 
+> 有时候，我们并不想像上面那样先 checkout 主分支 'master'，再来合并当前的工作分支。而是希望直接将当前工作分支的内容，在确认无误后，留在当前分支中，并且将当前分支的内容直接 forward-merge 到 'master'。假设大李自己有一个 my_image_rendering 的分支。此时，他可以用以下命令：
+> ``` bash
+> $ git branch 
+>   master
+> * my_image_rendering
+> $ git fetch . my_image_rendering master
+> From .
+>   9c2652c..f4e7579  my_image_rendering  -> master
+> $ git diff master my_image_rendering
+> ```
+
 ### 代码的全局协同
 
 大李对整个专业小组的工作进行整合后，可以向老张汇报项目的源码：
