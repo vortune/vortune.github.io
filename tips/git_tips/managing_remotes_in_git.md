@@ -68,7 +68,7 @@ Already up-to-date.
 
 Above operation `git pull` is a shorthand for `git fetch robin master` followed by `git merge FETCH_HEAD` . See [git pull document](https://www.git-scm.com/docs/git-pull).
 
-## Pushing some to Remote
+## Pushing some thing to Remote
 
 Unlike only one remote, we have to explicitly specify a remote branch as pushing destination.
 
@@ -81,5 +81,19 @@ Writing objects: 100% (5/5), 1.27 KiB | 0 bytes/s, done.
 Total 5 (delta 1), reused 0 (delta 0)
 To /home/robin/tmp/vortune.github.io.git
    e11413c..d96e6a0  master -> master
+```
+## Pushing a Local Branch to Remote Repository
+
+Assume we want to push a branch named 'testbranch' to remote repo named 'origin', then :
+
+```bash
+$ git branch testbranch master
+$ git push origin testbranch
+```
+
+## Deleting a Branch in Remote Repository
+
+```bash
+$ git push --delete origin testbranch
 ```
 
