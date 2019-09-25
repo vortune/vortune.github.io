@@ -89,6 +89,10 @@ grep '^numpy\.' complete-dict | sed 's/^numpy/np/g' >> complete_dict
 ## Syntax Checking
 
 ## Running Code
+```bash
+$ echo 'map <F5> :w<cr>:!python %<cr>' >> ~/.vimrc
+```
+
 
 ## Debugging
 
