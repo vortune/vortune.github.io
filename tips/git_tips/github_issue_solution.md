@@ -1,4 +1,4 @@
-# Resolvations for Github Problem
+# Soluations for Github Problem
 
 ## git clone or pull problem
 
