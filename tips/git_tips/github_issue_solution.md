@@ -23,6 +23,12 @@ Resolved by:
 $ git config --global http.postBuffer 524288000
 ```
 
+if issue don't solve, try `git clone` with `--depth=1` :
+
+```bash
+$ git clone https://github.com/vortune/vortune.github.io.git --depth=1
+```
+
 **curl 56**
 
 ```
